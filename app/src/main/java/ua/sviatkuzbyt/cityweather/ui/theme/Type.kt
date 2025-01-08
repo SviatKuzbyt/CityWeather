@@ -5,7 +5,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 import ua.sviatkuzbyt.cityweather.R
 
 private val RobotoFamily = FontFamily(
@@ -17,26 +16,26 @@ val Typography = Typography(
     headlineLarge = TextStyle(
         fontFamily = RobotoFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 24.sp
+        fontSize = textLargeSize
     ),
     headlineMedium = TextStyle(
         fontFamily = RobotoFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 16.sp
+        fontSize = textMediumSize
     ),
     displayLarge = TextStyle(
         fontFamily = RobotoFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 24.sp
+        fontSize = textLargeSize
     ),
     displayMedium = TextStyle(
         fontFamily = RobotoFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
+        fontSize = textMediumSize
     ),
     displaySmall = TextStyle(
         fontFamily = RobotoFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp
+        fontSize = textSmallSize
     )
 )

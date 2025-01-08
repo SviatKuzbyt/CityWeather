@@ -4,8 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.Screen
-import ua.sviatkuzbyt.cityweather.ui.elements.cities.CitiesTopBar
+import ua.sviatkuzbyt.cityweather.ui.AppNavigation
 import ua.sviatkuzbyt.cityweather.ui.theme.CityWeatherTheme
 
 class MainActivity : ComponentActivity() {
@@ -14,13 +13,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CityWeatherTheme{
-                Screen(
-                    topBar = { CitiesTopBar() }
-                ) {}
+                AppNavigation()
             }
         }
     }
 }
-
-
-

@@ -11,6 +11,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
+//Контейнер для сторінок
+
 @Composable
 fun Screen(
     modifier: Modifier = Modifier,

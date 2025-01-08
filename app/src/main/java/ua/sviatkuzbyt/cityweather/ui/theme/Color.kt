@@ -1,0 +1,18 @@
+package ua.sviatkuzbyt.cityweather.ui.theme
+
+import androidx.compose.ui.graphics.Color
+
+val Black = Color(0xFF111111)
+val Blue = Color(0xFF008DDA)
+
+val Gray = Color(0xFF888888)
+
+val GrayLightLow = Color(0xFFF2F2F2)
+val GrayDarkLow = Color(0xFF1D1D1D)
+
+val GrayLight = Color(0xFFBFBFBF)
+val GrayDark = Color(0xFF4D4D4D)
+
+val BlackTransparent = Color(0x80111111)
+val WhiteTransparent = Color(0x80FFFFFF)
+val WhiteTransparentLow = Color(0x1AFFFFFF)

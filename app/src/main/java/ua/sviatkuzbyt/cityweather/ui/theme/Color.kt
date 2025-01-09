@@ -13,6 +13,10 @@ val GrayDarkLow = Color(0xFF1D1D1D)
 val GrayLight = Color(0xFFBFBFBF)
 val GrayDark = Color(0xFF4D4D4D)
 
-val BlackTransparent = Color(0x80111111)
+
 val WhiteTransparent = Color(0x80FFFFFF)
 val WhiteTransparentLow = Color(0x1AFFFFFF)
+
+val BlackDark = Color(0xFF292929)
+val BlackDarkTransparent = Color(0x80292929)
+val BlackDarkTransparentLow = Color(0x1A292929)

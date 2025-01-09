@@ -13,4 +13,11 @@
     <string name="weather_rain">Weather now: Rain</string>
     <string name="weather_thunderstorm">Weather now: Thunderstorm</string>
     <string name="wind_speed">"Wind speed:"</string>
+    <string name="humidity">Air humidity</string>
+    <string name="pressure">Pressure</string>
+    <string name="feels_like">The temperature feels like</string>
+    <string name="precipitation_reliability">Precipitation reliability</string>
+    <string name="forecastToday">Daily forecast</string>
+    <string name="forecastFiveDays">Forecast for 5 days</string>
+    <string name="control">Control</string>
 </resources>

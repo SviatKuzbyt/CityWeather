@@ -14,5 +14,6 @@ val spaceLarge = 20.dp
 val buttonHeight = 48.dp
 
 val iconSmallSize = 16.dp
+val iconMediumSmallSize = 20.dp
 val iconMediumSize = 24.dp
 val iconLargeSize = 36.dp

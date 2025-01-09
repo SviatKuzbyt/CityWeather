@@ -8,24 +8,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.data.structures.CityBackground
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemColors
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemDetailData
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.DetailButton
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.DetailItem
 import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
-import ua.sviatkuzbyt.cityweather.ui.theme.spaceSmall
 
-private val testData = CityItemData(1, "Test1", "+1°C", "1 m/s", R.drawable.weather_01d, R.string.weather_clear, CityBackground.BLue, 1, "1 mm", "+1°C", 1)
-
-@Preview
 @Composable
-fun DetailCityItem(data: CityItemData = testData, colors: CityItemColors = CityItemColors.lightColors){
+fun DetailCityItem(data: CityItemData, colors: CityItemColors){
 
+    //List of weather details
     val infoList = listOf(
         CityItemDetailData(R.drawable.ic_humidity, R.string.humidity, "${data.humidity}%"),
         CityItemDetailData(R.drawable.ic_pressure, R.string.pressure, data.pressure),
@@ -33,12 +27,14 @@ fun DetailCityItem(data: CityItemData = testData, colors: CityItemColors = CityI
         CityItemDetailData(R.drawable.ic_rain, R.string.precipitation_reliability, "${data.rain}%")
     )
 
+    //Set UI
     Column(Modifier.fillMaxWidth()) {
         HorizontalDivider(
             color = colors.backColor,
             modifier = Modifier.padding(top = spaceMedium)
         )
 
+        //Weather details
         Row(
             horizontalArrangement = Arrangement.Absolute.SpaceAround,
             modifier = Modifier.fillMaxWidth().padding(vertical = spaceMedium)
@@ -53,6 +49,7 @@ fun DetailCityItem(data: CityItemData = testData, colors: CityItemColors = CityI
             }
         }
 
+        //Buttons
         DetailButton(
             label = R.string.forecastToday,
             colors = colors
@@ -67,6 +64,5 @@ fun DetailCityItem(data: CityItemData = testData, colors: CityItemColors = CityI
             label = R.string.control,
             colors = colors
         ) { }
-
     }
 }

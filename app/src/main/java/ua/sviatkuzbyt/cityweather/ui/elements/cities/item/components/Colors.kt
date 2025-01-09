@@ -3,7 +3,9 @@ package ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import ua.sviatkuzbyt.cityweather.data.structures.CityBackground
+import ua.sviatkuzbyt.cityweather.data.structures.CityItemColors
 
 fun getLinearBackground(backgrounds: List<Color>) =
     Brush.linearGradient(
@@ -33,3 +35,11 @@ fun getCityBackground(background: CityBackground) =
             listOf(Color(0xFF263045),  Color(0xFF465169))
         }
     }
+
+fun getCityItemColors(backgroundColor: Color): CityItemColors {
+    return if (backgroundColor.luminance() > 0.5f){
+        CityItemColors.darkColors
+    } else{
+        CityItemColors.lightColors
+    }
+}

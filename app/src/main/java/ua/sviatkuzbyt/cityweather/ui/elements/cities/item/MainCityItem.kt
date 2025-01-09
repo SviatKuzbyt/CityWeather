@@ -11,29 +11,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.data.structures.CityBackground
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemColors
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
 import ua.sviatkuzbyt.cityweather.ui.theme.iconLargeSize
 import ua.sviatkuzbyt.cityweather.ui.theme.spaceLarge
 import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
 
-private val testData = CityItemData(1, "Test1", "+1°C", "1 m/s", R.drawable.weather_01d, R.string.weather_clear, CityBackground.BLue, 1, "1 mm", "+1°C", 1)
-
-@Preview(device = "spec:width=2080px,height=2340px,dpi=440")
 @Composable
-fun MainCityItem(data: CityItemData = testData, colors: CityItemColors = CityItemColors.lightColors){
+fun MainCityItem(data: CityItemData, colors: CityItemColors){
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.fillMaxWidth()
     ) {
-
+        //City name text
         Text(
             text = data.name,
             style = MaterialTheme.typography.headlineMedium,
@@ -47,12 +41,14 @@ fun MainCityItem(data: CityItemData = testData, colors: CityItemColors = CityIte
             horizontalAlignment = Alignment.End,
             modifier = Modifier.padding(end = spaceLarge)
         ) {
+            //Temperature text
             Text(
                 text = data.temperature,
                 style = MaterialTheme.typography.displayLarge,
                 color = colors.textColor
             )
 
+            //Wind speed text
             Text(
                 text = "${stringResource(R.string.wind_speed)} ${data.windSpeed}",
                 style = MaterialTheme.typography.displaySmall,
@@ -60,6 +56,7 @@ fun MainCityItem(data: CityItemData = testData, colors: CityItemColors = CityIte
             )
         }
 
+        //Weather image
         Image(
             imageVector = ImageVector.vectorResource(data.image),
             contentDescription = stringResource(data.weatherDescription),

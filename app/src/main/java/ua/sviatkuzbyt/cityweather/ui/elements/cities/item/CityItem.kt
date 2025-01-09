@@ -30,7 +30,7 @@ fun CityItem(
     val backgrounds = getCityBackground(data.background)
     val colors = getCityItemColors(backgrounds[0])
 
-    //Set width, padding and background
+    //Set width, padding, background and animation
     val modifier = Modifier
         .fillMaxWidth()
         .padding(bottom = spaceMedium)
@@ -45,9 +45,10 @@ fun CityItem(
         }
         .padding(vertical = spaceMedium, horizontal = spaceLarge)
         .animateContentSize(
-            animationSpec = tween(500, 0)
+            animationSpec = tween(400, 0)
         )
 
+    //Set UI
     Column(modifier) {
         MainCityItem(data, colors)
 

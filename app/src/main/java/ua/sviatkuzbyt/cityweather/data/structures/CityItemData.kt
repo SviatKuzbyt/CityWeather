@@ -16,7 +16,7 @@ enum class CityBackground{
 
 @Stable
 data class CityItemData(
-    val cityId: Int,
+    val cityId: Long,
     val name: String,
     val temperature: String,
     val windSpeed: String,

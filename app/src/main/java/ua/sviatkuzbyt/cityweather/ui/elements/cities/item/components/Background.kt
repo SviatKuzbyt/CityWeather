@@ -9,7 +9,7 @@ fun getLinearBackground(backgrounds: List<Color>) =
     Brush.linearGradient(
         colors = backgrounds,
         start = Offset(0f, 0f),
-        end = Offset(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY)
+        end = Offset(Float.POSITIVE_INFINITY, 0f)
     )
 
 fun getCityBackground(background: CityBackground) =

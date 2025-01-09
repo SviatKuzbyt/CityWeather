@@ -1,15 +1,18 @@
 package ua.sviatkuzbyt.cityweather.ui.elements.cities.item
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.data.structures.CityBackground
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.getCityBackground
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.getCityItemColors
@@ -17,10 +20,11 @@ import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.getLinearBa
 import ua.sviatkuzbyt.cityweather.ui.theme.spaceLarge
 import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
 
-@Preview(showBackground = true, device = "spec:width=2080px,height=2340px,dpi=440")
 @Composable
 fun CityItem(
-    data: CityItemData = CityItemData(1, "Sambir", "+5 C", "4 m/s", R.drawable.weather_02n, R.string.weather_clear, CityBackground.BLue, 0, "0", "0", 0)
+    data: CityItemData,
+    isOpen: Boolean,
+    onClickItem: () -> Unit
 ){
     // Set colors for content
     val backgrounds = getCityBackground(data.background)
@@ -34,12 +38,26 @@ fun CityItem(
             brush = getLinearBackground(backgrounds),
             shape = RoundedCornerShape(spaceMedium)
         )
+        .clickable(
+            interactionSource = null,
+            indication = null,) {
+            onClickItem()
+        }
         .padding(vertical = spaceMedium, horizontal = spaceLarge)
+        .animateContentSize(
+            animationSpec = tween(500, 0)
+        )
 
     Column(modifier) {
         MainCityItem(data, colors)
 
-        DetailCityItem(data, colors)
+        AnimatedVisibility(
+            visible = isOpen,
+            enter = fadeIn(animationSpec = tween(100)),
+            exit = fadeOut(animationSpec = tween(100))
+        ) {
+            DetailCityItem(data, colors)
+        }
     }
 }
 

@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.ButtonTopBar
 import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
+import ua.sviatkuzbyt.cityweather.ui.theme.spaceSmall
 
 @Preview(showSystemUi = false, showBackground = true)
 @Composable
@@ -21,7 +22,8 @@ fun CitiesTopBar() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = spaceMedium),
+            .padding(horizontal = spaceMedium)
+            .padding(bottom = spaceSmall),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {

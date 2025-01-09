@@ -3,4 +3,14 @@
     <string name="weather">Weather</string>
     <string name="add_city">Add city</string>
     <string name="open_settings">Open settings</string>
+    <string name="weather_clear">Weather now: Clear</string>
+    <string name="weather_bit_cloudy">Weather now: A bit cloudy</string>
+    <string name="weather_cloudy">Weather now: Cloudy</string>
+    <string name="weather_light_rain">Weather now: Light rain</string>
+    <string name="weather_foggy">Weather now: Foggy</string>
+    <string name="weather_snow">Weather now: Snowing</string>
+    <string name="weather_heavy_clouds">Weather now: Heavy clouds</string>
+    <string name="weather_rain">Weather now: Rain</string>
+    <string name="weather_thunderstorm">Weather now: Thunderstorm</string>
+    <string name="wind_speed">"Wind speed:"</string>
 </resources>

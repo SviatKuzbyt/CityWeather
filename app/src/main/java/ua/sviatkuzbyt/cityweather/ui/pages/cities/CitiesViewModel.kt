@@ -3,16 +3,13 @@ package ua.sviatkuzbyt.cityweather.ui.pages.cities
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ua.sviatkuzbyt.cityweather.data.repositories.CitiesRepository
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
-import kotlin.random.Random
 
 class CitiesViewModel(application: Application): AndroidViewModel(application) {
     private val repository = CitiesRepository(application)
@@ -30,6 +27,24 @@ class CitiesViewModel(application: Application): AndroidViewModel(application) {
         val newItem = repository.addCity(name, position)
         _cities.update { oldList ->
             oldList + newItem
+        }
+    }
+
+    fun delete(id: Long, position: Int) = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteCity(id, position)
+        _cities.update { oldList ->
+            oldList - oldList[position]
+        }
+
+    }
+
+    fun moveUpCity(id: Long, position: Int) = viewModelScope.launch(Dispatchers.IO) {
+        repository.moveUpCity(id, position)
+        _cities.update { oldList ->
+            oldList.toMutableList().apply {
+                val item = removeAt(position)
+                add(0, item)
+            }
         }
     }
 }

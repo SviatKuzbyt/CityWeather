@@ -17,9 +17,12 @@ import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.CityItem
 
 private const val NO_OPEN_ITEM = -1
 
+
 @Preview
 @Composable
 fun CitiesScreen(){
+    val viewModel: CitiesViewModel = viewModel()
+
     var openCityItem by rememberSaveable {
         mutableIntStateOf(NO_OPEN_ITEM)
     }
@@ -27,7 +30,7 @@ fun CitiesScreen(){
         mutableStateOf(false)
     }
 
-    val viewModel: CitiesViewModel = viewModel()
+
     val cities by viewModel.cities.collectAsState()
 
     AddCitySheet(
@@ -51,13 +54,28 @@ fun CitiesScreen(){
     ) {
         itemsIndexed(cities){ index, item ->
             val isOpen = openCityItem == index
-            CityItem(item, isOpen) {
-                openCityItem = if (isOpen){
-                    NO_OPEN_ITEM
-                } else {
-                    index
+            CityItem(
+                item,
+                isOpen,
+                onClickItem = {
+                    openCityItem = if (isOpen){
+                        NO_OPEN_ITEM
+                    } else {
+                        index
+                    }
+                },
+                onDelete = {
+                    openCityItem = NO_OPEN_ITEM
+                    viewModel.delete(item.cityId, index)
+                },
+                onMoveUp = {
+                    openCityItem = NO_OPEN_ITEM
+                    viewModel.moveUpCity(item.cityId, index)
                 }
-            }
+            )
+
+
         }
     }
+
 }

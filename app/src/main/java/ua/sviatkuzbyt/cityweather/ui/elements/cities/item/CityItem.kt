@@ -24,7 +24,9 @@ import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
 fun CityItem(
     data: CityItemData,
     isOpen: Boolean,
-    onClickItem: () -> Unit
+    onClickItem: () -> Unit,
+    onDelete: () -> Unit,
+    onMoveUp: () -> Unit
 ){
     // Set colors for content
     val backgrounds = getCityBackground(data.background)
@@ -57,7 +59,7 @@ fun CityItem(
             enter = fadeIn(animationSpec = tween(100)),
             exit = fadeOut(animationSpec = tween(100))
         ) {
-            DetailCityItem(data, colors)
+            DetailCityItem(data, colors, onDelete, onMoveUp)
         }
     }
 }

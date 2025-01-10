@@ -1,13 +1,11 @@
 package ua.sviatkuzbyt.cityweather.data.repositories
 
 import android.content.Context
-import kotlinx.coroutines.delay
 import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.data.database.CityEntity
 import ua.sviatkuzbyt.cityweather.data.database.DataBaseManager
 import ua.sviatkuzbyt.cityweather.data.structures.CityBackground
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
-import kotlin.random.Random
 
 class CitiesRepository(context: Context) {
     private val dataBaseDao = DataBaseManager.getDao(context)
@@ -41,4 +39,14 @@ class CitiesRepository(context: Context) {
         feelsLike = "--°C",
         rain = 0
     )
+
+    fun deleteCity(id: Long, position: Int) {
+        dataBaseDao.moveCitiesUp(position)
+        dataBaseDao.deleteCity(id)
+    }
+
+    fun moveUpCity(id: Long, position: Int){
+        dataBaseDao.moveCitiesDown(position)
+        dataBaseDao.moveCityUp(id)
+    }
 }

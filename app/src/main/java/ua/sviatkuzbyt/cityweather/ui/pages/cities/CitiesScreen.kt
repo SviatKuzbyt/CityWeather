@@ -32,8 +32,12 @@ fun CitiesScreen(){
 
     AddCitySheet(
         isShow = showAddCitySheet,
-        hideAction = {showAddCitySheet = false},
-        addAction = { println("SKLT $it")}
+        hideAction = {
+            showAddCitySheet = false
+        },
+        addAction = { city ->
+            viewModel.addCity(city)
+        }
     )
 
     Screen(

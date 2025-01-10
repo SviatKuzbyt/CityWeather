@@ -1,10 +1,13 @@
 package ua.sviatkuzbyt.cityweather.data.repositories
 
 import android.content.Context
+import kotlinx.coroutines.delay
 import ua.sviatkuzbyt.cityweather.R
+import ua.sviatkuzbyt.cityweather.data.database.CityEntity
 import ua.sviatkuzbyt.cityweather.data.database.DataBaseManager
 import ua.sviatkuzbyt.cityweather.data.structures.CityBackground
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
+import kotlin.random.Random
 
 class CitiesRepository(context: Context) {
     private val dataBaseDao = DataBaseManager.getDao(context)
@@ -12,19 +15,30 @@ class CitiesRepository(context: Context) {
     fun getCities(): List<CityItemData>{
         val cities = dataBaseDao.getCities()
         return cities.map {
-            CityItemData(
-                cityId = it.id,
-                name = it.name,
-                temperature = "--°C",
-                windSpeed = "-- m/s",
-                image = R.drawable.unknown,
-                weatherDescription = R.string.weather_clear,
-                background = CityBackground.BLue,
-                humidity = 0,
-                pressure = "-- mm",
-                feelsLike = "--°C",
-                rain = 0
-            )
+            loadCity(it)
         }
     }
+
+    fun addCity(name: String, position: Int): CityItemData{
+        val recordToAdd = CityEntity(0, name, position)
+        val addedId = dataBaseDao.addCity(recordToAdd)
+        val addedRecord = CityEntity(addedId, name, position)
+
+        return loadCity(addedRecord)
+    }
+
+    //temp
+    private fun loadCity(data: CityEntity) = CityItemData(
+        cityId = data.id,
+        name = data.name,
+        temperature = "--°C",
+        windSpeed = "-- m/s",
+        image = R.drawable.unknown,
+        weatherDescription = R.string.weather_clear,
+        background = CityBackground.BLue,
+        humidity = 0,
+        pressure = "-- mm",
+        feelsLike = "--°C",
+        rain = 0
+    )
 }

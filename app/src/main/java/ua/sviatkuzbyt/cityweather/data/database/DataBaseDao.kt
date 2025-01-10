@@ -10,7 +10,7 @@ interface DataBaseDao {
     fun getCities(): List<CityEntity>
 
     @Insert
-    fun addCity(cityEntity: CityEntity)
+    fun addCity(cityEntity: CityEntity): Long
 
     @Query("UPDATE city SET position=position+1 WHERE position < :toPosition")
     fun moveCitiesDown(toPosition: Int)

@@ -6,6 +6,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.containerShape
 
 /*Кольори:
 * primary - голвна кнопка
@@ -53,6 +54,7 @@ fun CityWeatherTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
-        content = content
+        content = content,
+        shapes = MaterialTheme.shapes.copy(containerShape)
     )
 }

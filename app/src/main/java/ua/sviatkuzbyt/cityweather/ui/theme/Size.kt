@@ -7,6 +7,7 @@ val textSmallSize = 14.sp
 val textMediumSize = 16.sp
 val textLargeSize = 24.sp
 
+val spaceOverSmall = 4.dp
 val spaceSmall = 8.dp
 val spaceMedium = 16.dp
 val spaceLarge = 20.dp

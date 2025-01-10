@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,6 +15,9 @@ import androidx.compose.ui.res.vectorResource
 import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemColors
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.BasicLargeText
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.BasicSmallText
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.HeadText
 import ua.sviatkuzbyt.cityweather.ui.theme.iconLargeSize
 import ua.sviatkuzbyt.cityweather.ui.theme.spaceLarge
 import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
@@ -28,9 +29,8 @@ fun MainCityItem(data: CityItemData, colors: CityItemColors){
         modifier = Modifier.fillMaxWidth()
     ) {
         //City name text
-        Text(
+        HeadText(
             text = data.name,
-            style = MaterialTheme.typography.headlineMedium,
             color = colors.textColor,
             modifier = Modifier
                 .weight(1f)
@@ -42,16 +42,14 @@ fun MainCityItem(data: CityItemData, colors: CityItemColors){
             modifier = Modifier.padding(end = spaceLarge)
         ) {
             //Temperature text
-            Text(
+            BasicLargeText(
                 text = data.temperature,
-                style = MaterialTheme.typography.displayLarge,
                 color = colors.textColor
             )
 
             //Wind speed text
-            Text(
+            BasicSmallText(
                 text = "${stringResource(R.string.wind_speed)} ${data.windSpeed}",
-                style = MaterialTheme.typography.displaySmall,
                 color = colors.iconColor
             )
         }

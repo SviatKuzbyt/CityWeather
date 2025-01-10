@@ -10,7 +10,6 @@ class CitiesRepository(context: Context) {
     private val dataBaseDao = DataBaseManager.getDao(context)
 
     fun getCities(): List<CityItemData>{
-
         val cities = dataBaseDao.getCities()
         return cities.map {
             CityItemData(

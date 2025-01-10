@@ -37,7 +37,9 @@ fun DetailCityItem(data: CityItemData, colors: CityItemColors){
         //Weather details
         Row(
             horizontalArrangement = Arrangement.Absolute.SpaceAround,
-            modifier = Modifier.fillMaxWidth().padding(vertical = spaceMedium)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = spaceMedium)
         ) {
             infoList.forEach {
                 DetailItem(

@@ -32,7 +32,6 @@ fun ButtonTopBar(
         imageVector = ImageVector.vectorResource(imageId),
         contentDescription = stringResource(contentDescription),
         tint = MaterialTheme.colorScheme.onSurface,
-
         modifier = modifier
             .size(buttonHeight)
             .clickable(

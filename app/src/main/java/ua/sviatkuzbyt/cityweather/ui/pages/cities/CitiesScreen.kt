@@ -30,6 +30,17 @@ fun CitiesScreen(){
         mutableStateOf(false)
     }
 
+    val add: (String) -> Unit = {
+        viewModel.addCity(it)
+    }
+
+    val delete: (Long, Int) -> Unit = { id, position ->
+        viewModel.delete(id, position)
+    }
+
+    val moveUp: (Long, Int) -> Unit = { id, position ->
+        viewModel.moveUpCity(id, position)
+    }
 
     val cities by viewModel.cities.collectAsState()
 
@@ -39,7 +50,7 @@ fun CitiesScreen(){
             showAddCitySheet = false
         },
         addAction = { city ->
-            viewModel.addCity(city)
+            add(city)
         }
     )
 
@@ -66,12 +77,12 @@ fun CitiesScreen(){
                 },
                 onDelete = {
                     openCityItem = NO_OPEN_ITEM
-                    viewModel.delete(item.cityId, index)
+                    delete(item.cityId, index)
                 },
                 onMoveUp = {
                     if (index != 0) {
                         openCityItem = NO_OPEN_ITEM
-                        viewModel.moveUpCity(item.cityId, index)
+                        moveUp(item.cityId, index)
                     }
                 }
             )

@@ -26,9 +26,6 @@ fun CitiesScreen(){
     var openCityItem by rememberSaveable {
         mutableIntStateOf(NO_OPEN_ITEM)
     }
-    var showAddCitySheet by rememberSaveable {
-        mutableStateOf(false)
-    }
 
     val add: (String) -> Unit = {
         viewModel.addCity(it)
@@ -44,21 +41,11 @@ fun CitiesScreen(){
 
     val cities by viewModel.cities.collectAsState()
 
-    AddCitySheet(
-        isShow = showAddCitySheet,
-        hideAction = {
-            showAddCitySheet = false
-        },
-        addAction = { city ->
-            add(city)
-        }
-    )
-
     Screen(
         topBar = {
             CitiesTopBar(
-                onAddButtonClick = {
-                    showAddCitySheet = true
+                onAddCity = {city ->
+                    add(city)
                 }
             )
         }

@@ -34,10 +34,11 @@ import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
 @Preview
 @Composable
 fun AddCitySheet(
-    addAction: (String) -> Unit = {},
+    isShow: Boolean = false,
     hideAction: () -> Unit = {},
-    isShow: Boolean = false
+    addAction: (String) -> Unit = {}
 ){
+
     val showState = rememberModalBottomSheetState()
     val screenScope = rememberCoroutineScope()
 

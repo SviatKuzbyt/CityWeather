@@ -69,8 +69,10 @@ fun CitiesScreen(){
                     viewModel.delete(item.cityId, index)
                 },
                 onMoveUp = {
-                    openCityItem = NO_OPEN_ITEM
-                    viewModel.moveUpCity(item.cityId, index)
+                    if (index != 0) {
+                        openCityItem = NO_OPEN_ITEM
+                        viewModel.moveUpCity(item.cityId, index)
+                    }
                 }
             )
 

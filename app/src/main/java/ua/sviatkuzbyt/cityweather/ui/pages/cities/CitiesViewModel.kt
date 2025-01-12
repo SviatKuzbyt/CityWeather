@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -32,6 +33,7 @@ class CitiesViewModel(application: Application): AndroidViewModel(application) {
 
     fun delete(id: Long, position: Int) = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteCity(id, position)
+        delay(500)
         _cities.update { oldList ->
             oldList - oldList[position]
         }
@@ -40,11 +42,12 @@ class CitiesViewModel(application: Application): AndroidViewModel(application) {
 
     fun moveUpCity(id: Long, position: Int) = viewModelScope.launch(Dispatchers.IO) {
         repository.moveUpCity(id, position)
-        _cities.update { oldList ->
-            oldList.toMutableList().apply {
-                val item = removeAt(position)
-                add(0, item)
-            }
-        }
+        val moveItem = _cities.value[position]
+
+        delay(500)
+        _cities.value -= moveItem
+
+        delay(200)
+        _cities.value = listOf(moveItem) + _cities.value
     }
 }

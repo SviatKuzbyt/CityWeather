@@ -10,6 +10,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,7 +22,7 @@ import ua.sviatkuzbyt.cityweather.ui.theme.spaceLarge
 import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
 
 @Composable
-fun CityItem(
+fun LazyItemScope.CityItem(
     data: CityItemData,
     isOpen: Boolean,
     onClickItem: () -> Unit,
@@ -49,6 +50,7 @@ fun CityItem(
         .animateContentSize(
             animationSpec = tween(400, 0)
         )
+        .animateItem(placementSpec = null)
 
     //Set UI
     Column(modifier) {

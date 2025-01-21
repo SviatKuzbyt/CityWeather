@@ -9,18 +9,34 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
 
-//Контейнер для сторінок
+enum class ScreenState {
+    Loading, Content, Empty, Error
+}
 
 @Composable
 fun Screen(
     modifier: Modifier = Modifier,
     topBar: @Composable () -> Unit,
-    content: LazyListScope.() -> Unit
+    screenState: ScreenState = ScreenState.Loading,
+    emptyText: String,
+    content: LazyListScope.() -> Unit,
+
 ){
     Column(modifier.fillMaxSize()) {
         topBar()
-        LazyColumn(Modifier.fillMaxSize().padding(horizontal = spaceMedium)) {
-            content()
+        when(screenState){
+            ScreenState.Loading -> {
+                LoadScreen()
+            }
+            ScreenState.Content -> {
+                LazyColumn(Modifier.fillMaxSize().padding(horizontal = spaceMedium)) {
+                    content()
+                }
+            }
+            ScreenState.Empty -> {
+                EmptyTextScreen(emptyText)
+            }
+            ScreenState.Error -> {}
         }
     }
 }

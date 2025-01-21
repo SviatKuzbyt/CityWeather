@@ -17,6 +17,7 @@ import ua.sviatkuzbyt.cityweather.ui.elements.basic.containerShape
 * onPrimaryContainer - дод. текст
 * onSecondaryContainer - дод. іконики
 *  */
+
 private val DarkColorScheme = darkColorScheme(
     primary = Blue,
     onPrimary = Color.White,

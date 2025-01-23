@@ -17,9 +17,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kotlinx.serialization.Serializable
 import ua.sviatkuzbyt.cityweather.ui.pages.cities.CitiesScreen
+import ua.sviatkuzbyt.cityweather.ui.pages.forecast.TodayForecastScreen
 
 @Serializable
 data object CitiesRoute
+
+@Serializable
+data class ForecastTodayRoute(
+    val city: String
+)
 
 val LocalNavController: ProvidableCompositionLocal<NavController> = staticCompositionLocalOf{
     error("LocalNavController: No NavController")
@@ -43,6 +49,10 @@ fun AppNavigation(){
         ){
             composable<CitiesRoute> {
                 CitiesScreen()
+            }
+
+            composable<ForecastTodayRoute> {
+                TodayForecastScreen()
             }
         }
     }

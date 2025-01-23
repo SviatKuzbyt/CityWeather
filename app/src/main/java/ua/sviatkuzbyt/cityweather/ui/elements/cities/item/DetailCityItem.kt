@@ -27,7 +27,8 @@ fun DetailCityItem(
     data: CityItemData,
     colors: CityItemColors,
     onDelete: () -> Unit,
-    onMoveUp: () -> Unit
+    onMoveUp: () -> Unit,
+    onTodayClick: (String) -> Unit
 ){
 
     //List of weather details
@@ -70,7 +71,9 @@ fun DetailCityItem(
         DetailButton(
             label = R.string.forecastToday,
             colors = colors
-        ) { }
+        ) {
+            onTodayClick(data.name)
+        }
 
         DetailButton(
             label = R.string.forecastFiveDays,

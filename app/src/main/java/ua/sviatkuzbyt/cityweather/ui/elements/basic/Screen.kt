@@ -18,7 +18,7 @@ fun Screen(
     modifier: Modifier = Modifier,
     topBar: @Composable () -> Unit,
     screenState: ScreenState = ScreenState.Loading,
-    emptyText: String,
+    emptyText: String = "",
     onErrorRetryClick: () -> Unit,
     content: LazyListScope.() -> Unit,
 

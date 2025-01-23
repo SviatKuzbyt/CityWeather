@@ -17,6 +17,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
+import ua.sviatkuzbyt.cityweather.ui.ForecastTodayRoute
+import ua.sviatkuzbyt.cityweather.ui.LocalNavController
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.Screen
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.ScreenState
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.CitiesTopBar
@@ -35,6 +37,8 @@ fun CitiesScreen(){
         minActiveState = Lifecycle.State.RESUMED
     )
 
+    val navController = LocalNavController.current
+
     CitiesContent(
         cities = { cities },
         addCity = { name ->
@@ -49,7 +53,10 @@ fun CitiesScreen(){
         screenState = screenState,
         message = message,
         clearMessage = { viewModel.clearMessage() },
-        errorReturn = { viewModel.loadCities() }
+        errorReturn = { viewModel.loadCities() },
+        openForecastToday = { city ->
+            navController.navigate(ForecastTodayRoute(city))
+        }
     )
 }
 
@@ -62,7 +69,8 @@ private fun CitiesContent(
     screenState: ScreenState,
     message: Int?,
     clearMessage: () -> Unit,
-    errorReturn: () -> Unit
+    errorReturn: () -> Unit,
+    openForecastToday: (String) -> Unit
 ){
     var openCityItem by rememberSaveable {
         mutableIntStateOf(NO_OPEN_ITEM)
@@ -110,7 +118,8 @@ private fun CitiesContent(
                             openCityItem = NO_OPEN_ITEM
                             moveUpCity(item.cityId, index)
                         }
-                    }
+                    },
+                    onTodayClick = openForecastToday
                 )
             }
         }

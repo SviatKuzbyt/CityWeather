@@ -15,17 +15,19 @@ fun LabelNavigateTopBar(
     onNavigate: () -> Unit
 ){
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = spaceMedium)
+        modifier = Modifier.fillMaxWidth()
             .padding(bottom = spaceSmall)
     ) {
         ButtonTopBar(
             imageId = R.drawable.ic_back,
             contentDescription = R.string.close_page,
-            onClick = onNavigate
+            onClick = onNavigate,
+            modifier = Modifier.padding(start = spaceSmall)
         )
 
-        HeadLargeText(text)
+        HeadLargeText(
+            text = text,
+            modifier = Modifier.padding(horizontal = spaceMedium).padding(bottom = spaceSmall)
+        )
     }
 }

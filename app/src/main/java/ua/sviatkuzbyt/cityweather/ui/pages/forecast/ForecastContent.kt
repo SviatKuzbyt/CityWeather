@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import ua.sviatkuzbyt.cityweather.data.structures.ForecastData
+import ua.sviatkuzbyt.cityweather.data.api.forecast.ForecastData
 import ua.sviatkuzbyt.cityweather.ui.LocalNavController
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.LabelNavigateTopBar
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.Screen

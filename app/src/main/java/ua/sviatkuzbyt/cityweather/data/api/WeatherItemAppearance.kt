@@ -9,7 +9,7 @@ data class WeatherItemAppearance(
     val background: CityBackground
 ) {
     companion object{
-        val items = mapOf(
+        private val items = mapOf(
             "01d" to WeatherItemAppearance(R.drawable.weather_01d, CityBackground.BLue),
             "01n" to WeatherItemAppearance(R.drawable.weather_01n, CityBackground.BlueDark),
             "02d" to WeatherItemAppearance(R.drawable.weather_02d, CityBackground.BLue),
@@ -29,5 +29,10 @@ data class WeatherItemAppearance(
             "50d" to WeatherItemAppearance(R.drawable.weather_50, CityBackground.White),
             "50n" to WeatherItemAppearance(R.drawable.weather_50, CityBackground.WhiteDark)
         )
+
+        fun getWeatherItemAppearance(code: String): WeatherItemAppearance {
+            return items[code]
+                ?: WeatherItemAppearance(R.drawable.unknown, CityBackground.BLue)
+        }
     }
 }

@@ -3,7 +3,7 @@ package ua.sviatkuzbyt.cityweather.ui.pages.forecast
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.data.structures.ForecastData
+import ua.sviatkuzbyt.cityweather.data.api.forecast.ForecastData
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.ScreenState
 
 @Preview

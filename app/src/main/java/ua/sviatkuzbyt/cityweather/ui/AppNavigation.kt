@@ -1,14 +1,10 @@
 package ua.sviatkuzbyt.cityweather.ui
 
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandHorizontally
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
-import androidx.compose.animation.shrinkOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,10 +20,11 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import kotlinx.serialization.Serializable
 import ua.sviatkuzbyt.cityweather.ui.pages.cities.CitiesScreen
 import ua.sviatkuzbyt.cityweather.ui.pages.forecast.FiveDaysForecastScreen
-import ua.sviatkuzbyt.cityweather.ui.pages.forecast.TodayForecastScreen
+import ua.sviatkuzbyt.cityweather.ui.pages.forecast.today.TodayForecastScreen
 
 @Serializable
 data object CitiesRoute
@@ -83,7 +80,8 @@ fun AppNavigation(){
             }
 
             composable<ForecastTodayRoute>{
-                TodayForecastScreen()
+                val route: ForecastTodayRoute = it.toRoute()
+                TodayForecastScreen(route.city)
             }
 
             composable<ForecastFiveDaysRoute>{

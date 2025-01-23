@@ -1,29 +1,21 @@
-package ua.sviatkuzbyt.cityweather.data.api
+package ua.sviatkuzbyt.cityweather.data.api.current
 import com.google.gson.Gson
-import ua.sviatkuzbyt.cityweather.R
+import ua.sviatkuzbyt.cityweather.data.api.WeatherItemAppearance.Companion.getWeatherItemAppearance
+import ua.sviatkuzbyt.cityweather.data.api.getApiResponse
 import ua.sviatkuzbyt.cityweather.data.database.CityEntity
-import ua.sviatkuzbyt.cityweather.data.structures.CityBackground
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
-import ua.sviatkuzbyt.cityweather.data.structures.WeatherResponse
-import java.net.URL
 
 class CurrentWeatherManager{
     private val gson = Gson()
 
     fun loadWeatherForCity(cityEntity: CityEntity): CityItemData{
-        val apiResponse = getDataFromApi(cityEntity.name)
+        val apiResponse = getApiResponse(cityEntity.name, "weather")
         return convertToCityItem(apiResponse, cityEntity)
     }
 
-    private fun getDataFromApi(city: String): String{
-        return URL(
-            "https://api.openweathermap.org/data/2.5/weather?q=$city&units=metric&appid=$API_KEY"
-        ).readText()
-    }
-
-    fun convertToCityItem(apiResponse: String, cityEntity: CityEntity): CityItemData{
+    private fun convertToCityItem(apiResponse: String, cityEntity: CityEntity): CityItemData{
         val gsonResponse = gson.fromJson(apiResponse, WeatherResponse::class.java)
-        val appearance = getAppearance(gsonResponse.weather[0].icon)
+        val appearance = getWeatherItemAppearance(gsonResponse.weather[0].icon)
 
         return CityItemData(
             cityId = cityEntity.id,
@@ -40,8 +32,5 @@ class CurrentWeatherManager{
         )
     }
 
-    private fun getAppearance(code: String): WeatherItemAppearance {
-        return WeatherItemAppearance.items[code]
-            ?: WeatherItemAppearance(R.drawable.unknown, CityBackground.BLue)
-    }
+
 }

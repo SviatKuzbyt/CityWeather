@@ -1,6 +1,4 @@
-package ua.sviatkuzbyt.cityweather.data.structures
-
-import androidx.annotation.DrawableRes
+package ua.sviatkuzbyt.cityweather.data.api.current
 
 data class WeatherResponse(
     val weather: List<Weather>,

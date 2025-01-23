@@ -2,7 +2,7 @@ package ua.sviatkuzbyt.cityweather.data.repositories
 
 import android.content.Context
 import ua.sviatkuzbyt.cityweather.data.ExistCityException
-import ua.sviatkuzbyt.cityweather.data.api.CurrentWeatherManager
+import ua.sviatkuzbyt.cityweather.data.api.current.CurrentWeatherManager
 import ua.sviatkuzbyt.cityweather.data.database.CityEntity
 import ua.sviatkuzbyt.cityweather.data.database.DataBaseManager
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemData

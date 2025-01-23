@@ -26,21 +26,31 @@ class CitiesViewModel(application: Application): AndroidViewModel(application) {
 
     init { loadCities() }
 
-    private suspend fun saveableCall(code: suspend () -> Unit){
+    private suspend fun saveableCall(
+        errorHandler: () -> Unit = {},
+        code: suspend () -> Unit
+    ){
         try {
              code()
         } catch (e: Exception){
             _message.value = exceptionDescription(e)
+            errorHandler()
         }
     }
 
-    private fun loadCities() = viewModelScope.launch(Dispatchers.IO){
-        saveableCall {
-            _cities.value = repository.getCities()
-            _screenState.value =
-                if (_cities.value.isEmpty()) ScreenState.Empty
-                else ScreenState.Content
-        }
+    fun loadCities() = viewModelScope.launch(Dispatchers.IO){
+        saveableCall(
+            code = {
+                _screenState.value = ScreenState.Loading
+                _cities.value = repository.getCities()
+                _screenState.value =
+                    if (_cities.value.isEmpty()) ScreenState.Empty
+                    else ScreenState.Content
+            },
+            errorHandler = {
+                _screenState.value = ScreenState.Error
+            }
+        )
     }
 
     fun addCity(name: String) = viewModelScope.launch(Dispatchers.IO) {

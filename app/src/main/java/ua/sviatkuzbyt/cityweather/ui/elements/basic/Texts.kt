@@ -5,6 +5,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import ua.sviatkuzbyt.cityweather.ui.theme.textLargeSize
 import ua.sviatkuzbyt.cityweather.ui.theme.textMediumSize
 import ua.sviatkuzbyt.cityweather.ui.theme.textSmallSize
@@ -81,6 +82,22 @@ fun HeadLargeText(
         fontSize = textLargeSize,
         style = MaterialTheme.typography.headlineMedium,
         color = color,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun CenterText(
+    text: String,
+    color: Color = MaterialTheme.colorScheme.onPrimaryContainer,
+    modifier: Modifier = Modifier
+){
+    Text(
+        text = text,
+        fontSize = textMediumSize,
+        style = MaterialTheme.typography.displayMedium,
+        color = color,
+        textAlign = TextAlign.Center,
         modifier = modifier
     )
 }

@@ -19,6 +19,7 @@ fun Screen(
     topBar: @Composable () -> Unit,
     screenState: ScreenState = ScreenState.Loading,
     emptyText: String,
+    onErrorRetryClick: () -> Unit,
     content: LazyListScope.() -> Unit,
 
 ){
@@ -36,7 +37,9 @@ fun Screen(
             ScreenState.Empty -> {
                 EmptyTextScreen(emptyText)
             }
-            ScreenState.Error -> {}
+            ScreenState.Error -> {
+                ErrorScreen(onErrorRetryClick)
+            }
         }
     }
 }

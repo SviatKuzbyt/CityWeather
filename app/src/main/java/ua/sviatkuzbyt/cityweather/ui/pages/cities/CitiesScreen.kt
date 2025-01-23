@@ -48,7 +48,8 @@ fun CitiesScreen(){
         },
         screenState = screenState,
         message = message,
-        clearMessage = {viewModel.clearMessage()}
+        clearMessage = { viewModel.clearMessage() },
+        errorReturn = { viewModel.loadCities() }
     )
 }
 
@@ -60,7 +61,8 @@ private fun CitiesContent(
     moveUpCity: (Long, Int) -> Unit,
     screenState: ScreenState,
     message: Int?,
-    clearMessage: () -> Unit
+    clearMessage: () -> Unit,
+    errorReturn: () -> Unit
 ){
     var openCityItem by rememberSaveable {
         mutableIntStateOf(NO_OPEN_ITEM)
@@ -84,6 +86,7 @@ private fun CitiesContent(
                 }
             )
         },
+        onErrorRetryClick = errorReturn,
         content = {
             itemsIndexed(cities.invoke()){ index, item ->
                 val isOpen = openCityItem == index

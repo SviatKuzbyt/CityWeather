@@ -1,14 +1,19 @@
 package ua.sviatkuzbyt.cityweather.ui.pages.cities
 
+import android.widget.Toast
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
@@ -23,9 +28,12 @@ private const val NO_OPEN_ITEM = -1
 @Composable
 fun CitiesScreen(){
     val viewModel: CitiesViewModel = viewModel()
-    val cities by viewModel.cities.collectAsState()
 
+    val cities by viewModel.cities.collectAsState()
     val screenState by viewModel.screenState.collectAsState()
+    val message by viewModel.message.collectAsStateWithLifecycle(
+        minActiveState = Lifecycle.State.RESUMED
+    )
 
     CitiesContent(
         cities = { cities },
@@ -38,7 +46,9 @@ fun CitiesScreen(){
         moveUpCity = {id, position ->
             viewModel.moveUpCity(id, position)
         },
-        screenState = screenState
+        screenState = screenState,
+        message = message,
+        clearMessage = {viewModel.clearMessage()}
     )
 }
 
@@ -48,10 +58,20 @@ private fun CitiesContent(
     addCity: (String) -> Unit,
     deleteCity: (Long, Int) -> Unit,
     moveUpCity: (Long, Int) -> Unit,
-    screenState: ScreenState
+    screenState: ScreenState,
+    message: Int?,
+    clearMessage: () -> Unit
 ){
     var openCityItem by rememberSaveable {
         mutableIntStateOf(NO_OPEN_ITEM)
+    }
+    val context = LocalContext.current
+
+    LaunchedEffect(message) {
+        message?.let {
+            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+            clearMessage()
+        }
     }
 
     Screen(

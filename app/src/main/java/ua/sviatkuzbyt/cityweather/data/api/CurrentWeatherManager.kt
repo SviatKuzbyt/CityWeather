@@ -12,7 +12,7 @@ class CurrentWeatherManager{
     private val gson = Gson()
 
     fun loadWeatherForCity(cityEntity: CityEntity): CityItemData{
-        val apiResponse = getDataFromApi(cityEntity.name.trim())
+        val apiResponse = getDataFromApi(cityEntity.name)
         return convertToCityItem(apiResponse, cityEntity)
     }
 

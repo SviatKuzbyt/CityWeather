@@ -23,4 +23,7 @@ interface DataBaseDao {
 
     @Query("DELETE FROM city WHERE id=:id")
     fun deleteCity(id: Long)
+
+    @Query("SELECT 1 FROM city WHERE name=:name")
+    fun checkExistCity(name: String): Int
 }

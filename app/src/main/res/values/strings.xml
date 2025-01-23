@@ -29,4 +29,5 @@
     <string name="error">An error occurred</string>
     <string name="no_connect">Connection failed. Check the Internet connection</string>
     <string name="no_info">Failed to upload information. Incorrect data entered</string>
+    <string name="city_already_added">City already added</string>
 </resources>

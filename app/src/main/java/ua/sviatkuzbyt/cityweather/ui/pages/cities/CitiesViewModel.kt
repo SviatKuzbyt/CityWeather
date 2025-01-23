@@ -1,10 +1,8 @@
 package ua.sviatkuzbyt.cityweather.ui.pages.cities
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,11 +18,11 @@ class CitiesViewModel(application: Application): AndroidViewModel(application) {
     private val repository = CitiesRepository(application)
     private val _cities = MutableStateFlow<List<CityItemData>>(listOf())
     private val _screenState = MutableStateFlow(ScreenState.Loading)
-    private val _message = MutableStateFlow(0)
+    private val _message = MutableStateFlow<Int?>(null)
 
     val cities: StateFlow<List<CityItemData>> = _cities
     val screenState: StateFlow<ScreenState> = _screenState
-    val message: StateFlow<Int> = _message
+    val message: StateFlow<Int?> = _message
 
     init { loadCities() }
 
@@ -74,5 +72,9 @@ class CitiesViewModel(application: Application): AndroidViewModel(application) {
         delay(500)
         _cities.value -= moveItem
         _cities.value = listOf(moveItem) + _cities.value
+    }
+
+    fun clearMessage(){
+        _message.value = null
     }
 }

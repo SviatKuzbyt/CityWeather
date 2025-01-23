@@ -1,14 +1,14 @@
 package ua.sviatkuzbyt.cityweather.data.repositories
 
 import android.content.Context
-import ua.sviatkuzbyt.cityweather.R
+import ua.sviatkuzbyt.cityweather.data.api.CurrentWeatherManager
 import ua.sviatkuzbyt.cityweather.data.database.CityEntity
 import ua.sviatkuzbyt.cityweather.data.database.DataBaseManager
-import ua.sviatkuzbyt.cityweather.data.structures.CityBackground
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
 
 class CitiesRepository(context: Context) {
     private val dataBaseDao = DataBaseManager.getDao(context)
+    private val currentWeatherManager = CurrentWeatherManager()
 
     fun getCities(): List<CityItemData>{
         val cities = dataBaseDao.getCities()
@@ -18,27 +18,17 @@ class CitiesRepository(context: Context) {
     }
 
     fun addCity(name: String, position: Int): CityItemData{
-        val recordToAdd = CityEntity(0, name, position)
-        val addedId = dataBaseDao.addCity(recordToAdd)
-        val addedRecord = CityEntity(addedId, name, position)
+        val cityEntity = CityEntity(0, name, position)
+        val loadedWeather = loadCity(cityEntity)
+        val addedId = dataBaseDao.addCity(cityEntity)
 
-        return loadCity(addedRecord)
+        return loadedWeather.copy(cityId = addedId)
     }
 
     //temp
-    private fun loadCity(data: CityEntity) = CityItemData(
-        cityId = data.id,
-        name = data.name,
-        temperature = "--°C",
-        windSpeed = "-- m/s",
-        image = R.drawable.unknown,
-        weatherDescription = "none",
-        background = CityBackground.BLue,
-        humidity = 0,
-        pressure = 0,
-        feelsLike = "--°C",
-        rain = 0
-    )
+    private fun loadCity(cityEntity: CityEntity): CityItemData {
+        return currentWeatherManager.loadWeatherForCity(cityEntity)
+    }
 
     fun deleteCity(id: Long, position: Int) {
         dataBaseDao.moveCitiesUp(position)

@@ -28,8 +28,3 @@ data class Wind(
 data class Rain(
     val `1h`: Float
 )
-
-data class WeatherItemAppearance(
-    @DrawableRes val icon: Int,
-    val background: CityBackground
-)

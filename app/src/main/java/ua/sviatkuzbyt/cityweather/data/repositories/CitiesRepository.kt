@@ -32,10 +32,10 @@ class CitiesRepository(context: Context) {
         temperature = "--°C",
         windSpeed = "-- m/s",
         image = R.drawable.unknown,
-        weatherDescription = R.string.weather_clear,
+        weatherDescription = "none",
         background = CityBackground.BLue,
         humidity = 0,
-        pressure = "-- mm",
+        pressure = 0,
         feelsLike = "--°C",
         rain = 0
     )

@@ -33,9 +33,9 @@ fun DetailCityItem(
     //List of weather details
     val infoList = listOf(
         CityItemDetailData(R.drawable.ic_humidity, R.string.humidity, "${data.humidity}%"),
-        CityItemDetailData(R.drawable.ic_pressure, R.string.pressure, data.pressure),
+        CityItemDetailData(R.drawable.ic_pressure, R.string.pressure, "${data.pressure} hPa"),
         CityItemDetailData(R.drawable.ic_feels_like, R.string.feels_like, data.feelsLike),
-        CityItemDetailData(R.drawable.ic_rain, R.string.precipitation_reliability, "${data.rain}%")
+        CityItemDetailData(R.drawable.ic_rain, R.string.precipitation_reliability, "${data.rain} mm/h")
     )
 
     var showControlMenu by remember {

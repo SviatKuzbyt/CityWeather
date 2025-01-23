@@ -21,10 +21,10 @@ data class CityItemData(
     val temperature: String,
     val windSpeed: String,
     @DrawableRes val image: Int,
-    @StringRes val weatherDescription: Int,
+    val weatherDescription: String,
     val background: CityBackground,
     val humidity: Int,
-    val pressure: String,
+    val pressure: Int,
     val feelsLike: String,
     val rain: Int
 )

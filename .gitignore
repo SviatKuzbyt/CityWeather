@@ -13,3 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/src/main/java/ua/sviatkuzbyt/cityweather/data/api/key.kt

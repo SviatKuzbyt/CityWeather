@@ -1,5 +1,14 @@
 package ua.sviatkuzbyt.cityweather.ui
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.animation.shrinkOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -37,6 +46,20 @@ val LocalNavController: ProvidableCompositionLocal<NavController> = staticCompos
     error("LocalNavController: No NavController")
 }
 
+val enterTransition =
+    scaleIn(
+        initialScale = 0.75f,
+        animationSpec = tween(400, 100)
+    ) + fadeIn(animationSpec = tween(400, 100))
+
+
+val exitTransition =
+    scaleOut(
+        targetScale = 0.75f,
+        animationSpec = tween(400)
+    ) + fadeOut(animationSpec = tween(400))
+
+
 @Composable
 fun AppNavigation(){
     val modifier = Modifier
@@ -51,17 +74,19 @@ fun AppNavigation(){
         NavHost(
             modifier = modifier,
             navController = navController,
-            startDestination = CitiesRoute
+            startDestination = CitiesRoute,
+            enterTransition = { enterTransition },
+            exitTransition = { exitTransition }
         ){
             composable<CitiesRoute> {
                 CitiesScreen()
             }
 
-            composable<ForecastTodayRoute> {
+            composable<ForecastTodayRoute>{
                 TodayForecastScreen()
             }
 
-            composable<ForecastFiveDaysRoute> {
+            composable<ForecastFiveDaysRoute>{
                 FiveDaysForecastScreen()
             }
         }

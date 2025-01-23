@@ -33,4 +33,6 @@
     <string name="error_load">There was a loading error</string>
     <string name="retry">Try again</string>
     <string name="close_page">Close page</string>
+    <string name="time">Time</string>
+    <string name="temperature">Temperature</string>
 </resources>

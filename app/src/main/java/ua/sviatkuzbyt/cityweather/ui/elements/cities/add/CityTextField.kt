@@ -2,12 +2,15 @@ package ua.sviatkuzbyt.cityweather.ui.elements.cities.add
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.BasicText
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.containerShape
@@ -42,6 +45,10 @@ fun CityTextField(
         modifier = Modifier.fillMaxWidth(),
         keyboardActions = KeyboardActions {
             keyboardAction()
-        }
+        },
+        keyboardOptions = KeyboardOptions(
+            capitalization = KeyboardCapitalization.Sentences,
+            imeAction = ImeAction.Search
+        )
     )
 }

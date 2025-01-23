@@ -28,7 +28,8 @@ fun DetailCityItem(
     colors: CityItemColors,
     onDelete: () -> Unit,
     onMoveUp: () -> Unit,
-    onTodayClick: (String) -> Unit
+    onTodayClick: (String) -> Unit,
+    onFiveDaysClick: (String) -> Unit
 ){
 
     //List of weather details
@@ -78,7 +79,9 @@ fun DetailCityItem(
         DetailButton(
             label = R.string.forecastFiveDays,
             colors = colors
-        ) { }
+        ) {
+            onFiveDaysClick(data.name)
+        }
 
         Box {
             DetailButton(

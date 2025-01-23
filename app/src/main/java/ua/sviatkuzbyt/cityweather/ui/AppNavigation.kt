@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kotlinx.serialization.Serializable
 import ua.sviatkuzbyt.cityweather.ui.pages.cities.CitiesScreen
+import ua.sviatkuzbyt.cityweather.ui.pages.forecast.FiveDaysForecastScreen
 import ua.sviatkuzbyt.cityweather.ui.pages.forecast.TodayForecastScreen
 
 @Serializable
@@ -24,6 +25,11 @@ data object CitiesRoute
 
 @Serializable
 data class ForecastTodayRoute(
+    val city: String
+)
+
+@Serializable
+data class ForecastFiveDaysRoute(
     val city: String
 )
 
@@ -45,8 +51,7 @@ fun AppNavigation(){
         NavHost(
             modifier = modifier,
             navController = navController,
-            //temp
-            startDestination = ForecastTodayRoute("Sambir")
+            startDestination = CitiesRoute
         ){
             composable<CitiesRoute> {
                 CitiesScreen()
@@ -54,6 +59,10 @@ fun AppNavigation(){
 
             composable<ForecastTodayRoute> {
                 TodayForecastScreen()
+            }
+
+            composable<ForecastFiveDaysRoute> {
+                FiveDaysForecastScreen()
             }
         }
     }

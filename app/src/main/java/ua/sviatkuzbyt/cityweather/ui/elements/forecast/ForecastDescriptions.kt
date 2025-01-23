@@ -19,7 +19,7 @@ import ua.sviatkuzbyt.cityweather.ui.theme.iconSmallSize
 import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
 
 @Composable
-fun ForecastDescriptions(showWindSpeed: Boolean) {
+fun ForecastDescriptions(showWindSpeed: Boolean, weatherWeight: Float) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -49,7 +49,7 @@ fun ForecastDescriptions(showWindSpeed: Boolean) {
         DescriptionIcon(
             icon = R.drawable.ic_forecast_weather,
             contentDescription = R.string.weather,
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(weatherWeight)
         )
     }
 }

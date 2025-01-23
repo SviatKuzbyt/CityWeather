@@ -8,28 +8,35 @@ import ua.sviatkuzbyt.cityweather.ui.elements.basic.ScreenState
 
 @Preview
 @Composable
-fun TodayForecastScreen(){
+fun FiveDaysForecastScreen(){
     val tempList = listOf(
         ForecastData(
-            "15:00",
-            "+20C",
-            "5 m/s",
+            "Пн, 20.05",
+            "+20℃ / +12℃",
+            null,
             R.drawable.weather_02d,
             "sun"
         ),
         ForecastData(
-            "18:00",
-            "+2C",
-            "3 m/s",
-            R.drawable.weather_02d,
+            "Вт, 21.05",
+            "+23℃ / +14℃",
+            null,
+            R.drawable.weather_01d,
             "sun"
         ),
         ForecastData(
-            "21:00",
-            "+17C",
-            "21 m/s",
-            R.drawable.weather_02d,
+            "Ср, 22.05",
+            "+26℃ / +16℃",
+            null,
+            R.drawable.weather_01d,
             "sun"
+        ),
+        ForecastData(
+            "Чт, 23.05",
+            "+18℃ / +9℃",
+            null,
+            R.drawable.weather_09,
+            "rain"
         )
     )
 
@@ -37,7 +44,7 @@ fun TodayForecastScreen(){
         forecastList = tempList,
         onErrorRetryClick = {},
         screenState = ScreenState.Content,
-        isWindSpeed = true,
-        topBarLabel = R.string.forecastToday
+        isWindSpeed = false,
+        topBarLabel = R.string.forecastFiveDays
     )
 }

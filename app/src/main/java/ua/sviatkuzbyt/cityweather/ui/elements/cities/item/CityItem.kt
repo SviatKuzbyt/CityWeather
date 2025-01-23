@@ -28,7 +28,8 @@ fun LazyItemScope.CityItem(
     onClickItem: () -> Unit,
     onDelete: () -> Unit,
     onMoveUp: () -> Unit,
-    onTodayClick: (String) -> Unit
+    onTodayClick: (String) -> Unit,
+    onFiveDaysClick: (String) -> Unit
 ){
     // Set colors for content
     val backgrounds = getCityBackground(data.background)
@@ -62,7 +63,7 @@ fun LazyItemScope.CityItem(
             enter = fadeIn(animationSpec = tween(100)),
             exit = fadeOut(animationSpec = tween(100))
         ) {
-            DetailCityItem(data, colors, onDelete, onMoveUp, onTodayClick)
+            DetailCityItem(data, colors, onDelete, onMoveUp, onTodayClick, onFiveDaysClick)
         }
     }
 }

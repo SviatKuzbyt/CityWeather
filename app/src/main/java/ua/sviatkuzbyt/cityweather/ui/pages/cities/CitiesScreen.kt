@@ -17,6 +17,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
+import ua.sviatkuzbyt.cityweather.ui.ForecastFiveDaysRoute
 import ua.sviatkuzbyt.cityweather.ui.ForecastTodayRoute
 import ua.sviatkuzbyt.cityweather.ui.LocalNavController
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.Screen
@@ -56,6 +57,9 @@ fun CitiesScreen(){
         errorReturn = { viewModel.loadCities() },
         openForecastToday = { city ->
             navController.navigate(ForecastTodayRoute(city))
+        },
+        openForecastFiveDays = { city ->
+            navController.navigate(ForecastFiveDaysRoute(city))
         }
     )
 }
@@ -70,7 +74,8 @@ private fun CitiesContent(
     message: Int?,
     clearMessage: () -> Unit,
     errorReturn: () -> Unit,
-    openForecastToday: (String) -> Unit
+    openForecastToday: (String) -> Unit,
+    openForecastFiveDays: (String) -> Unit
 ){
     var openCityItem by rememberSaveable {
         mutableIntStateOf(NO_OPEN_ITEM)
@@ -119,7 +124,8 @@ private fun CitiesContent(
                             moveUpCity(item.cityId, index)
                         }
                     },
-                    onTodayClick = openForecastToday
+                    onTodayClick = openForecastToday,
+                    onFiveDaysClick = openForecastFiveDays
                 )
             }
         }

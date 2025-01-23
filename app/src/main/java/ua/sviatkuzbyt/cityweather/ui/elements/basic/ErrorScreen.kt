@@ -38,7 +38,7 @@ fun ErrorScreen(onRetryClick: () -> Unit){
         )
         SpaceMedium()
 
-        CenterText(stringResource(R.string.error_load))
+        CenterBasicText(stringResource(R.string.error_load))
         Spacer(Modifier.height(32.dp))
 
         RetryButton { onRetryClick() }

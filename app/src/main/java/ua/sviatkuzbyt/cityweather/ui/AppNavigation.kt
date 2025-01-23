@@ -45,7 +45,8 @@ fun AppNavigation(){
         NavHost(
             modifier = modifier,
             navController = navController,
-            startDestination = CitiesRoute
+            //temp
+            startDestination = ForecastTodayRoute("Sambir")
         ){
             composable<CitiesRoute> {
                 CitiesScreen()

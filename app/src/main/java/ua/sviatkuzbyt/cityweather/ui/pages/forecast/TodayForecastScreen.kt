@@ -11,7 +11,7 @@ import ua.sviatkuzbyt.cityweather.ui.elements.forecast.ForecastItem
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.LabelNavigateTopBar
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.Screen
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.ScreenState
-import ua.sviatkuzbyt.cityweather.ui.elements.forecast.ForecastDescription
+import ua.sviatkuzbyt.cityweather.ui.elements.forecast.ForecastDescriptions
 
 @Preview
 @Composable
@@ -26,7 +26,7 @@ fun TodayForecastScreen(){
         ),
         ForecastData(
             "18:00",
-            "+21C",
+            "+2C",
             "3 m/s",
             R.drawable.weather_02d,
             "sun"
@@ -34,7 +34,7 @@ fun TodayForecastScreen(){
         ForecastData(
             "21:00",
             "+17C",
-            "2 m/s",
+            "21 m/s",
             R.drawable.weather_02d,
             "sun"
         )
@@ -52,6 +52,8 @@ fun ForecastContent(
 ){
     val navController = LocalNavController.current
 
+    val isWindSpeed = forecastList[0].windSpeed != null
+
     Screen(
         topBar = {
             LabelNavigateTopBar(
@@ -62,6 +64,10 @@ fun ForecastContent(
         screenState = ScreenState.Content,
         onErrorRetryClick = onErrorRetryClick,
         content = {
+            item {
+                ForecastDescriptions(isWindSpeed)
+            }
+
             items(forecastList){
                 ForecastItem(it)
             }

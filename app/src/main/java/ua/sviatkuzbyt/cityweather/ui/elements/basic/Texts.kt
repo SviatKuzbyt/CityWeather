@@ -87,15 +87,31 @@ fun HeadLargeText(
 }
 
 @Composable
-fun CenterText(
+fun CenterBasicText(
     text: String,
-    color: Color = MaterialTheme.colorScheme.onPrimaryContainer,
+    color: Color = MaterialTheme.colorScheme.onSurface,
     modifier: Modifier = Modifier
 ){
     Text(
         text = text,
         fontSize = textMediumSize,
         style = MaterialTheme.typography.displayMedium,
+        color = color,
+        textAlign = TextAlign.Center,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun CenterHeadText(
+    text: String,
+    color: Color = MaterialTheme.colorScheme.onSurface,
+    modifier: Modifier = Modifier
+){
+    Text(
+        text = text,
+        fontSize = textMediumSize,
+        style = MaterialTheme.typography.headlineMedium,
         color = color,
         textAlign = TextAlign.Center,
         modifier = modifier

@@ -45,14 +45,14 @@ val LocalNavController: ProvidableCompositionLocal<NavController> = staticCompos
 
 val enterTransition =
     scaleIn(
-        initialScale = 0.75f,
+        initialScale = 0.85f,
         animationSpec = tween(400, 100)
     ) + fadeIn(animationSpec = tween(400, 100))
 
 
 val exitTransition =
     scaleOut(
-        targetScale = 0.75f,
+        targetScale = 0.85f,
         animationSpec = tween(400)
     ) + fadeOut(animationSpec = tween(400))
 

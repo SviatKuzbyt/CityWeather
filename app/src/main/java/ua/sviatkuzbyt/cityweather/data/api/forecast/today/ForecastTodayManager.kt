@@ -1,7 +1,8 @@
-package ua.sviatkuzbyt.cityweather.data.api.forecast
+package ua.sviatkuzbyt.cityweather.data.api.forecast.today
 
 import com.google.gson.Gson
 import ua.sviatkuzbyt.cityweather.data.api.WeatherItemAppearance.Companion.getWeatherItemAppearance
+import ua.sviatkuzbyt.cityweather.data.api.forecast.ForecastData
 import ua.sviatkuzbyt.cityweather.data.api.getApiResponse
 import java.time.Instant
 import java.time.ZoneId
@@ -11,9 +12,13 @@ class ForecastTodayManager {
     fun loadForecast(city: String): List<ForecastData>{
         val apiResponse = getApiResponse(city, "forecast", "&cnt=8")
         val gson = Gson()
-        val convertedForecastResponse = gson.fromJson(apiResponse, ForecastResponse::class.java)
+        val forecastTodayResponse = gson.fromJson(apiResponse, ForecastTodayDataResponse::class.java)
 
-        return convertedForecastResponse.list.map {
+        return formatData(forecastTodayResponse.list)
+    }
+
+    private fun formatData(data: List<ForecastTodayResponseItem>): List<ForecastData>{
+        return data.map {
             ForecastData(
                 time = convertLongToTimeString(it.dt),
                 temp = "${it.main.temp.toInt()}℃",

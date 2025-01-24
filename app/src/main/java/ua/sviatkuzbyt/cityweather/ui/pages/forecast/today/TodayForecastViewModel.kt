@@ -5,11 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ua.sviatkuzbyt.cityweather.data.api.forecast.ForecastData
-import ua.sviatkuzbyt.cityweather.data.api.forecast.ForecastTodayManager
+import ua.sviatkuzbyt.cityweather.data.api.forecast.today.ForecastTodayManager
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.ScreenState
 
 class TodayForecastViewModel(private val city: String): ViewModel() {
@@ -26,6 +27,7 @@ class TodayForecastViewModel(private val city: String): ViewModel() {
 
     fun loadData() = viewModelScope.launch(Dispatchers.IO) {
         try {
+            delay(300)
             _screenState.value = ScreenState.Loading
             _forecastList.value = manager.loadForecast(city)
             _screenState.value = ScreenState.Content

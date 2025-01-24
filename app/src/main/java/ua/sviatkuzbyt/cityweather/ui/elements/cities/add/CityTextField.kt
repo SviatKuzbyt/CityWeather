@@ -7,6 +7,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -14,12 +18,14 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasic
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.shapeContainer
+import ua.sviatkuzbyt.cityweather.ui.theme.Red
 
 @Composable
 fun CityTextField(
     value: String,
     onValueChange: (String) -> Unit,
-    keyboardAction: () -> Unit
+    keyboardAction: () -> Unit,
+    errorText: Boolean
 ){
     val colors = OutlinedTextFieldDefaults.colors(
         focusedContainerColor = MaterialTheme.colorScheme.surfaceContainer,
@@ -28,6 +34,9 @@ fun CityTextField(
         focusedBorderColor = MaterialTheme.colorScheme.surfaceContainer,
         focusedTextColor = MaterialTheme.colorScheme.onSurface,
         unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+        errorContainerColor = MaterialTheme.colorScheme.surfaceContainer,
+        errorBorderColor = Red,
+        errorCursorColor = Red
     )
 
     OutlinedTextField(
@@ -49,6 +58,7 @@ fun CityTextField(
         keyboardOptions = KeyboardOptions(
             capitalization = KeyboardCapitalization.Sentences,
             imeAction = ImeAction.Search
-        )
+        ),
+        isError = errorText
     )
 }

@@ -19,3 +19,5 @@ val WhiteTransparentLow = Color(0x1AFFFFFF)
 val BlackDark = Color(0xFF292929)
 val BlackDarkTransparent = Color(0x80292929)
 val BlackDarkTransparentLow = Color(0x1A292929)
+
+val Red = Color(0xFFD84040)

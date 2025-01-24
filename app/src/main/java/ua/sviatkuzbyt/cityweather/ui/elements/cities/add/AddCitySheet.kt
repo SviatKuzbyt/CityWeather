@@ -12,8 +12,10 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -51,6 +53,14 @@ fun AddCitySheet(
                 mutableStateOf("")
             }
 
+            val errorTextField = remember {
+                mutableStateOf(false)
+            }
+
+            if (errorTextField.value && cityName.isNotBlank()){
+                errorTextField.value = false
+            }
+
             Column(
                 modifier = Modifier
                     .padding(horizontal = sizeSpace16)
@@ -65,9 +75,11 @@ fun AddCitySheet(
                         cityName = newValue
                     },
                     keyboardAction = {
-                        addAction(cityName)
-                        hideScreen(screenScope, showState, hideAction)
-                    }
+                        performAction(
+                            cityName, addAction, hideAction, showState, screenScope, errorTextField
+                        )
+                    },
+                    errorText = errorTextField.value
                 )
                 SpacerMedium()
 
@@ -77,12 +89,29 @@ fun AddCitySheet(
                     }
 
                     AddButton {
-                        addAction(cityName)
-                        hideScreen(screenScope, showState, hideAction)
+                        performAction(
+                            cityName, addAction, hideAction, showState, screenScope, errorTextField
+                        )
                     }
                 }
             }
         }
+    }
+}
+
+private fun performAction(
+    cityName: String,
+    addAction: (String) -> Unit,
+    hideAction: () -> Unit,
+    showState: SheetState,
+    screenScope: CoroutineScope,
+    errorTextField: MutableState<Boolean>
+){
+    if (cityName.isNotBlank()){
+        addAction(cityName)
+        hideScreen(screenScope, showState, hideAction)
+    } else{
+        errorTextField.value = true
     }
 }
 

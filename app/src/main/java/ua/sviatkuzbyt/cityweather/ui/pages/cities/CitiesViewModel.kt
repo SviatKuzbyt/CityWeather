@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ua.sviatkuzbyt.cityweather.data.exceptionDescription
 import ua.sviatkuzbyt.cityweather.data.repositories.CitiesRepository
-import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.ScreenState
+import ua.sviatkuzbyt.cityweather.data.structures.ScreenState
+import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
 
 class CitiesViewModel(application: Application): AndroidViewModel(application) {
     private val repository = CitiesRepository(application)

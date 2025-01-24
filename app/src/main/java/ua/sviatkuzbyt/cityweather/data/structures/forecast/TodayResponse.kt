@@ -1,7 +1,7 @@
-package ua.sviatkuzbyt.cityweather.data.api.forecast.today
+package ua.sviatkuzbyt.cityweather.data.structures.forecast
 
-import ua.sviatkuzbyt.cityweather.data.api.current.Weather
-import ua.sviatkuzbyt.cityweather.data.api.current.Wind
+import ua.sviatkuzbyt.cityweather.data.structures.currentweather.Weather
+import ua.sviatkuzbyt.cityweather.data.structures.currentweather.Wind
 
 data class ForecastTodayDataResponse(
     val list: List<ForecastTodayResponseItem>
@@ -12,8 +12,4 @@ data class ForecastTodayResponseItem(
     val main: Main,
     val wind: Wind,
     val weather: List<Weather>
-)
-
-data class Main(
-    val temp: Float
 )

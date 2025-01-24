@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.data.api.current
+package ua.sviatkuzbyt.cityweather.data.structures.currentweather
 
 data class WeatherResponse(
     val weather: List<Weather>,

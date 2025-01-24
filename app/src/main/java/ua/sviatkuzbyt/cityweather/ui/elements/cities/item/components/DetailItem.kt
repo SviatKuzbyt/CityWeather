@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import ua.sviatkuzbyt.cityweather.data.structures.CityItemColors
+import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemColors
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.BasicSmallText
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.SpaceSmall
 import ua.sviatkuzbyt.cityweather.ui.theme.iconMediumSmallSize

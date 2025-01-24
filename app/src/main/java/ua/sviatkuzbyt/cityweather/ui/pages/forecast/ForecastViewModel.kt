@@ -1,20 +1,18 @@
-package ua.sviatkuzbyt.cityweather.ui.pages.forecast.today
+package ua.sviatkuzbyt.cityweather.ui.pages.forecast
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ua.sviatkuzbyt.cityweather.data.api.forecast.ForecastData
-import ua.sviatkuzbyt.cityweather.data.api.forecast.today.ForecastTodayManager
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.ScreenState
+import ua.sviatkuzbyt.cityweather.data.api.ForecastManager
+import ua.sviatkuzbyt.cityweather.data.structures.ScreenState
+import ua.sviatkuzbyt.cityweather.data.structures.forecast.ForecastData
 
-class TodayForecastViewModel(private val city: String): ViewModel() {
-    private val manager = ForecastTodayManager()
+class ForecastViewModel(private val repository: ForecastManager): ViewModel() {
     private val _forecastList = MutableStateFlow<List<ForecastData>>(listOf())
     private val _screenState = MutableStateFlow(ScreenState.Loading)
 
@@ -27,9 +25,8 @@ class TodayForecastViewModel(private val city: String): ViewModel() {
 
     fun loadData() = viewModelScope.launch(Dispatchers.IO) {
         try {
-            delay(300)
             _screenState.value = ScreenState.Loading
-            _forecastList.value = manager.loadForecast(city)
+            _forecastList.value = repository.loadForecast()
             _screenState.value = ScreenState.Content
         } catch (e: Exception){
             _screenState.value = ScreenState.Error
@@ -37,11 +34,11 @@ class TodayForecastViewModel(private val city: String): ViewModel() {
         }
     }
 
-    class Factory(private val city: String) : ViewModelProvider.Factory {
+    class Factory(private val repository: ForecastManager) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(TodayForecastViewModel::class.java)) {
-                return TodayForecastViewModel(city) as T
+            if (modelClass.isAssignableFrom(ForecastViewModel::class.java)) {
+                return ForecastViewModel(repository) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

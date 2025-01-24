@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.data.api.forecast
+package ua.sviatkuzbyt.cityweather.data.structures.forecast
 
 import androidx.annotation.DrawableRes
 
@@ -8,4 +8,8 @@ data class ForecastData(
     val windSpeed: String? = null,
     @DrawableRes val weatherIcon: Int,
     val contentDescription: String
+)
+
+data class Main(
+    val temp: Float
 )

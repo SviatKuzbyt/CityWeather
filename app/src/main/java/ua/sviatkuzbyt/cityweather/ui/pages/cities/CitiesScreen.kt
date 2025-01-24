@@ -16,12 +16,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
+import ua.sviatkuzbyt.cityweather.data.structures.ScreenState
+import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
 import ua.sviatkuzbyt.cityweather.ui.ForecastFiveDaysRoute
 import ua.sviatkuzbyt.cityweather.ui.ForecastTodayRoute
 import ua.sviatkuzbyt.cityweather.ui.LocalNavController
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.Screen
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.ScreenState
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.CitiesTopBar
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.CityItem
 

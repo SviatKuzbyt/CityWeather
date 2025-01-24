@@ -5,13 +5,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ua.sviatkuzbyt.cityweather.R
+import ua.sviatkuzbyt.cityweather.data.repositories.ForecastTodayRepository
 import ua.sviatkuzbyt.cityweather.ui.pages.forecast.ForecastContent
+import ua.sviatkuzbyt.cityweather.ui.pages.forecast.ForecastViewModel
 
 @Composable
 fun TodayForecastScreen(city: String){
 
-    val viewModel: TodayForecastViewModel = viewModel(
-        factory = TodayForecastViewModel.Factory(city)
+    val viewModel: ForecastViewModel = viewModel(
+        factory = ForecastViewModel.Factory(ForecastTodayRepository(city))
     )
 
     val forecastList by viewModel.forecastList.collectAsState()

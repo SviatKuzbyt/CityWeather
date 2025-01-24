@@ -2,14 +2,16 @@ package ua.sviatkuzbyt.cityweather.data.repositories
 
 import android.content.Context
 import ua.sviatkuzbyt.cityweather.data.ExistCityException
-import ua.sviatkuzbyt.cityweather.data.api.current.CurrentWeatherManager
+import ua.sviatkuzbyt.cityweather.data.api.CurrentWeatherManager
 import ua.sviatkuzbyt.cityweather.data.database.CityEntity
 import ua.sviatkuzbyt.cityweather.data.database.DataBaseManager
-import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
+import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
 
+private const val NO_EXIST = 0
 class CitiesRepository(context: Context) {
     private val dataBaseDao = DataBaseManager.getDao(context)
     private val currentWeatherManager = CurrentWeatherManager()
+
 
     fun getCities(): List<CityItemData>{
         val cities = dataBaseDao.getCities()
@@ -18,9 +20,9 @@ class CitiesRepository(context: Context) {
         }
     }
 
-    fun addCity(name: String, position: Int): CityItemData{
+    fun addCity(name: String, position: Int): CityItemData {
         val nameTrim = name.trim()
-        if (dataBaseDao.checkExistCity(nameTrim) == 0){
+        if (dataBaseDao.checkExistCity(nameTrim) == NO_EXIST){
             val cityEntity = CityEntity(0, name.trim(), position)
             val loadedWeather = loadCity(cityEntity)
             val addedId = dataBaseDao.addCity(cityEntity)

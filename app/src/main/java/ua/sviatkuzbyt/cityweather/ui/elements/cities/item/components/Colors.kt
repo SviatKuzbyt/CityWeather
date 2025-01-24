@@ -4,8 +4,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
-import ua.sviatkuzbyt.cityweather.data.structures.CityBackground
-import ua.sviatkuzbyt.cityweather.data.structures.CityItemColors
+import ua.sviatkuzbyt.cityweather.data.structures.cities.CityBackground
+import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemColors
 
 fun getLinearBackground(backgrounds: List<Color>) =
     Brush.linearGradient(

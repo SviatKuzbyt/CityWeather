@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import ua.sviatkuzbyt.cityweather.data.api.forecast.ForecastData
+import ua.sviatkuzbyt.cityweather.data.structures.forecast.ForecastData
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.CenterBasicText
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.CenterHeadText
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.containerShape

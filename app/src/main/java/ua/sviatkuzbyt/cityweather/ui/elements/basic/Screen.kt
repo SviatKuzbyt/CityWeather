@@ -7,11 +7,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import ua.sviatkuzbyt.cityweather.data.structures.ScreenState
 import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
 
-enum class ScreenState {
-    Loading, Content, Empty, Error
-}
+
 
 @Composable
 fun Screen(
@@ -22,7 +21,7 @@ fun Screen(
     onErrorRetryClick: () -> Unit,
     content: LazyListScope.() -> Unit,
 
-){
+    ){
     Column(modifier.fillMaxSize()) {
         topBar()
         when(screenState){

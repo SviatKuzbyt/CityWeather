@@ -1,19 +1,19 @@
-package ua.sviatkuzbyt.cityweather.data.api.current
+package ua.sviatkuzbyt.cityweather.data.api
 import com.google.gson.Gson
-import ua.sviatkuzbyt.cityweather.data.api.WeatherItemAppearance.Companion.getWeatherItemAppearance
-import ua.sviatkuzbyt.cityweather.data.api.getApiResponse
+import ua.sviatkuzbyt.cityweather.data.structures.WeatherItemAppearance.Companion.getWeatherItemAppearance
 import ua.sviatkuzbyt.cityweather.data.database.CityEntity
-import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
+import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
+import ua.sviatkuzbyt.cityweather.data.structures.currentweather.WeatherResponse
 
 class CurrentWeatherManager{
     private val gson = Gson()
 
-    fun loadWeatherForCity(cityEntity: CityEntity): CityItemData{
+    fun loadWeatherForCity(cityEntity: CityEntity): CityItemData {
         val apiResponse = getApiResponse(cityEntity.name, "weather")
         return convertToCityItem(apiResponse, cityEntity)
     }
 
-    private fun convertToCityItem(apiResponse: String, cityEntity: CityEntity): CityItemData{
+    private fun convertToCityItem(apiResponse: String, cityEntity: CityEntity): CityItemData {
         val gsonResponse = gson.fromJson(apiResponse, WeatherResponse::class.java)
         val appearance = getWeatherItemAppearance(gsonResponse.weather[0].icon)
 
@@ -31,6 +31,4 @@ class CurrentWeatherManager{
             rain = gsonResponse.rain?.`1h`?.toInt() ?: 0
         )
     }
-
-
 }

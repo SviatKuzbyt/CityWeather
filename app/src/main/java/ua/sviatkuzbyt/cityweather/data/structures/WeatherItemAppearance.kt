@@ -1,8 +1,8 @@
-package ua.sviatkuzbyt.cityweather.data.api
+package ua.sviatkuzbyt.cityweather.data.structures
 
 import androidx.annotation.DrawableRes
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.data.structures.CityBackground
+import ua.sviatkuzbyt.cityweather.data.structures.cities.CityBackground
 
 data class WeatherItemAppearance(
     @DrawableRes val icon: Int,

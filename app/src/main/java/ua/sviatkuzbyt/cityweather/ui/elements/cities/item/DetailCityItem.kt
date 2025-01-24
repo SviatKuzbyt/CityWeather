@@ -14,9 +14,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.data.structures.CityItemColors
-import ua.sviatkuzbyt.cityweather.data.structures.CityItemData
-import ua.sviatkuzbyt.cityweather.data.structures.CityItemDetailData
+import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemColors
+import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
+import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemDetailData
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.ControlMenu
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.DetailButton
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.DetailItem

@@ -9,7 +9,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import ua.sviatkuzbyt.cityweather.data.structures.CityItemColors
+import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemColors
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.BasicText
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.containerShape
 import ua.sviatkuzbyt.cityweather.ui.theme.buttonHeight

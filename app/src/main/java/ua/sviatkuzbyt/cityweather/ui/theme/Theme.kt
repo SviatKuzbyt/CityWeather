@@ -6,18 +6,17 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.containerShape
-
-/*Кольори:
-* primary - голвна кнопка
-* onPrimary - текст кнопки
-* surface - фон
-* onSurface - основний текст
-* surfaceContainer - фон контейнерів
-* onPrimaryContainer - дод. текст
-* onSecondaryContainer - дод. іконики
-*  */
-
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.shapeContainer
+/**
+ * Кольори:
+    * * primary - голвна кнопка (синій)
+    * * onPrimary - текст кнопки (білий)
+    * * surface - фон (білий/темний)
+    * * onSurface - основний текст (чорний/білий)
+    * * surfaceContainer - фон контейнерів (майже білий/чорний)
+    * * onPrimaryContainer - дод. текст (сірий)
+    * * onSecondaryContainer - дод. іконики (світло/темно сірий)
+    */
 private val DarkColorScheme = darkColorScheme(
     primary = Blue,
     onPrimary = Color.White,
@@ -56,6 +55,6 @@ fun CityWeatherTheme(
         colorScheme = colorScheme,
         typography = Typography,
         content = content,
-        shapes = MaterialTheme.shapes.copy(containerShape)
+        shapes = MaterialTheme.shapes.copy(shapeContainer)
     )
 }

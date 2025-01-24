@@ -16,26 +16,26 @@ val Typography = Typography(
     headlineLarge = TextStyle(
         fontFamily = RobotoFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = textLargeSize
+        fontSize = sizeText24
     ),
     headlineMedium = TextStyle(
         fontFamily = RobotoFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = textMediumSize
+        fontSize = sizeText16
     ),
     displayLarge = TextStyle(
         fontFamily = RobotoFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = textLargeSize
+        fontSize = sizeText24
     ),
     displayMedium = TextStyle(
         fontFamily = RobotoFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = textMediumSize
+        fontSize = sizeText16
     ),
     displaySmall = TextStyle(
         fontFamily = RobotoFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = textSmallSize
+        fontSize = sizeText14
     )
 )

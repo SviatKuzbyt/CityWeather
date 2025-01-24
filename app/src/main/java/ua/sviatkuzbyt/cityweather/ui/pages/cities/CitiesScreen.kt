@@ -1,15 +1,12 @@
 package ua.sviatkuzbyt.cityweather.ui.pages.cities
 
-import android.widget.Toast
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
@@ -21,9 +18,10 @@ import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
 import ua.sviatkuzbyt.cityweather.ui.ForecastFiveDaysRoute
 import ua.sviatkuzbyt.cityweather.ui.ForecastTodayRoute
 import ua.sviatkuzbyt.cityweather.ui.LocalNavController
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.Screen
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.screens.Screen
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.CitiesTopBar
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.CityItem
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.ToastMessage
 
 private const val NO_OPEN_ITEM = -1
 
@@ -31,17 +29,21 @@ private const val NO_OPEN_ITEM = -1
 @Composable
 fun CitiesScreen(){
     val viewModel: CitiesViewModel = viewModel()
+    val navController = LocalNavController.current
 
     val cities by viewModel.cities.collectAsState()
     val screenState by viewModel.screenState.collectAsState()
+
     val message by viewModel.message.collectAsStateWithLifecycle(
         minActiveState = Lifecycle.State.RESUMED
     )
 
-    val navController = LocalNavController.current
-
     CitiesContent(
-        cities = { cities },
+        screenState = screenState,
+        message = message,
+        cities = {
+            cities
+        },
         addCity = { name ->
             viewModel.addCity(name)
         },
@@ -51,10 +53,12 @@ fun CitiesScreen(){
         moveUpCity = {id, position ->
             viewModel.moveUpCity(id, position)
         },
-        screenState = screenState,
-        message = message,
-        clearMessage = { viewModel.clearMessage() },
-        errorReturn = { viewModel.loadCities() },
+        clearMessage = {
+            viewModel.clearMessage()
+        },
+        errorReturn = {
+            viewModel.loadCities()
+        },
         openForecastToday = { city ->
             navController.navigate(ForecastTodayRoute(city))
         },
@@ -80,52 +84,47 @@ private fun CitiesContent(
     var openCityItem by rememberSaveable {
         mutableIntStateOf(NO_OPEN_ITEM)
     }
-    val context = LocalContext.current
 
-    LaunchedEffect(message) {
-        message?.let {
-            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
-            clearMessage()
-        }
-    }
+    ToastMessage(message, clearMessage)
 
     Screen(
         screenState = screenState,
         emptyText = stringResource(R.string.no_cities),
+        onErrorRetryClick = errorReturn,
+
         topBar = {
             CitiesTopBar(
                 onAddCity = {city ->
                     addCity(city)
-                }
+                },
+                onMoreButtonClick = {}
             )
         },
-        onErrorRetryClick = errorReturn,
+
         content = {
             itemsIndexed(cities.invoke()){ index, item ->
                 val isOpen = openCityItem == index
 
                 CityItem(
-                    item,
-                    isOpen,
+                    data = item,
+                    isOpen = isOpen,
+                    onTodayClick = openForecastToday,
+                    onFiveDaysClick = openForecastFiveDays,
                     onClickItem = {
                         openCityItem =
                             if (isOpen) NO_OPEN_ITEM
                             else index
                     },
-
                     onDelete = {
                         openCityItem = NO_OPEN_ITEM
                         deleteCity(item.cityId, index)
                     },
-
                     onMoveUp = {
                         if (index != 0) {
                             openCityItem = NO_OPEN_ITEM
                             moveUpCity(item.cityId, index)
                         }
-                    },
-                    onTodayClick = openForecastToday,
-                    onFiveDaysClick = openForecastFiveDays
+                    }
                 )
             }
         }

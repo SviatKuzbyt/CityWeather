@@ -15,15 +15,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.ui.theme.iconSmallSize
-import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
 
 @Composable
 fun ForecastDescriptions(showWindSpeed: Boolean, weatherWeight: Float) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = spaceMedium),
+            .padding(vertical = sizeSpace16),
         verticalAlignment = Alignment.CenterVertically
     ) {
         DescriptionIcon(
@@ -64,6 +63,6 @@ fun DescriptionIcon(
         imageVector = ImageVector.vectorResource(icon),
         contentDescription = stringResource(contentDescription),
         tint = MaterialTheme.colorScheme.onSecondaryContainer,
-        modifier = modifier.size(iconSmallSize)
+        modifier = modifier.size(sizeSpace16)
     )
 }

@@ -10,7 +10,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,11 +17,11 @@ import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.getCityBackground
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.getCityItemColors
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.getLinearBackground
-import ua.sviatkuzbyt.cityweather.ui.theme.spaceLarge
-import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace20
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
 
 @Composable
-fun LazyItemScope.CityItem(
+fun CityItem(
     data: CityItemData,
     isOpen: Boolean,
     onClickItem: () -> Unit,
@@ -38,21 +37,21 @@ fun LazyItemScope.CityItem(
     //Set width, padding, background and animation
     val modifier = Modifier
         .fillMaxWidth()
-        .padding(bottom = spaceMedium)
+        .padding(bottom = sizeSpace16)
         .background(
             brush = getLinearBackground(backgrounds),
-            shape = RoundedCornerShape(spaceMedium)
+            shape = RoundedCornerShape(sizeSpace16)
         )
         .clickable(
             interactionSource = null,
-            indication = null,) {
+            indication = null,
+        ) {
             onClickItem()
         }
-        .padding(vertical = spaceMedium, horizontal = spaceLarge)
+        .padding(vertical = sizeSpace16, horizontal = sizeSpace20)
         .animateContentSize(
             animationSpec = tween(400, 0)
         )
-        .animateItem(placementSpec = null)
 
     //Set UI
     Column(modifier) {

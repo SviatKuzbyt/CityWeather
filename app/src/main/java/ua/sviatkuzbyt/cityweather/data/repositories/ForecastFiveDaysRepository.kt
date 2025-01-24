@@ -17,7 +17,7 @@ class ForecastFiveDaysRepository(city: String): ForecastManager(city){
     }
 
     private fun formatData(data: List<ForecastFiveDaysItem>): List<ForecastData>{
-        val toFormatList = data.map {
+        val noFormatDataList = data.map {
             NoFormatFiveDaysData(
                 time = convertTime(it.dt, "E, dd.MM"),
                 temp =it.main.temp.toInt(),
@@ -26,7 +26,7 @@ class ForecastFiveDaysRepository(city: String): ForecastManager(city){
             )
         }
 
-        val groupByDays = toFormatList
+        val groupByDays = noFormatDataList
             .groupBy { it.time }
             .filter { it.value.size > 4}
 

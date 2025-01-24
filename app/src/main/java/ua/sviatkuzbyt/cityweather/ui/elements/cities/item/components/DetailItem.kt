@@ -1,7 +1,5 @@
 package ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -14,35 +12,34 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemColors
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.BasicSmallText
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.SpaceSmall
-import ua.sviatkuzbyt.cityweather.ui.theme.iconMediumSmallSize
-import ua.sviatkuzbyt.cityweather.ui.theme.spaceSmall
+import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemDetailData
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasicSmall
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.SpacerSmall
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace20
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace8
 
 @Composable
 fun DetailItem(
     modifier: Modifier = Modifier,
-    @DrawableRes icon: Int,
-    @StringRes contentDescription: Int,
+    content: CityItemDetailData,
     colors: CityItemColors,
-    textContent: String
 ){
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Icon(
-            imageVector = ImageVector.vectorResource(icon),
-            contentDescription = stringResource(contentDescription),
+            imageVector = ImageVector.vectorResource(content.icon),
+            contentDescription = stringResource(content.contentDescription),
             tint = colors.iconColor,
-            modifier = Modifier.size(iconMediumSmallSize)
+            modifier = Modifier.size(sizeSpace20)
         )
 
-        SpaceSmall()
-        Spacer(Modifier.height(spaceSmall))
+        SpacerSmall()
+        Spacer(Modifier.height(sizeSpace8))
 
-        BasicSmallText(
-            text = textContent,
+        TextBasicSmall(
+            text = content.textContent,
             color = colors.textColor
         )
     }

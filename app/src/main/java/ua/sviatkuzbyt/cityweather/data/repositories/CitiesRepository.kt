@@ -8,23 +8,24 @@ import ua.sviatkuzbyt.cityweather.data.database.DataBaseManager
 import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
 
 private const val NO_EXIST = 0
+
 class CitiesRepository(context: Context) {
     private val dataBaseDao = DataBaseManager.getDao(context)
     private val currentWeatherManager = CurrentWeatherManager()
 
-
-    fun getCities(): List<CityItemData>{
+    fun getWeatherForCities(): List<CityItemData>{
         val cities = dataBaseDao.getCities()
         return cities.map {
-            loadCity(it)
+            loadWeather(it)
         }
     }
 
     fun addCity(name: String, position: Int): CityItemData {
         val nameTrim = name.trim()
+
         if (dataBaseDao.checkExistCity(nameTrim) == NO_EXIST){
             val cityEntity = CityEntity(0, name.trim(), position)
-            val loadedWeather = loadCity(cityEntity)
+            val loadedWeather = loadWeather(cityEntity)
             val addedId = dataBaseDao.addCity(cityEntity)
 
             return loadedWeather.copy(cityId = addedId)
@@ -33,7 +34,7 @@ class CitiesRepository(context: Context) {
         }
     }
 
-    private fun loadCity(cityEntity: CityEntity): CityItemData {
+    private fun loadWeather(cityEntity: CityEntity): CityItemData {
         return currentWeatherManager.loadWeatherForCity(cityEntity)
     }
 

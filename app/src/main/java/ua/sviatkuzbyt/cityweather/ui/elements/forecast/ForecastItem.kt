@@ -15,36 +15,36 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import ua.sviatkuzbyt.cityweather.data.structures.forecast.ForecastData
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.CenterBasicText
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.CenterHeadText
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.containerShape
-import ua.sviatkuzbyt.cityweather.ui.theme.iconMediumSize
-import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasicCenter
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextHeadCenter
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.shapeContainer
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace24
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
 
 @Composable
 fun ForecastItem(data: ForecastData, weatherWeight: Float){
     Row(
         modifier = Modifier
-            .padding(bottom = spaceMedium)
+            .padding(bottom = sizeSpace16)
             .fillMaxWidth()
             .heightIn(56.dp)
             .background(
                 color = MaterialTheme.colorScheme.surfaceContainer,
-                shape = containerShape
+                shape = shapeContainer
             ),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        CenterHeadText(data.time, modifier = Modifier.weight(1f))
-        CenterBasicText(data.temp, modifier = Modifier.weight(1f))
+        TextHeadCenter(data.time, modifier = Modifier.weight(1f))
+        TextBasicCenter(data.temp, modifier = Modifier.weight(1f))
 
         data.windSpeed?.let {
-            CenterBasicText(it, modifier = Modifier.weight(1f))
+            TextBasicCenter(it, modifier = Modifier.weight(1f))
         }
 
         Image(
             imageVector = ImageVector.vectorResource(data.weatherIcon),
             contentDescription = data.contentDescription,
-            modifier = Modifier.height(iconMediumSize).weight(weatherWeight)
+            modifier = Modifier.height(sizeSpace24).weight(weatherWeight)
         )
     }
 }

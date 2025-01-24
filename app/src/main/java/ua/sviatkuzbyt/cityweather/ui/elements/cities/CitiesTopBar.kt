@@ -12,24 +12,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.ButtonTopBar
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.HeadLargeText
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.topbar.ButtonTopBar
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextHeadLarge
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.add.AddCitySheet
-import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
-import ua.sviatkuzbyt.cityweather.ui.theme.spaceSmall
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace8
 
-@Preview(showSystemUi = false, showBackground = true)
 @Composable
 fun CitiesTopBar(
-    onMoreButtonClick: () -> Unit = {},
-    onAddCity: (String) -> Unit = {}
+    onMoreButtonClick: () -> Unit,
+    onAddCity: (String) -> Unit
 ) {
     val barModifier = Modifier
         .fillMaxWidth()
-        .padding(horizontal = spaceMedium)
-        .padding(bottom = spaceSmall)
+        .padding(horizontal = sizeSpace16)
+        .padding(bottom = sizeSpace8)
 
     var showAddCitySheet by rememberSaveable {
         mutableStateOf(false)
@@ -41,7 +39,7 @@ fun CitiesTopBar(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
 
-        HeadLargeText(stringResource(R.string.weather))
+        TextHeadLarge(stringResource(R.string.weather))
 
         Row {
             ButtonTopBar(

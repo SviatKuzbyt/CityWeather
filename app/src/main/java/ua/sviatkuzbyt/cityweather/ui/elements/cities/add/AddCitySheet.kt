@@ -1,5 +1,4 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
-
 package ua.sviatkuzbyt.cityweather.ui.elements.cities.add
 
 import androidx.compose.foundation.layout.Column
@@ -20,23 +19,21 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.HeadText
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.SpaceMedium
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.SpaceSmall
-import ua.sviatkuzbyt.cityweather.ui.theme.spaceLarge
-import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextHead
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.SpacerMedium
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.SpacerSmall
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace20
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
 
-@Preview
 @Composable
 fun AddCitySheet(
     isShow: Boolean = false,
-    hideAction: () -> Unit = {},
-    addAction: (String) -> Unit = {}
+    hideAction: () -> Unit,
+    addAction: (String) -> Unit
 ){
 
     val showState = rememberModalBottomSheetState()
@@ -46,10 +43,9 @@ fun AddCitySheet(
         ModalBottomSheet(
             onDismissRequest = hideAction,
             sheetState = showState,
-            shape = RoundedCornerShape(topEnd = spaceLarge, topStart = spaceLarge),
+            shape = RoundedCornerShape(topEnd = sizeSpace20, topStart = sizeSpace20),
             containerColor = MaterialTheme.colorScheme.surface,
             tonalElevation = 0.dp,
-
         ) {
             var cityName by rememberSaveable {
                 mutableStateOf("")
@@ -57,12 +53,11 @@ fun AddCitySheet(
 
             Column(
                 modifier = Modifier
-                    .padding(horizontal = spaceMedium)
-                    .padding(bottom = spaceMedium)
+                    .padding(horizontal = sizeSpace16)
+                    .padding(bottom = sizeSpace16)
             ){
-                HeadText(stringResource(R.string.add_city))
-
-                SpaceSmall()
+                TextHead(stringResource(R.string.add_city))
+                SpacerSmall()
 
                 CityTextField(
                     value = cityName,
@@ -74,8 +69,7 @@ fun AddCitySheet(
                         hideScreen(screenScope, showState, hideAction)
                     }
                 )
-
-                SpaceMedium()
+                SpacerMedium()
 
                 Row(modifier = Modifier.fillMaxWidth()) {
                     CancelButton {

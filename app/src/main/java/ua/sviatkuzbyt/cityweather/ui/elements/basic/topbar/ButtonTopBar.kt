@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.ui.elements.basic
+package ua.sviatkuzbyt.cityweather.ui.elements.basic.topbar
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -15,9 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.Role
 import ua.sviatkuzbyt.cityweather.ui.theme.Gray
-import ua.sviatkuzbyt.cityweather.ui.theme.buttonHeight
-
-//Кнопки лише з іконкою
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace48
 
 @Composable
 fun ButtonTopBar(
@@ -32,8 +30,9 @@ fun ButtonTopBar(
         imageVector = ImageVector.vectorResource(imageId),
         contentDescription = stringResource(contentDescription),
         tint = MaterialTheme.colorScheme.onSurface,
+
         modifier = modifier
-            .size(buttonHeight)
+            .size(sizeSpace48)
             .clickable(
                 onClick = onClick,
                 enabled = true,
@@ -42,7 +41,7 @@ fun ButtonTopBar(
 
                 indication = androidx.compose.material.ripple.rememberRipple(
                     bounded = false,
-                    radius = buttonHeight / 2,
+                    radius = sizeSpace48 / 2,
                     color = Gray
                 )
             )

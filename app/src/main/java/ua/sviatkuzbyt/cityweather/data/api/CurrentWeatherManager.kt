@@ -1,9 +1,10 @@
 package ua.sviatkuzbyt.cityweather.data.api
+
 import com.google.gson.Gson
 import ua.sviatkuzbyt.cityweather.data.structures.WeatherItemAppearance.Companion.getWeatherItemAppearance
 import ua.sviatkuzbyt.cityweather.data.database.CityEntity
 import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
-import ua.sviatkuzbyt.cityweather.data.structures.currentweather.WeatherResponse
+import ua.sviatkuzbyt.cityweather.data.structures.WeatherResponse
 
 class CurrentWeatherManager{
     private val gson = Gson()

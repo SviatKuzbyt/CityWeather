@@ -12,8 +12,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.BasicText
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.containerShape
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasic
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.shapeContainer
 
 @Composable
 fun CityTextField(
@@ -34,9 +34,9 @@ fun CityTextField(
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        shape = containerShape,
+        shape = shapeContainer,
         placeholder = {
-            BasicText(
+            TextBasic(
                 text = stringResource(R.string.enter_city),
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )

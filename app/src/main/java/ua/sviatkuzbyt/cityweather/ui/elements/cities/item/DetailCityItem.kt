@@ -20,7 +20,7 @@ import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemDetailData
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.ControlMenu
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.DetailButton
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.DetailItem
-import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
 
 @Composable
 fun DetailCityItem(
@@ -31,7 +31,6 @@ fun DetailCityItem(
     onTodayClick: (String) -> Unit,
     onFiveDaysClick: (String) -> Unit
 ){
-
     //List of weather details
     val infoList = listOf(
         CityItemDetailData(R.drawable.ic_humidity, R.string.humidity, "${data.humidity}%"),
@@ -48,7 +47,7 @@ fun DetailCityItem(
     Column(Modifier.fillMaxWidth()) {
         HorizontalDivider(
             color = colors.backColor,
-            modifier = Modifier.padding(top = spaceMedium)
+            modifier = Modifier.padding(top = sizeSpace16)
         )
 
         //Weather details
@@ -56,38 +55,24 @@ fun DetailCityItem(
             horizontalArrangement = Arrangement.Absolute.SpaceAround,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = spaceMedium)
+                .padding(vertical = sizeSpace16)
         ) {
             infoList.forEach {
-                DetailItem(
-                    icon =  it.icon,
-                    contentDescription = it.contentDescription,
-                    colors = colors,
-                    textContent = it.textContent
-                )
+                DetailItem(content = it, colors = colors)
             }
         }
 
         //Buttons
-        DetailButton(
-            label = R.string.forecastToday,
-            colors = colors
-        ) {
+        DetailButton(label = R.string.forecastToday, colors = colors) {
             onTodayClick(data.name)
         }
 
-        DetailButton(
-            label = R.string.forecastFiveDays,
-            colors = colors
-        ) {
+        DetailButton(label = R.string.forecastFiveDays, colors = colors) {
             onFiveDaysClick(data.name)
         }
 
         Box {
-            DetailButton(
-                label = R.string.control,
-                colors = colors
-            ) {
+            DetailButton(label = R.string.control, colors = colors) {
                 showControlMenu = true
             }
 
@@ -98,7 +83,5 @@ fun DetailCityItem(
                 onMoveUp = onMoveUp
             )
         }
-
     }
 }
-

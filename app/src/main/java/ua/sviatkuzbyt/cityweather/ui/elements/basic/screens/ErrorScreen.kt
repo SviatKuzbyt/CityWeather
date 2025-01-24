@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.ui.elements.basic
+package ua.sviatkuzbyt.cityweather.ui.elements.basic.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,10 +18,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.ui.theme.buttonHeight
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasic
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasicCenter
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.SpacerMedium
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.shapeContainer
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace48
 
 @Composable
 fun ErrorScreen(onRetryClick: () -> Unit){
@@ -36,9 +39,9 @@ fun ErrorScreen(onRetryClick: () -> Unit){
             tint = MaterialTheme.colorScheme.onSecondaryContainer,
             modifier = Modifier.size(56.dp)
         )
-        SpaceMedium()
+        SpacerMedium()
 
-        CenterBasicText(stringResource(R.string.error_load))
+        TextBasicCenter(stringResource(R.string.error_load))
         Spacer(Modifier.height(32.dp))
 
         RetryButton { onRetryClick() }
@@ -49,21 +52,14 @@ fun ErrorScreen(onRetryClick: () -> Unit){
 private fun RetryButton(onClick: () -> Unit){
     Button(
         onClick = onClick,
-        shape = containerShape,
+        shape = shapeContainer,
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainer,
             contentColor = MaterialTheme.colorScheme.onPrimaryContainer
         ),
-        modifier = Modifier.heightIn(buttonHeight),
+        modifier = Modifier.heightIn(sizeSpace48),
         contentPadding = PaddingValues(horizontal = 32.dp)
     ) {
-        BasicText(stringResource(R.string.retry))
+        TextBasic(stringResource(R.string.retry))
     }
-}
-
-
-@Preview
-@Composable
-fun ErrorScreenPreview(){
-    ErrorScreen {}
 }

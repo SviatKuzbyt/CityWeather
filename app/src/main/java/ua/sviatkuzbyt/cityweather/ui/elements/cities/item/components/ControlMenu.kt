@@ -14,8 +14,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.BasicText
-import ua.sviatkuzbyt.cityweather.ui.theme.spaceSmall
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasic
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace8
 
 @Composable
 fun ControlMenu(
@@ -56,21 +56,20 @@ fun ControlMenu(
 private fun DropdownMenuButton(
     tittle: String,
     @DrawableRes icon: Int? = null,
-    onClick: () -> Unit,
-
-    ){
+    onClick: () -> Unit
+) {
     DropdownMenuItem(
         leadingIcon = {
             if (icon != null){
                 Icon(
                     imageVector = ImageVector.vectorResource(icon),
                     contentDescription = tittle,
-                    Modifier.padding(start = spaceSmall, end = spaceSmall),
+                    Modifier.padding(start = sizeSpace8, end = sizeSpace8),
                     tint = MaterialTheme.colorScheme.onSurface
                 )
             }
         },
-        text = { BasicText(tittle) },
+        text = { TextBasic(tittle) },
         onClick = onClick
     )
 }

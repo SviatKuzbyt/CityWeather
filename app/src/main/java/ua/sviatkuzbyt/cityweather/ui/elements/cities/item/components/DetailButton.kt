@@ -10,10 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemColors
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.BasicText
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.containerShape
-import ua.sviatkuzbyt.cityweather.ui.theme.buttonHeight
-import ua.sviatkuzbyt.cityweather.ui.theme.spaceSmall
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasic
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.shapeContainer
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace48
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace8
 
 @Composable
 fun DetailButton(
@@ -29,14 +29,14 @@ fun DetailButton(
 
     Button(
         onClick = onClick,
-        shape = containerShape,
+        shape = shapeContainer,
         colors = buttonColors,
         modifier = modifier
-            .padding(top = spaceSmall)
+            .padding(top = sizeSpace8)
             .fillMaxWidth()
-            .height(buttonHeight)
+            .height(sizeSpace48)
     ) {
-        BasicText(
+        TextBasic(
             text = stringResource(label),
             color = colors.textColor
         )

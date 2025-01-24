@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -16,6 +15,7 @@ import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
 
 class CitiesViewModel(application: Application): AndroidViewModel(application) {
     private val repository = CitiesRepository(application)
+
     private val _cities = MutableStateFlow<List<CityItemData>>(listOf())
     private val _screenState = MutableStateFlow(ScreenState.Loading)
     private val _message = MutableStateFlow<Int?>(null)
@@ -26,23 +26,25 @@ class CitiesViewModel(application: Application): AndroidViewModel(application) {
 
     init { loadCities() }
 
-    private suspend fun saveableCall(
+    private fun saveableCoroutineCall(
         errorHandler: () -> Unit = {},
         code: suspend () -> Unit
     ){
-        try {
-             code()
-        } catch (e: Exception){
-            _message.value = exceptionDescription(e)
-            errorHandler()
+        viewModelScope.launch(Dispatchers.IO){
+            try {
+                code()
+            } catch (e: Exception){
+                _message.value = exceptionDescription(e)
+                errorHandler()
+            }
         }
     }
 
-    fun loadCities() = viewModelScope.launch(Dispatchers.IO){
-        saveableCall(
+    fun loadCities(){
+        saveableCoroutineCall(
             code = {
                 _screenState.value = ScreenState.Loading
-                _cities.value = repository.getCities()
+                _cities.value = repository.getWeatherForCities()
                 _screenState.value =
                     if (_cities.value.isEmpty()) ScreenState.Empty
                     else ScreenState.Content
@@ -53,21 +55,24 @@ class CitiesViewModel(application: Application): AndroidViewModel(application) {
         )
     }
 
-    fun addCity(name: String) = viewModelScope.launch(Dispatchers.IO) {
-        saveableCall {
+    fun addCity(name: String)  {
+        saveableCoroutineCall {
             val position = _cities.value.size
             val newItem = repository.addCity(name, position)
-            if (_cities.value.isEmpty()) _screenState.value = ScreenState.Content
+
+            if (_cities.value.isEmpty()){
+                _screenState.value = ScreenState.Content
+            }
+
             _cities.update { oldList ->
                 oldList + newItem
             }
         }
     }
 
-    fun deleteCity(id: Long, position: Int) = viewModelScope.launch(Dispatchers.IO) {
-        saveableCall {
+    fun deleteCity(id: Long, position: Int) {
+        saveableCoroutineCall {
             repository.deleteCity(id, position)
-            delay(500)
             _cities.update { oldList ->
                 oldList - oldList[position]
             }
@@ -75,13 +80,13 @@ class CitiesViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun moveUpCity(id: Long, position: Int) = viewModelScope.launch(Dispatchers.IO) {
-        repository.moveUpCity(id, position)
-        val moveItem = _cities.value[position]
-
-        delay(500)
-        _cities.value -= moveItem
-        _cities.value = listOf(moveItem) + _cities.value
+    fun moveUpCity(id: Long, position: Int) {
+        saveableCoroutineCall{
+            repository.moveUpCity(id, position)
+            val moveItem = _cities.value[position]
+            _cities.value -= moveItem
+            _cities.value = listOf(moveItem) + _cities.value
+        }
     }
 
     fun clearMessage(){

@@ -3,18 +3,13 @@ package ua.sviatkuzbyt.cityweather.ui.theme
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-val textSmallSize = 14.sp
-val textMediumSize = 16.sp
-val textLargeSize = 24.sp
+val sizeText14 = 14.sp
+val sizeText16 = 16.sp
+val sizeText24 = 24.sp
 
-val spaceOverSmall = 4.dp
-val spaceSmall = 8.dp
-val spaceMedium = 16.dp
-val spaceLarge = 20.dp
-
-val buttonHeight = 48.dp
-
-val iconSmallSize = 16.dp
-val iconMediumSmallSize = 20.dp
-val iconMediumSize = 24.dp
-val iconLargeSize = 36.dp
+val sizeSpace8 = 8.dp
+val sizeSpace16 = 16.dp
+val sizeSpace20 = 20.dp
+val sizeSpace24 = 24.dp
+val sizeSpace36 = 36.dp
+val sizeSpace48 = 48.dp

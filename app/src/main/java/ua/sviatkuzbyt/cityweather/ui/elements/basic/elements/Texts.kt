@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.ui.elements.basic
+package ua.sviatkuzbyt.cityweather.ui.elements.basic.elements
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -6,20 +6,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import ua.sviatkuzbyt.cityweather.ui.theme.textLargeSize
-import ua.sviatkuzbyt.cityweather.ui.theme.textMediumSize
-import ua.sviatkuzbyt.cityweather.ui.theme.textSmallSize
-
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeText24
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeText16
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeText14
 
 @Composable
-fun BasicText(
+fun TextBasic(
     text: String,
     color: Color = MaterialTheme.colorScheme.onSurface,
     modifier: Modifier = Modifier
 ){
     Text(
         text = text,
-        fontSize = textMediumSize,
+        fontSize = sizeText16,
         style = MaterialTheme.typography.displayMedium,
         color = color,
         modifier = modifier
@@ -27,14 +26,14 @@ fun BasicText(
 }
 
 @Composable
-fun BasicLargeText(
+fun TextBasicLarge(
     text: String,
     color: Color = MaterialTheme.colorScheme.onSurface,
     modifier: Modifier = Modifier
 ){
     Text(
         text = text,
-        fontSize = textLargeSize,
+        fontSize = sizeText24,
         style = MaterialTheme.typography.displayMedium,
         color = color,
         modifier = modifier
@@ -42,14 +41,14 @@ fun BasicLargeText(
 }
 
 @Composable
-fun BasicSmallText(
+fun TextBasicSmall(
     text: String,
     color: Color = MaterialTheme.colorScheme.onSurface,
     modifier: Modifier = Modifier
 ){
     Text(
         text = text,
-        fontSize = textSmallSize,
+        fontSize = sizeText14,
         style = MaterialTheme.typography.displayMedium,
         color = color,
         modifier = modifier
@@ -57,14 +56,14 @@ fun BasicSmallText(
 }
 
 @Composable
-fun HeadText(
+fun TextHead(
     text: String,
     color: Color = MaterialTheme.colorScheme.onSurface,
     modifier: Modifier = Modifier
 ){
     Text(
         text = text,
-        fontSize = textMediumSize,
+        fontSize = sizeText16,
         style = MaterialTheme.typography.headlineMedium,
         color = color,
         modifier = modifier
@@ -72,14 +71,14 @@ fun HeadText(
 }
 
 @Composable
-fun HeadLargeText(
+fun TextHeadLarge(
     text: String,
     color: Color = MaterialTheme.colorScheme.onSurface,
     modifier: Modifier = Modifier
 ){
     Text(
         text = text,
-        fontSize = textLargeSize,
+        fontSize = sizeText24,
         style = MaterialTheme.typography.headlineMedium,
         color = color,
         modifier = modifier
@@ -87,14 +86,14 @@ fun HeadLargeText(
 }
 
 @Composable
-fun CenterBasicText(
+fun TextBasicCenter(
     text: String,
     color: Color = MaterialTheme.colorScheme.onSurface,
     modifier: Modifier = Modifier
 ){
     Text(
         text = text,
-        fontSize = textMediumSize,
+        fontSize = sizeText16,
         style = MaterialTheme.typography.displayMedium,
         color = color,
         textAlign = TextAlign.Center,
@@ -103,14 +102,14 @@ fun CenterBasicText(
 }
 
 @Composable
-fun CenterHeadText(
+fun TextHeadCenter(
     text: String,
     color: Color = MaterialTheme.colorScheme.onSurface,
     modifier: Modifier = Modifier
 ){
     Text(
         text = text,
-        fontSize = textMediumSize,
+        fontSize = sizeText16,
         style = MaterialTheme.typography.headlineMedium,
         color = color,
         textAlign = TextAlign.Center,

@@ -15,12 +15,12 @@ import androidx.compose.ui.res.vectorResource
 import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemColors
 import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.BasicLargeText
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.BasicSmallText
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.HeadText
-import ua.sviatkuzbyt.cityweather.ui.theme.iconLargeSize
-import ua.sviatkuzbyt.cityweather.ui.theme.spaceLarge
-import ua.sviatkuzbyt.cityweather.ui.theme.spaceMedium
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasicLarge
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasicSmall
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextHead
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace36
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace20
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
 
 @Composable
 fun MainCityItem(data: CityItemData, colors: CityItemColors){
@@ -29,26 +29,26 @@ fun MainCityItem(data: CityItemData, colors: CityItemColors){
         modifier = Modifier.fillMaxWidth()
     ) {
         //City name text
-        HeadText(
+        TextHead(
             text = data.name,
             color = colors.textColor,
             modifier = Modifier
                 .weight(1f)
-                .padding(end = spaceMedium)
+                .padding(end = sizeSpace16)
         )
 
         Column(
             horizontalAlignment = Alignment.End,
-            modifier = Modifier.padding(end = spaceLarge)
+            modifier = Modifier.padding(end = sizeSpace20)
         ) {
             //Temperature text
-            BasicLargeText(
+            TextBasicLarge(
                 text = data.temperature,
                 color = colors.textColor
             )
 
             //Wind speed text
-            BasicSmallText(
+            TextBasicSmall(
                 text = "${stringResource(R.string.wind_speed)} ${data.windSpeed}",
                 color = colors.iconColor
             )
@@ -58,7 +58,7 @@ fun MainCityItem(data: CityItemData, colors: CityItemColors){
         Image(
             imageVector = ImageVector.vectorResource(data.image),
             contentDescription = data.weatherDescription,
-            modifier = Modifier.size(iconLargeSize)
+            modifier = Modifier.size(sizeSpace36)
         )
     }
 }

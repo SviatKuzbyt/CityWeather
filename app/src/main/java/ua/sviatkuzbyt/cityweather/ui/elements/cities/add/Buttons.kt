@@ -11,12 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.BasicText
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.HeadText
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.containerShape
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasic
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextHead
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.shapeContainer
 import ua.sviatkuzbyt.cityweather.ui.theme.WhiteTransparent
-import ua.sviatkuzbyt.cityweather.ui.theme.buttonHeight
-import ua.sviatkuzbyt.cityweather.ui.theme.spaceSmall
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace48
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace8
 
 @Composable
 fun RowScope.AddButton(
@@ -24,17 +24,17 @@ fun RowScope.AddButton(
 ){
     Button(
         onClick = onClick,
-        shape = containerShape,
+        shape = shapeContainer,
         modifier = Modifier
-            .height(buttonHeight)
+            .height(sizeSpace48)
             .weight(1f)
-            .padding(start = spaceSmall),
+            .padding(start = sizeSpace8),
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = WhiteTransparent
         )
     ) {
-        HeadText(
+        TextHead(
             text = stringResource(R.string.add),
             color = Color.White
         )
@@ -48,15 +48,15 @@ fun RowScope.CancelButton(
     Button(
         onClick = onClick,
         modifier = Modifier
-            .height(buttonHeight)
+            .height(sizeSpace48)
             .weight(1f)
-            .padding(end = spaceSmall),
-        shape = containerShape,
+            .padding(end = sizeSpace8),
+        shape = shapeContainer,
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.surface,
             contentColor = MaterialTheme.colorScheme.onSecondaryContainer
         )
     ) {
-        BasicText(stringResource(R.string.cancel))
+        TextBasic(stringResource(R.string.cancel))
     }
 }

@@ -23,7 +23,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import kotlinx.serialization.Serializable
 import ua.sviatkuzbyt.cityweather.ui.pages.cities.CitiesScreen
-import ua.sviatkuzbyt.cityweather.ui.pages.forecast.FiveDaysForecastScreen
+import ua.sviatkuzbyt.cityweather.ui.pages.forecast.fivedays.FiveDaysForecastScreen
 import ua.sviatkuzbyt.cityweather.ui.pages.forecast.today.TodayForecastScreen
 
 @Serializable
@@ -85,7 +85,8 @@ fun AppNavigation(){
             }
 
             composable<ForecastFiveDaysRoute>{
-                FiveDaysForecastScreen()
+                val route: ForecastTodayRoute = it.toRoute()
+                FiveDaysForecastScreen(route.city)
             }
         }
     }

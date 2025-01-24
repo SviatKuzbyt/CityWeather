@@ -42,7 +42,7 @@ class ForecastFiveDaysManager {
     }
 
     private fun convertLongToTimeString(timestamp: Long): String {
-        val formatter = DateTimeFormatter.ofPattern("dd.MM")
+        val formatter = DateTimeFormatter.ofPattern("E, dd.MM")
         return Instant.ofEpochSecond(timestamp)
             .atZone(ZoneId.systemDefault())
             .format(formatter)

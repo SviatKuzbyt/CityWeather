@@ -22,6 +22,6 @@ fun FiveDaysForecastScreen(city: String){
         onErrorRetryClick = {viewModel.loadData()},
         screenState = screenState,
         isWindSpeed = false,
-        topBarLabel = R.string.forecastToday
+        topBarLabel = R.string.forecastFiveDays
     )
 }

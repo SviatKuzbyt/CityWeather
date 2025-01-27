@@ -13,7 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.basicClick
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.basicClick
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.getCityBackground
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.getCityItemColors
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.getLinearBackground

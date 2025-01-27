@@ -1,10 +1,9 @@
 package ua.sviatkuzbyt.cityweather.ui.elements.basic.screens
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import ua.sviatkuzbyt.cityweather.data.structures.ScreenState
@@ -17,7 +16,7 @@ fun Screen(
     screenState: ScreenState = ScreenState.Loading,
     emptyText: String = "",
     onErrorRetryClick: () -> Unit,
-    content: LazyListScope.() -> Unit
+    content: @Composable () -> Unit
 ){
     Column(modifier.fillMaxSize()) {
         topBar()
@@ -27,7 +26,7 @@ fun Screen(
                 LoadScreen()
             }
             ScreenState.Content -> {
-                LazyColumn(Modifier.fillMaxSize().padding(horizontal = sizeSpace16)) {
+                Box(Modifier.fillMaxSize().padding(horizontal = sizeSpace16)){
                     content()
                 }
             }

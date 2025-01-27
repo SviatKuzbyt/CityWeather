@@ -1,12 +1,20 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package ua.sviatkuzbyt.cityweather.ui.pages.cities
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
@@ -22,6 +30,7 @@ import ua.sviatkuzbyt.cityweather.ui.elements.basic.screens.Screen
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.CitiesTopBar
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.CityItem
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.ToastMessage
+import ua.sviatkuzbyt.cityweather.ui.elements.cities.RefreshLazyColumn
 
 private const val NO_OPEN_ITEM = -1
 
@@ -64,6 +73,9 @@ fun CitiesScreen(){
         },
         openForecastFiveDays = { city ->
             navController.navigate(ForecastFiveDaysRoute(city))
+        },
+        update = {
+            viewModel.loadCities()
         }
     )
 }
@@ -79,7 +91,8 @@ private fun CitiesContent(
     clearMessage: () -> Unit,
     errorReturn: () -> Unit,
     openForecastToday: (String) -> Unit,
-    openForecastFiveDays: (String) -> Unit
+    openForecastFiveDays: (String) -> Unit,
+    update: () -> Unit
 ){
     var openCityItem by rememberSaveable {
         mutableIntStateOf(NO_OPEN_ITEM)
@@ -102,30 +115,32 @@ private fun CitiesContent(
         },
 
         content = {
-            itemsIndexed(cities.invoke()){ index, item ->
-                val isOpen = openCityItem == index
+            RefreshLazyColumn(update){
+                itemsIndexed(cities.invoke()){ index, item ->
+                    val isOpen = openCityItem == index
 
-                CityItem(
-                    data = item,
-                    isOpen = isOpen,
-                    onTodayClick = openForecastToday,
-                    onFiveDaysClick = openForecastFiveDays,
-                    onClickItem = {
-                        openCityItem =
-                            if (isOpen) NO_OPEN_ITEM
-                            else index
-                    },
-                    onDelete = {
-                        openCityItem = NO_OPEN_ITEM
-                        deleteCity(item.cityId, index)
-                    },
-                    onMoveUp = {
-                        if (index != 0) {
+                    CityItem(
+                        data = item,
+                        isOpen = isOpen,
+                        onTodayClick = openForecastToday,
+                        onFiveDaysClick = openForecastFiveDays,
+                        onClickItem = {
+                            openCityItem =
+                                if (isOpen) NO_OPEN_ITEM
+                                else index
+                        },
+                        onDelete = {
                             openCityItem = NO_OPEN_ITEM
-                            moveUpCity(item.cityId, index)
+                            deleteCity(item.cityId, index)
+                        },
+                        onMoveUp = {
+                            if (index != 0) {
+                                openCityItem = NO_OPEN_ITEM
+                                moveUpCity(item.cityId, index)
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
         }
     )

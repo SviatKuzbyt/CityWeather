@@ -53,7 +53,7 @@ fun ControlMenu(
 }
 
 @Composable
-private fun DropdownMenuButton(
+fun DropdownMenuButton(
     tittle: String,
     @DrawableRes icon: Int? = null,
     onClick: () -> Unit

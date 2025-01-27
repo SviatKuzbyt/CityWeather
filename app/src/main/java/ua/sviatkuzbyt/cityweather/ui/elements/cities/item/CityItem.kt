@@ -6,7 +6,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,6 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.basicClick
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.getCityBackground
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.getCityItemColors
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components.getLinearBackground
@@ -42,10 +42,7 @@ fun CityItem(
             brush = getLinearBackground(backgrounds),
             shape = RoundedCornerShape(sizeSpace16)
         )
-        .clickable(
-            interactionSource = null,
-            indication = null,
-        ) {
+        .basicClick {
             onClickItem()
         }
         .padding(vertical = sizeSpace16, horizontal = sizeSpace20)

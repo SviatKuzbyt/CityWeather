@@ -1,7 +1,7 @@
 package ua.sviatkuzbyt.cityweather.data.structures.forecast
 
-import ua.sviatkuzbyt.cityweather.data.structures.Weather
-import ua.sviatkuzbyt.cityweather.data.structures.Wind
+import ua.sviatkuzbyt.cityweather.data.structures.weather.Weather
+import ua.sviatkuzbyt.cityweather.data.structures.weather.Wind
 
 data class ForecastTodayDataResponse(
     val list: List<ForecastTodayResponseItem>

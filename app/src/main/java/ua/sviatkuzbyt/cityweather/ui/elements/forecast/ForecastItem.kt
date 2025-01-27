@@ -3,7 +3,6 @@ package ua.sviatkuzbyt.cityweather.ui.elements.forecast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
@@ -15,9 +14,7 @@ import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace24
 
 @Composable
 fun ForecastItem(data: ForecastData, weatherWeight: Float){
-    ItemList(
-        verticalAlignment = Alignment.CenterVertically
-    ){
+    ItemList {
         TextHeadCenter(data.time, modifier = Modifier.weight(1f))
         TextBasicCenter(data.temp, modifier = Modifier.weight(1f))
 

@@ -1,7 +1,6 @@
 package ua.sviatkuzbyt.cityweather.ui.elements.basic.elements
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,7 +16,6 @@ import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace56
 @Composable
 fun ItemList(
     modifier: Modifier = Modifier,
-    verticalAlignment: Alignment.Vertical,
     content: @Composable RowScope.() -> Unit
 ){
     Row(
@@ -29,8 +27,7 @@ fun ItemList(
                 color = MaterialTheme.colorScheme.surfaceContainer,
                 shape = shapeContainer
             ),
-        verticalAlignment = verticalAlignment,
-        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically,
         content = content
     )
 }

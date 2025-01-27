@@ -21,6 +21,7 @@ import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
 import ua.sviatkuzbyt.cityweather.ui.ForecastFiveDaysRoute
 import ua.sviatkuzbyt.cityweather.ui.ForecastTodayRoute
 import ua.sviatkuzbyt.cityweather.ui.LocalNavController
+import ua.sviatkuzbyt.cityweather.ui.SettingsRoute
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.screens.Screen
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.CitiesTopBar
 import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.CityItem
@@ -71,6 +72,9 @@ fun CitiesScreen(){
         },
         update = {
             viewModel.loadCities()
+        },
+        moreButton = {
+            navController.navigate(SettingsRoute)
         }
     )
 }
@@ -87,7 +91,8 @@ private fun CitiesContent(
     errorReturn: () -> Unit,
     openForecastToday: (String) -> Unit,
     openForecastFiveDays: (String) -> Unit,
-    update: () -> Unit
+    update: () -> Unit,
+    moreButton: () -> Unit
 ){
     var openCityItem by rememberSaveable {
         mutableIntStateOf(NO_OPEN_ITEM)
@@ -105,7 +110,7 @@ private fun CitiesContent(
                 onAddCity = {city ->
                     addCity(city)
                 },
-                onMoreButtonClick = {}
+                onMoreButtonClick = moreButton
             )
         },
 

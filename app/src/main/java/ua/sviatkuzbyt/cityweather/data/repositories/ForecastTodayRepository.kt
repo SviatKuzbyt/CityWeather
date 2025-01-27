@@ -1,6 +1,6 @@
 package ua.sviatkuzbyt.cityweather.data.repositories
 
-import ua.sviatkuzbyt.cityweather.data.structures.WeatherItemAppearance.Companion.getWeatherItemAppearance
+import ua.sviatkuzbyt.cityweather.data.structures.weather.WeatherItemAppearance.Companion.getWeatherItemAppearance
 import ua.sviatkuzbyt.cityweather.data.structures.forecast.ForecastData
 import ua.sviatkuzbyt.cityweather.data.api.ForecastManager
 import ua.sviatkuzbyt.cityweather.data.structures.forecast.ForecastTodayDataResponse

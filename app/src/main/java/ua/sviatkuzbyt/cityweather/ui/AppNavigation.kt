@@ -25,6 +25,7 @@ import kotlinx.serialization.Serializable
 import ua.sviatkuzbyt.cityweather.ui.pages.cities.CitiesScreen
 import ua.sviatkuzbyt.cityweather.ui.pages.forecasts.ForecastFiveDaysScreen
 import ua.sviatkuzbyt.cityweather.ui.pages.forecasts.ForecastTodayScreen
+import ua.sviatkuzbyt.cityweather.ui.pages.settings.SettingsScreen
 
 @Serializable
 data object CitiesRoute
@@ -38,6 +39,9 @@ data class ForecastTodayRoute(
 data class ForecastFiveDaysRoute(
     val city: String
 )
+
+@Serializable
+data object SettingsRoute
 
 val LocalNavController: ProvidableCompositionLocal<NavController> = staticCompositionLocalOf{
     error("LocalNavController: No NavController")
@@ -87,6 +91,10 @@ fun AppNavigation(){
             composable<ForecastFiveDaysRoute>{
                 val route: ForecastTodayRoute = it.toRoute()
                 ForecastFiveDaysScreen(route.city)
+            }
+
+            composable<SettingsRoute> {
+                SettingsScreen()
             }
         }
     }

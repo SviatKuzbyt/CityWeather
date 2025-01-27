@@ -35,4 +35,5 @@
     <string name="close_page">Close page</string>
     <string name="time">Time</string>
     <string name="temperature">Temperature</string>
+    <string name="settings">Settings</string>
 </resources>

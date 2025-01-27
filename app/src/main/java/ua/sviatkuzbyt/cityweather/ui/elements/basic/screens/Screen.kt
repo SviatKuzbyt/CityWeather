@@ -15,7 +15,7 @@ fun Screen(
     topBar: @Composable () -> Unit,
     screenState: ScreenState = ScreenState.Loading,
     emptyText: String = "",
-    onErrorRetryClick: () -> Unit,
+    onErrorRetryClick: () -> Unit = {},
     content: @Composable () -> Unit
 ){
     Column(modifier.fillMaxSize()) {

@@ -13,3 +13,4 @@ val sizeSpace20 = 20.dp
 val sizeSpace24 = 24.dp
 val sizeSpace36 = 36.dp
 val sizeSpace48 = 48.dp
+val sizeSpace56 = 56.dp

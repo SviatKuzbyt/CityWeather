@@ -12,6 +12,7 @@ import ua.sviatkuzbyt.cityweather.data.exceptionDescription
 import ua.sviatkuzbyt.cityweather.data.repositories.CitiesRepository
 import ua.sviatkuzbyt.cityweather.data.structures.ScreenState
 import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
+import ua.sviatkuzbyt.cityweather.ui.elements.saveableCoroutineCall
 
 class CitiesViewModel(application: Application): AndroidViewModel(application) {
     private val repository = CitiesRepository(application)
@@ -26,20 +27,6 @@ class CitiesViewModel(application: Application): AndroidViewModel(application) {
 
     init { loadCities() }
 
-    private fun saveableCoroutineCall(
-        errorHandler: () -> Unit = {},
-        code: suspend () -> Unit
-    ){
-        viewModelScope.launch(Dispatchers.IO){
-            try {
-                code()
-            } catch (e: Exception){
-                _message.value = exceptionDescription(e)
-                errorHandler()
-            }
-        }
-    }
-
     fun loadCities(){
         saveableCoroutineCall(
             code = {
@@ -51,12 +38,13 @@ class CitiesViewModel(application: Application): AndroidViewModel(application) {
             },
             errorHandler = {
                 _screenState.value = ScreenState.Error
-            }
+            },
+            message = _message
         )
     }
 
     fun addCity(name: String)  {
-        saveableCoroutineCall {
+        saveableCoroutineCall(_message) {
             val position = _cities.value.size
             val newItem = repository.addCity(name, position)
 
@@ -71,7 +59,7 @@ class CitiesViewModel(application: Application): AndroidViewModel(application) {
     }
 
     fun deleteCity(id: Long, position: Int) {
-        saveableCoroutineCall {
+        saveableCoroutineCall(_message) {
             repository.deleteCity(id, position)
             _cities.update { oldList ->
                 oldList - oldList[position]
@@ -81,7 +69,7 @@ class CitiesViewModel(application: Application): AndroidViewModel(application) {
     }
 
     fun moveUpCity(id: Long, position: Int) {
-        saveableCoroutineCall{
+        saveableCoroutineCall(_message) {
             repository.moveUpCity(id, position)
             val moveItem = _cities.value[position]
             _cities.value -= moveItem

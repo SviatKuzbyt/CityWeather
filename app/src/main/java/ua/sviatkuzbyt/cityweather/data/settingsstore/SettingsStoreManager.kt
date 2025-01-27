@@ -9,17 +9,16 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
-private val Context.settingsStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-
-class SettingsStoreManager(private val context: Context){
+object SettingsStoreManager{
+    private val Context.settingsStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
     private val unitsKey = stringPreferencesKey("units")
 
-    suspend fun getUnits() =
+    suspend fun getUnits(context: Context) =
         context.settingsStore.data.map {
             it[unitsKey] ?: "standard"
         }.first()
 
-    suspend fun setUnits(value: String){
+    suspend fun setUnits(context: Context, value: String){
         context.settingsStore.edit {
             it[unitsKey] = value
         }

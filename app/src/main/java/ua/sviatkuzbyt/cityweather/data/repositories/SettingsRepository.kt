@@ -7,21 +7,20 @@ import ua.sviatkuzbyt.cityweather.data.structures.settings.SettingsItemData
 
 private const val UNITS_ID = 1
 
-class SettingsRepository(context: Context) {
-    private val store = SettingsStoreManager(context)
+class SettingsRepository(private val context: Context) {
 
     suspend fun getSettingsList() = listOf(
         SettingsItemData(
             id = UNITS_ID,
             label = R.string.units,
-            setValue = store.getUnits(),
+            setValue = SettingsStoreManager.getUnits(context),
             listOfValues = { listOf("standard", "metric", "imperial") }
         )
     )
 
     suspend fun setSettings(id: Int, value: String){
         when(id){
-            UNITS_ID -> store.setUnits(value)
+            UNITS_ID -> SettingsStoreManager.setUnits(context, value)
         }
     }
 }

@@ -71,5 +71,5 @@ dependencies {
 
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.gson)
-
+    implementation(libs.androidx.datastore.preferences)
 }

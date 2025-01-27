@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter
 abstract class ForecastManager(protected val city: String) {
     protected val gson = Gson()
 
-    abstract fun loadForecast(): List<ForecastData>
+    abstract suspend fun loadForecast(): List<ForecastData>
 
     protected fun convertTime(time: Long, pattern: String): String{
         val formatter = DateTimeFormatter.ofPattern(pattern)

@@ -3,6 +3,7 @@ package ua.sviatkuzbyt.cityweather.ui.pages.forecasts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.data.repositories.ForecastFiveDaysRepository
@@ -25,11 +26,12 @@ private fun ForecastScreen(
     city: String,
     type: ForecastScreenType
 ){
+    val context = LocalContext.current
     val viewModel: ForecastViewModel = viewModel(
         factory = ForecastViewModel.Factory(
             when(type){
-                ForecastScreenType.Today -> ForecastTodayRepository(city)
-                ForecastScreenType.FiveDays -> ForecastFiveDaysRepository(city)
+                ForecastScreenType.Today -> ForecastTodayRepository(city, context)
+                ForecastScreenType.FiveDays -> ForecastFiveDaysRepository(city, context)
             }
         )
     )

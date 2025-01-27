@@ -15,7 +15,7 @@ object SettingsStoreManager{
 
     suspend fun getUnits(context: Context) =
         context.settingsStore.data.map {
-            it[unitsKey] ?: "standard"
+            it[unitsKey] ?: "metric"
         }.first()
 
     suspend fun setUnits(context: Context, value: String){

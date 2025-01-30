@@ -11,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.data.structures.ScreenState
-import ua.sviatkuzbyt.cityweather.data.structures.settings.AboutItem
+import ua.sviatkuzbyt.cityweather.ui.elements.settings.AboutItem
 import ua.sviatkuzbyt.cityweather.data.structures.settings.SettingsItemData
 import ua.sviatkuzbyt.cityweather.ui.LocalNavController
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.screens.Screen

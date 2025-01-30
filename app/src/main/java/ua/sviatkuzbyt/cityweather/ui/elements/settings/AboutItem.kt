@@ -1,6 +1,5 @@
-package ua.sviatkuzbyt.cityweather.data.structures.settings
+package ua.sviatkuzbyt.cityweather.ui.elements.settings
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable

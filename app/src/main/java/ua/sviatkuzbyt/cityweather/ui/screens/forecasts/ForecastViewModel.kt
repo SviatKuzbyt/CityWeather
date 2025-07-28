@@ -5,14 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import ua.sviatkuzbyt.cityweather.data.api.ForecastManager
-import ua.sviatkuzbyt.cityweather.data.structures.forecast.ForecastData
+import ua.sviatkuzbyt.cityweather.data.exceptionDescription
 import ua.sviatkuzbyt.cityweather.ui.elements.saveableCoroutineCall
-
-sealed class ForecastState(){
-    data object Loading: ForecastState()
-    data class Content(val forecastList: List<ForecastData>): ForecastState()
-    data class Error(val text: String): ForecastState()
-}
+import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastState
 
 class ForecastViewModel(private val repository: ForecastManager): ViewModel() {
     private val _forecastState = MutableStateFlow<ForecastState>(ForecastState.Loading)
@@ -25,7 +20,7 @@ class ForecastViewModel(private val repository: ForecastManager): ViewModel() {
             _forecastState.value = ForecastState.Content(repository.loadForecast())
         },
         errorHandler = {
-            _forecastState.value = ForecastState.Error(it.message ?: "Unknown error")
+            _forecastState.value = ForecastState.Error(exceptionDescription(it))
         },
     )
 

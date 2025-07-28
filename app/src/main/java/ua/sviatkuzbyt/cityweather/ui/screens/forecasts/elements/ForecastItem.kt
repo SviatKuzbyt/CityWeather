@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.ui.elements.forecast
+package ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.height

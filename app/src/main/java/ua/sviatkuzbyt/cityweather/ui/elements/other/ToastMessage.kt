@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.ui.elements.basic.elements
+package ua.sviatkuzbyt.cityweather.ui.elements.other
 
 import android.widget.Toast
 import androidx.annotation.StringRes

@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.ui.elements.basic.topbar
+package ua.sviatkuzbyt.cityweather.ui.elements.topbar
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextHeadLarge
+import ua.sviatkuzbyt.cityweather.ui.elements.other.TextHeadLarge
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace8
 

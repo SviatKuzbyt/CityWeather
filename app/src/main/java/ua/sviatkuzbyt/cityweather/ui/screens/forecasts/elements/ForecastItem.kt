@@ -7,9 +7,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import ua.sviatkuzbyt.cityweather.data.structures.forecast.ForecastData
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.ItemList
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasicCenter
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextHeadCenter
+import ua.sviatkuzbyt.cityweather.ui.elements.other.ItemList
+import ua.sviatkuzbyt.cityweather.ui.elements.other.TextBasicCenter
+import ua.sviatkuzbyt.cityweather.ui.elements.other.TextHeadCenter
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace24
 
 @Composable

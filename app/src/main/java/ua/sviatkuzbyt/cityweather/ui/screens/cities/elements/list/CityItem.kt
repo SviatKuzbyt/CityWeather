@@ -30,10 +30,10 @@ import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemColors
 import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
 import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemDetailData
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasicLarge
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasicSmall
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextHead
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.basicClick
+import ua.sviatkuzbyt.cityweather.ui.elements.other.TextBasicLarge
+import ua.sviatkuzbyt.cityweather.ui.elements.other.TextBasicSmall
+import ua.sviatkuzbyt.cityweather.ui.elements.other.TextHead
+import ua.sviatkuzbyt.cityweather.ui.elements.other.basicClick
 import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.list.elements.ControlMenu
 import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.list.elements.DetailButton
 import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.list.elements.DetailItem

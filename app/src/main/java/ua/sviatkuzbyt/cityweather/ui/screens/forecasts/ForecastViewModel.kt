@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import ua.sviatkuzbyt.cityweather.data.api.ForecastManager
 import ua.sviatkuzbyt.cityweather.data.exceptionDescription
-import ua.sviatkuzbyt.cityweather.ui.elements.saveableCoroutineCall
+import ua.sviatkuzbyt.cityweather.ui.elements.other.saveableCoroutineCall
 import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastState
 
 class ForecastViewModel(private val repository: ForecastManager): ViewModel() {

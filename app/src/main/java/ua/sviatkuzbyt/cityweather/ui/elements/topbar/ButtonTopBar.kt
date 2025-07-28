@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.ui.elements.basic.topbar
+package ua.sviatkuzbyt.cityweather.ui.elements.topbar
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

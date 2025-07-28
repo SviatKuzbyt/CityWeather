@@ -9,12 +9,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.ui.screens.settings.elements.AboutItem
 import ua.sviatkuzbyt.cityweather.ui.LocalNavController
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.screens.Screen
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.topbar.LabelNavigateTopBar
+import ua.sviatkuzbyt.cityweather.ui.elements.other.ToastMessage
+import ua.sviatkuzbyt.cityweather.ui.elements.screens.Screen
+import ua.sviatkuzbyt.cityweather.ui.elements.topbar.LabelNavigateTopBar
 import ua.sviatkuzbyt.cityweather.ui.screens.settings.elements.SettingsItem
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
 
@@ -23,7 +26,11 @@ fun SettingsScreen(){
     // data
     val viewModel: SettingsViewModel = viewModel()
     val navController = LocalNavController.current
+
     val settingsList by viewModel.settingsList.collectAsState()
+    val message by viewModel.message.collectAsStateWithLifecycle(
+        minActiveState = Lifecycle.State.RESUMED
+    )
 
     // ui
     Screen(
@@ -49,4 +56,6 @@ fun SettingsScreen(){
             }
         }
     )
+
+    ToastMessage(message, viewModel::clearMessage)
 }

@@ -6,7 +6,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.shapeContainer
+import ua.sviatkuzbyt.cityweather.ui.elements.other.shapeContainer
 /**
  * Кольори:
     * * primary - голвна кнопка (синій)

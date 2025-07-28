@@ -16,10 +16,10 @@ import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.data.repositories.ForecastFiveDaysRepository
 import ua.sviatkuzbyt.cityweather.data.repositories.ForecastTodayRepository
 import ua.sviatkuzbyt.cityweather.ui.LocalNavController
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.screens.LoadScreen
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.screens.Screen
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.screens.TextPlug
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.topbar.LabelNavigateTopBar
+import ua.sviatkuzbyt.cityweather.ui.elements.screens.LoadPlug
+import ua.sviatkuzbyt.cityweather.ui.elements.screens.Screen
+import ua.sviatkuzbyt.cityweather.ui.elements.screens.TextPlug
+import ua.sviatkuzbyt.cityweather.ui.elements.topbar.LabelNavigateTopBar
 import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastDescriptions
 import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastItem
 import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastScreenType
@@ -85,7 +85,7 @@ private fun ForecastScreen(
                         }
                     }
                     is ForecastState.Error -> TextPlug(stringResource(state.text))
-                    ForecastState.Loading -> LoadScreen()
+                    ForecastState.Loading -> LoadPlug()
                 }
             }
 

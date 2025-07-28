@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import ua.sviatkuzbyt.cityweather.data.repositories.CitiesRepository
 import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
-import ua.sviatkuzbyt.cityweather.ui.elements.saveableCoroutineCall
+import ua.sviatkuzbyt.cityweather.ui.elements.other.saveableCoroutineCall
 
 class CitiesViewModel(application: Application): AndroidViewModel(application) {
     private val repository = CitiesRepository(application)

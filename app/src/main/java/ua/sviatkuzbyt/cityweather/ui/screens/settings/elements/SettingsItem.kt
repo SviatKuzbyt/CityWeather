@@ -21,10 +21,10 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.data.structures.settings.SettingsItemData
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.basicClick
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.ItemList
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasic
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasicSmall
+import ua.sviatkuzbyt.cityweather.ui.elements.other.basicClick
+import ua.sviatkuzbyt.cityweather.ui.elements.other.ItemList
+import ua.sviatkuzbyt.cityweather.ui.elements.other.TextBasic
+import ua.sviatkuzbyt.cityweather.ui.elements.other.TextBasicSmall
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace20
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace8

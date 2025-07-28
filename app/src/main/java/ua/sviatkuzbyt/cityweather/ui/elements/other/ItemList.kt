@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.ui.elements.basic.elements
+package ua.sviatkuzbyt.cityweather.ui.elements.other
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope

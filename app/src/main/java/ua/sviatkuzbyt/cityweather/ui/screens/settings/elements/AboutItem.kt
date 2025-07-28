@@ -6,9 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextBasic
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.TextHead
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.containerBackground
+import ua.sviatkuzbyt.cityweather.ui.elements.other.TextBasic
+import ua.sviatkuzbyt.cityweather.ui.elements.other.TextHead
+import ua.sviatkuzbyt.cityweather.ui.elements.other.containerBackground
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace20
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace8

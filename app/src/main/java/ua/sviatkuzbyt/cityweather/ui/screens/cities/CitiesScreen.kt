@@ -8,19 +8,23 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.ui.ForecastFiveDaysRoute
 import ua.sviatkuzbyt.cityweather.ui.ForecastTodayRoute
 import ua.sviatkuzbyt.cityweather.ui.LocalNavController
 import ua.sviatkuzbyt.cityweather.ui.SettingsRoute
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.screens.Screen
+import ua.sviatkuzbyt.cityweather.ui.elements.screens.Screen
 import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.CitiesTopBar
 import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.list.CityItem
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.ToastMessage
-import ua.sviatkuzbyt.cityweather.ui.elements.basic.RefreshLazyColumn
+import ua.sviatkuzbyt.cityweather.ui.elements.other.ToastMessage
+import ua.sviatkuzbyt.cityweather.ui.elements.other.RefreshLazyColumn
+import ua.sviatkuzbyt.cityweather.ui.elements.screens.TextPlug
+import ua.sviatkuzbyt.cityweather.ui.elements.screens.TextPlugList
 import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.AddCityDialog
 
 private const val NO_OPEN_ITEM = -1
@@ -56,34 +60,38 @@ fun CitiesScreen(){
                 isRefreshing = isLoading,
                 onRefresh = { viewModel.loadCities() },
                 content = {
-                    itemsIndexed(citiesList){ index, city ->
-                        val isOpen = openCityItem == index
+                    if (citiesList.isEmpty() && !isLoading) {
+                        item { TextPlugList(stringResource(R.string.no_cities)) }
+                    } else {
+                        itemsIndexed(citiesList){ index, city ->
+                            val isOpen = openCityItem == index
 
-                        CityItem(
-                            data = city,
-                            isOpen = isOpen,
-                            onTodayClick = {
-                                navController.navigate(ForecastTodayRoute(city.name))
-                            },
-                            onFiveDaysClick = {
-                                navController.navigate(ForecastFiveDaysRoute(city.name))
-                            },
-                            onClickItem = {
-                                openCityItem =
-                                    if (isOpen) NO_OPEN_ITEM
-                                    else index
-                            },
-                            onDelete = {
-                                openCityItem = NO_OPEN_ITEM
-                                viewModel.deleteCity(city.cityId, index)
-                            },
-                            onMoveUp = {
-                                if (index != 0) {
+                            CityItem(
+                                data = city,
+                                isOpen = isOpen,
+                                onTodayClick = {
+                                    navController.navigate(ForecastTodayRoute(city.name))
+                                },
+                                onFiveDaysClick = {
+                                    navController.navigate(ForecastFiveDaysRoute(city.name))
+                                },
+                                onClickItem = {
+                                    openCityItem =
+                                        if (isOpen) NO_OPEN_ITEM
+                                        else index
+                                },
+                                onDelete = {
                                     openCityItem = NO_OPEN_ITEM
-                                    viewModel.moveUpCity(city.cityId, index)
+                                    viewModel.deleteCity(city.cityId, index)
+                                },
+                                onMoveUp = {
+                                    if (index != 0) {
+                                        openCityItem = NO_OPEN_ITEM
+                                        viewModel.moveUpCity(city.cityId, index)
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             )

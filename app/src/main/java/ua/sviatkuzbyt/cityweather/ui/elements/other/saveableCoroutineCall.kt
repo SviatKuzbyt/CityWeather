@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.ui.elements
+package ua.sviatkuzbyt.cityweather.ui.elements.other
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import ua.sviatkuzbyt.cityweather.data.repositories.SettingsRepository
 import ua.sviatkuzbyt.cityweather.data.structures.settings.SettingsItemData
-import ua.sviatkuzbyt.cityweather.ui.elements.saveableCoroutineCall
+import ua.sviatkuzbyt.cityweather.ui.elements.other.saveableCoroutineCall
 
 class SettingsViewModel(application: Application): AndroidViewModel(application) {
     private val repository = SettingsRepository(application)
@@ -35,5 +35,9 @@ class SettingsViewModel(application: Application): AndroidViewModel(application)
             }
             repository.setSettings(id, value)
         }
+    }
+
+    fun clearMessage() {
+        _message.value = null
     }
 }

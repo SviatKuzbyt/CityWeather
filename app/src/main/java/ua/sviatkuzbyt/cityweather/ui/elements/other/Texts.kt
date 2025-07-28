@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.ui.elements.basic.elements
+package ua.sviatkuzbyt.cityweather.ui.elements.other
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text

@@ -11,11 +11,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.ui.elements.settings.AboutItem
+import ua.sviatkuzbyt.cityweather.ui.screens.settings.elements.AboutItem
 import ua.sviatkuzbyt.cityweather.ui.LocalNavController
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.screens.Screen
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.topbar.LabelNavigateTopBar
-import ua.sviatkuzbyt.cityweather.ui.elements.settings.SettingsItem
+import ua.sviatkuzbyt.cityweather.ui.screens.settings.elements.SettingsItem
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
 
 @Composable

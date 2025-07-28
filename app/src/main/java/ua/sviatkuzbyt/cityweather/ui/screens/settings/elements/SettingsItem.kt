@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.ui.elements.settings
+package ua.sviatkuzbyt.cityweather.ui.screens.settings.elements
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -34,9 +34,7 @@ fun SettingsItem(
     data: SettingsItemData,
     onChangeValue: (String) -> Unit
 ){
-    var isShowList by remember {
-        mutableStateOf(false)
-    }
+    var isShowList by remember { mutableStateOf(false) }
 
     ItemList(
         Modifier.basicClick { isShowList = true }
@@ -71,8 +69,7 @@ private fun OpenIcon(isRotate: Boolean) {
         modifier = Modifier
             .padding(start = sizeSpace8, end = sizeSpace20)
             .width(10.dp)
-            .rotate(if(isRotate) 180f else 0f)
-        ,
+            .rotate(if(isRotate) 180f else 0f),
         tint = MaterialTheme.colorScheme.onSecondaryContainer
     )
 }
@@ -88,7 +85,6 @@ private fun SettingsList(
         expanded = isShow,
         onDismissRequest = onDismiss,
         offset = DpOffset(-sizeSpace8, sizeSpace16)
-
     ) {
         data.invoke().forEach {
             DropdownMenuItem(

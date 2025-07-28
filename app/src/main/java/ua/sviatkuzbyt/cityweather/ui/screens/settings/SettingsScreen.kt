@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.ui.pages.settings
+package ua.sviatkuzbyt.cityweather.ui.screens.settings
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize

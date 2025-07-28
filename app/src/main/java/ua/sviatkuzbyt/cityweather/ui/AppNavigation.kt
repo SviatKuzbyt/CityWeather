@@ -22,23 +22,19 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import kotlinx.serialization.Serializable
-import ua.sviatkuzbyt.cityweather.ui.pages.cities.CitiesScreen
-import ua.sviatkuzbyt.cityweather.ui.pages.forecasts.ForecastFiveDaysScreen
-import ua.sviatkuzbyt.cityweather.ui.pages.forecasts.ForecastTodayScreen
-import ua.sviatkuzbyt.cityweather.ui.pages.settings.SettingsScreen
+import ua.sviatkuzbyt.cityweather.ui.screens.cities.CitiesScreen
+import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.ForecastFiveDaysScreen
+import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.ForecastTodayScreen
+import ua.sviatkuzbyt.cityweather.ui.screens.settings.SettingsScreen
 
 @Serializable
 data object CitiesRoute
 
 @Serializable
-data class ForecastTodayRoute(
-    val city: String
-)
+data class ForecastTodayRoute(val city: String)
 
 @Serializable
-data class ForecastFiveDaysRoute(
-    val city: String
-)
+data class ForecastFiveDaysRoute(val city: String)
 
 @Serializable
 data object SettingsRoute
@@ -53,13 +49,11 @@ val enterTransition =
         animationSpec = tween(400, 100)
     ) + fadeIn(animationSpec = tween(400, 100))
 
-
 val exitTransition =
     scaleOut(
         targetScale = 0.85f,
         animationSpec = tween(400)
     ) + fadeOut(animationSpec = tween(400))
-
 
 @Composable
 fun AppNavigation(){
@@ -71,7 +65,6 @@ fun AppNavigation(){
     val navController = rememberNavController()
 
     CompositionLocalProvider(LocalNavController provides navController ) {
-        //Розміщення маршрутів навігації
         NavHost(
             modifier = modifier,
             navController = navController,

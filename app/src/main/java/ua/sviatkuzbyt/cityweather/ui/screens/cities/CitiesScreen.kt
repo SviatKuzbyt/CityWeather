@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.ui.pages.cities
+package ua.sviatkuzbyt.cityweather.ui.screens.cities
 
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
@@ -17,11 +17,11 @@ import ua.sviatkuzbyt.cityweather.ui.ForecastTodayRoute
 import ua.sviatkuzbyt.cityweather.ui.LocalNavController
 import ua.sviatkuzbyt.cityweather.ui.SettingsRoute
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.screens.Screen
-import ua.sviatkuzbyt.cityweather.ui.elements.cities.CitiesTopBar
-import ua.sviatkuzbyt.cityweather.ui.elements.cities.item.CityItem
+import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.CitiesTopBar
+import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.list.CityItem
 import ua.sviatkuzbyt.cityweather.ui.elements.basic.elements.ToastMessage
-import ua.sviatkuzbyt.cityweather.ui.elements.cities.RefreshLazyColumn
-import ua.sviatkuzbyt.cityweather.ui.elements.cities.add.AddCityDialog
+import ua.sviatkuzbyt.cityweather.ui.elements.basic.RefreshLazyColumn
+import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.AddCityDialog
 
 private const val NO_OPEN_ITEM = -1
 

@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.ui.elements.cities
+package ua.sviatkuzbyt.cityweather.ui.screens.cities.elements
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

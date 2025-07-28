@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.ui.pages.forecasts
+package ua.sviatkuzbyt.cityweather.ui.screens.forecasts
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

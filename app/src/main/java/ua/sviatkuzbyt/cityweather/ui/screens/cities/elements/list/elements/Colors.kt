@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.ui.elements.cities.item.components
+package ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.list.elements
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush

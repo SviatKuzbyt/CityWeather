@@ -18,14 +18,13 @@ import ua.sviatkuzbyt.cityweather.ui.ForecastFiveDaysRoute
 import ua.sviatkuzbyt.cityweather.ui.ForecastTodayRoute
 import ua.sviatkuzbyt.cityweather.ui.LocalNavController
 import ua.sviatkuzbyt.cityweather.ui.SettingsRoute
-import ua.sviatkuzbyt.cityweather.ui.elements.screens.Screen
-import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.CitiesTopBar
-import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.list.CityItem
-import ua.sviatkuzbyt.cityweather.ui.elements.other.ToastMessage
 import ua.sviatkuzbyt.cityweather.ui.elements.other.RefreshLazyColumn
-import ua.sviatkuzbyt.cityweather.ui.elements.screens.TextPlug
+import ua.sviatkuzbyt.cityweather.ui.elements.other.ToastMessage
+import ua.sviatkuzbyt.cityweather.ui.elements.screens.Screen
 import ua.sviatkuzbyt.cityweather.ui.elements.screens.TextPlugList
 import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.AddCityDialog
+import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.CitiesTopBar
+import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.list.CityItem
 
 private const val NO_OPEN_ITEM = -1
 

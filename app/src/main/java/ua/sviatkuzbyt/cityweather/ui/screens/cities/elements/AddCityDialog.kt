@@ -31,10 +31,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.ui.elements.other.TextHead
 import ua.sviatkuzbyt.cityweather.ui.elements.other.SpacerMedium
 import ua.sviatkuzbyt.cityweather.ui.elements.other.SpacerSmall
 import ua.sviatkuzbyt.cityweather.ui.elements.other.TextBasic
+import ua.sviatkuzbyt.cityweather.ui.elements.other.TextHead
 import ua.sviatkuzbyt.cityweather.ui.elements.other.shapeContainer
 import ua.sviatkuzbyt.cityweather.ui.theme.Red
 import ua.sviatkuzbyt.cityweather.ui.theme.WhiteTransparent

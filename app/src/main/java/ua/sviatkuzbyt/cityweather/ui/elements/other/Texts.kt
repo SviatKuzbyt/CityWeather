@@ -6,9 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import ua.sviatkuzbyt.cityweather.ui.theme.sizeText24
-import ua.sviatkuzbyt.cityweather.ui.theme.sizeText16
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeText14
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeText16
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeText24
 
 @Composable
 fun TextBasic(

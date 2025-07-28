@@ -9,8 +9,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.ui.elements.topbar.ButtonTopBar
 import ua.sviatkuzbyt.cityweather.ui.elements.other.TextHeadLarge
+import ua.sviatkuzbyt.cityweather.ui.elements.topbar.ButtonTopBar
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace8
 

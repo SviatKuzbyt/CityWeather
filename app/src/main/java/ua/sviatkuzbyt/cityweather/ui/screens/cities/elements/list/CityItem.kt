@@ -40,8 +40,8 @@ import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.list.elements.Detai
 import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.list.elements.getCityBackground
 import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.list.elements.getCityItemColors
 import ua.sviatkuzbyt.cityweather.ui.screens.cities.elements.list.elements.getLinearBackground
-import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace20
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
+import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace20
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace36
 
 @Composable

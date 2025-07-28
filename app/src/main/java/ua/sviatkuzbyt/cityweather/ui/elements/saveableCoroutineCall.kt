@@ -9,15 +9,16 @@ import ua.sviatkuzbyt.cityweather.data.exceptionDescription
 
 fun ViewModel.saveableCoroutineCall(
     message:  MutableStateFlow<Int?>? = null,
-    errorHandler: () -> Unit = {},
+    errorHandler: (Exception) -> Unit = {},
+    finallyHandler: () -> Unit = {},
     code: suspend () -> Unit
-){
-    viewModelScope.launch(Dispatchers.IO){
-        try {
-            code()
-        } catch (e: Exception){
-            message?.value = exceptionDescription(e)
-            errorHandler()
-        }
+) = viewModelScope.launch(Dispatchers.IO){
+    try {
+        code()
+    } catch (e: Exception){
+        message?.value = exceptionDescription(e)
+        errorHandler(e)
+    } finally {
+        finallyHandler()
     }
 }

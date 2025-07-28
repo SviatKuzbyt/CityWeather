@@ -2,27 +2,22 @@ package ua.sviatkuzbyt.cityweather.ui.pages.cities
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
-import ua.sviatkuzbyt.cityweather.data.exceptionDescription
 import ua.sviatkuzbyt.cityweather.data.repositories.CitiesRepository
-import ua.sviatkuzbyt.cityweather.data.structures.ScreenState
 import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
 import ua.sviatkuzbyt.cityweather.ui.elements.saveableCoroutineCall
 
 class CitiesViewModel(application: Application): AndroidViewModel(application) {
     private val repository = CitiesRepository(application)
 
-    private val _cities = MutableStateFlow<List<CityItemData>>(listOf())
-    private val _screenState = MutableStateFlow(ScreenState.Loading)
+    private val _citiesList = MutableStateFlow<List<CityItemData>>(listOf())
+    private val _isLoading = MutableStateFlow(false)
     private val _message = MutableStateFlow<Int?>(null)
 
-    val cities: StateFlow<List<CityItemData>> = _cities
-    val screenState: StateFlow<ScreenState> = _screenState
+    val citiesList: StateFlow<List<CityItemData>> = _citiesList
+    val isLoading: StateFlow<Boolean> = _isLoading
     val message: StateFlow<Int?> = _message
 
     init { loadCities() }
@@ -30,50 +25,46 @@ class CitiesViewModel(application: Application): AndroidViewModel(application) {
     fun loadCities(){
         saveableCoroutineCall(
             code = {
-                _screenState.value = ScreenState.Loading
-                _cities.value = repository.getWeatherForCities()
-                _screenState.value =
-                    if (_cities.value.isEmpty()) ScreenState.Empty
-                    else ScreenState.Content
+                _isLoading.value = true
+                _citiesList.value = repository.getWeatherForCities()
             },
-            errorHandler = {
-                _screenState.value = ScreenState.Error
+            finallyHandler = {
+                _isLoading.value = false
             },
             message = _message
         )
     }
 
     fun addCity(name: String)  {
-        saveableCoroutineCall(_message) {
-            val position = _cities.value.size
-            val newItem = repository.addCity(name, position)
-
-            if (_cities.value.isEmpty()){
-                _screenState.value = ScreenState.Content
-            }
-
-            _cities.update { oldList ->
-                oldList + newItem
-            }
-        }
+        saveableCoroutineCall(
+            code = {
+                _isLoading.value = true
+                val position = _citiesList.value.size
+                val newItem = repository.addCity(name, position)
+                _citiesList.update { oldList ->
+                    oldList + newItem
+                }
+            },
+            message = _message,
+            finallyHandler = { _isLoading.value = false }
+        )
     }
 
     fun deleteCity(id: Long, position: Int) {
         saveableCoroutineCall(_message) {
             repository.deleteCity(id, position)
-            _cities.update { oldList ->
+            _citiesList.update { oldList ->
                 oldList - oldList[position]
             }
-            if (_cities.value.isEmpty()) _screenState.value = ScreenState.Empty
         }
     }
 
     fun moveUpCity(id: Long, position: Int) {
         saveableCoroutineCall(_message) {
             repository.moveUpCity(id, position)
-            val moveItem = _cities.value[position]
-            _cities.value -= moveItem
-            _cities.value = listOf(moveItem) + _cities.value
+            val moveItem = _citiesList.value[position]
+            _citiesList.value -= moveItem
+            _citiesList.value = listOf(moveItem) + _citiesList.value
         }
     }
 

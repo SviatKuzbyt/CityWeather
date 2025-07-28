@@ -16,9 +16,7 @@ class SettingsViewModel(application: Application): AndroidViewModel(application)
     val settingsList: StateFlow<List<SettingsItemData>> = _settingsList
     val message: StateFlow<Int?> = _message
 
-    init {
-        loadSettings()
-    }
+    init { loadSettings() }
 
     private fun loadSettings(){
         saveableCoroutineCall(_message) {

@@ -13,29 +13,10 @@ import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
 fun Screen(
     modifier: Modifier = Modifier,
     topBar: @Composable () -> Unit,
-    screenState: ScreenState = ScreenState.Loading,
-    emptyText: String = "",
-    onErrorRetryClick: () -> Unit = {},
     content: @Composable () -> Unit
 ){
     Column(modifier.fillMaxSize()) {
         topBar()
-
-        when(screenState){
-            ScreenState.Loading -> {
-                LoadScreen()
-            }
-            ScreenState.Content -> {
-                Box(Modifier.fillMaxSize().padding(horizontal = sizeSpace16)){
-                    content()
-                }
-            }
-            ScreenState.Empty -> {
-                EmptyTextScreen(emptyText)
-            }
-            ScreenState.Error -> {
-                ErrorScreen(onErrorRetryClick)
-            }
-        }
+        content()
     }
 }

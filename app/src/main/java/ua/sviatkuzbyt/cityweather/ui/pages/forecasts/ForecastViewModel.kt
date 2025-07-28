@@ -1,38 +1,32 @@
 package ua.sviatkuzbyt.cityweather.ui.pages.forecasts
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import ua.sviatkuzbyt.cityweather.data.api.ForecastManager
-import ua.sviatkuzbyt.cityweather.data.structures.ScreenState
 import ua.sviatkuzbyt.cityweather.data.structures.forecast.ForecastData
 import ua.sviatkuzbyt.cityweather.ui.elements.saveableCoroutineCall
 
+sealed class ForecastState(){
+    data object Loading: ForecastState()
+    data class Content(val forecastList: List<ForecastData>): ForecastState()
+    data class Error(val text: String): ForecastState()
+}
+
 class ForecastViewModel(private val repository: ForecastManager): ViewModel() {
-    private val _forecastList = MutableStateFlow<List<ForecastData>>(listOf())
-    private val _screenState = MutableStateFlow(ScreenState.Loading)
+    private val _forecastState = MutableStateFlow<ForecastState>(ForecastState.Loading)
+    val forecastState: StateFlow<ForecastState> = _forecastState
 
-    val forecastList: StateFlow<List<ForecastData>> = _forecastList
-    val screenState: StateFlow<ScreenState> = _screenState
-
-    init {
-        loadData()
-    }
+    init { loadData() }
 
     fun loadData() = saveableCoroutineCall(
-        errorHandler = {
-            _screenState.value = ScreenState.Error
-        },
         code = {
-            _screenState.value = ScreenState.Loading
-            _forecastList.value = repository.loadForecast()
-            _screenState.value = ScreenState.Content
-        }
+            _forecastState.value = ForecastState.Content(repository.loadForecast())
+        },
+        errorHandler = {
+            _forecastState.value = ForecastState.Error(it.message ?: "Unknown error")
+        },
     )
 
     class Factory(private val repository: ForecastManager) : ViewModelProvider.Factory {

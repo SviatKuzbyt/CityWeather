@@ -121,7 +121,7 @@ fun MainCityItem(data: CityItemData, colors: CityItemColors){
         //Weather image
         Image(
             imageVector = ImageVector.vectorResource(data.image),
-            contentDescription = data.weatherDescription,
+            contentDescription = stringResource(data.weatherDescription),
             modifier = Modifier.size(sizeSpace36)
         )
     }

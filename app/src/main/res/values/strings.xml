@@ -12,6 +12,7 @@
     <string name="weather_heavy_clouds">Weather now: Heavy clouds</string>
     <string name="weather_rain">Weather now: Rain</string>
     <string name="weather_thunderstorm">Weather now: Thunderstorm</string>
+    <string name="weather_unknown">Weather now: Unknown</string>
     <string name="wind_speed">Wind speed:</string>
     <string name="humidity">Air humidity</string>
     <string name="pressure">Pressure</string>

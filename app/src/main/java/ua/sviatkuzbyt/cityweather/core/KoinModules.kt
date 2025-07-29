@@ -7,7 +7,9 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
-import ua.sviatkuzbyt.cityweather.data.api.CurrentWeatherManager
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import ua.sviatkuzbyt.cityweather.data.api.WeatherApi
 import ua.sviatkuzbyt.cityweather.data.database.DataBaseDao
 import ua.sviatkuzbyt.cityweather.data.database.DatabaseRoom
 import ua.sviatkuzbyt.cityweather.data.repositories.CitiesRepository
@@ -33,14 +35,24 @@ val viewModelsModule = module {
 }
 
 val repositoriesModule = module {
-    factoryOf(::CitiesRepository)
+//    factoryOf(::CitiesRepositoryOld)
     factoryOf(::ForecastRepository)
     factoryOf(::SettingsRepository)
+    factoryOf(::CitiesRepository)
 }
 
 val apiModule = module {
+    single {
+        Retrofit.Builder()
+            .baseUrl("https://api.openweathermap.org/data/2.5/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    single<WeatherApi> { get<Retrofit>().create(WeatherApi::class.java) }
+
     single<Gson> { Gson() }
-    factoryOf(::CurrentWeatherManager)
+//    factoryOf(::CurrentWeatherManager)
 }
 
 val storageModule = module {

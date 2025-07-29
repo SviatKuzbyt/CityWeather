@@ -106,12 +106,12 @@ class DataBaseTest {
     ){
         var result = "SKLT: RESULT OF TEST\nEXPECTED DATA: \n"
         expectedData.forEach {
-            result += "${it.id} - ${it.name} - ${it.position}\n"
+            result += "${it.cityId} - ${it.name} - ${it.position}\n"
         }
 
         result += "REAL DATA:\n"
         realData.forEach {
-            result += "${it.id} - ${it.name} - ${it.position}\n"
+            result += "${it.cityId} - ${it.name} - ${it.position}\n"
         }
 
         println(result)

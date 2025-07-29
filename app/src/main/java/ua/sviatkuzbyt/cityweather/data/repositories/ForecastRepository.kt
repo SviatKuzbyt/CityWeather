@@ -42,7 +42,7 @@ class ForecastRepository(
                 temp = "${it.main.temp.toInt()}$temp",
                 windSpeed = "${it.wind.speed.toInt()} $wind",
                 weatherIcon = getWeatherItemAppearance(it.weather[0].icon).icon,
-                contentDescription = it.weather[0].description
+                contentDescription = "Temp description"
             )
         }
     }
@@ -60,7 +60,7 @@ class ForecastRepository(
                 time = convertTime(it.dt, "E, dd.MM"),
                 temp =it.main.temp.toInt(),
                 weatherIcon = it.weather[0].icon,
-                contentDescription = it.weather[0].description
+                contentDescription = "Temp description"
             )
         }
 

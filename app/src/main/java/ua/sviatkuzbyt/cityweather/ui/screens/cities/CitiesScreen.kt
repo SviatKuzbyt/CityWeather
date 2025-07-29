@@ -14,6 +14,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 import ua.sviatkuzbyt.cityweather.R
+import ua.sviatkuzbyt.cityweather.data.structures.cities.mapCityEntityToItem
 import ua.sviatkuzbyt.cityweather.ui.ForecastFiveDaysRoute
 import ua.sviatkuzbyt.cityweather.ui.ForecastTodayRoute
 import ua.sviatkuzbyt.cityweather.ui.LocalNavController
@@ -66,7 +67,7 @@ fun CitiesScreen(){
                             val isOpen = openCityItem == index
 
                             CityItem(
-                                data = city,
+                                data = mapCityEntityToItem(city),
                                 isOpen = isOpen,
                                 onTodayClick = {
                                     navController.navigate(ForecastTodayRoute(city.name))

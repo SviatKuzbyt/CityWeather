@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.data
+package ua.sviatkuzbyt.cityweather.data.other
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -7,6 +7,14 @@ import android.net.NetworkCapabilities
 suspend fun runIfConnected(context: Context, code: suspend () -> Unit){
     if (isConnected(context)) code()
     else throw NoConnectException()
+}
+
+fun canLoad(time: Long, currentUnits: String, lastUnits: String): Boolean{
+    val currentTime = System.currentTimeMillis()
+
+    return if ((currentTime - time) >= 30 * 60 * 1000) true
+    else if (currentUnits != lastUnits) true
+    else false
 }
 
 private fun isConnected(context: Context): Boolean {

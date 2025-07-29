@@ -5,12 +5,12 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import ua.sviatkuzbyt.cityweather.data.exceptionDescription
+import ua.sviatkuzbyt.cityweather.data.other.exceptionDescription
 
 fun ViewModel.saveableCoroutineCall(
     message:  MutableStateFlow<Int?>? = null,
-    errorHandler: (Exception) -> Unit = {},
-    finallyHandler: () -> Unit = {},
+    errorHandler: suspend (Exception) -> Unit = {},
+    finallyHandler: suspend () -> Unit = {},
     code: suspend () -> Unit
 ) = viewModelScope.launch(Dispatchers.IO){
     try {

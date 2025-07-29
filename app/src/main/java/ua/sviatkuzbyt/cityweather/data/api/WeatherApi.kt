@@ -2,7 +2,7 @@ package ua.sviatkuzbyt.cityweather.data.api
 
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ua.sviatkuzbyt.cityweather.data.structures.weather.WeatherResponse
+import ua.sviatkuzbyt.cityweather.data.structures.weather.cities.WeatherResponse
 
 interface WeatherApi {
 

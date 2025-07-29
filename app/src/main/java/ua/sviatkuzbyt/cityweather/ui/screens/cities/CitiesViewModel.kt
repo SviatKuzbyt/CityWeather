@@ -2,6 +2,7 @@ package ua.sviatkuzbyt.cityweather.ui.screens.cities
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -28,7 +29,10 @@ class CitiesViewModel(private val repository: CitiesRepository): ViewModel() {
                 _isLoading.value = true
                 repository.loadData()
             },
-            finallyHandler = { _isLoading.value = false },
+            finallyHandler = {
+                delay(200)
+                _isLoading.value = false
+            },
             message = _message
         )
     }
@@ -40,7 +44,10 @@ class CitiesViewModel(private val repository: CitiesRepository): ViewModel() {
                 val position = citiesList.value.size
                 repository.addCity(name, position)
             },
-            finallyHandler = { _isLoading.value = false },
+            finallyHandler = {
+                delay(200)
+                _isLoading.value = false
+            },
             message = _message
         )
     }

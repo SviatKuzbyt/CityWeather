@@ -2,7 +2,6 @@ package ua.sviatkuzbyt.cityweather.core
 
 import androidx.room.Room
 import com.google.gson.Gson
-import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
@@ -15,7 +14,6 @@ import ua.sviatkuzbyt.cityweather.data.database.DatabaseRoom
 import ua.sviatkuzbyt.cityweather.data.repositories.CitiesRepository
 import ua.sviatkuzbyt.cityweather.data.repositories.ForecastRepository
 import ua.sviatkuzbyt.cityweather.data.repositories.SettingsRepository
-import ua.sviatkuzbyt.cityweather.data.settingsstore.SettingsStoreManager
 import ua.sviatkuzbyt.cityweather.ui.screens.cities.CitiesViewModel
 import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.ForecastViewModel
 import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastScreenType
@@ -35,24 +33,9 @@ val viewModelsModule = module {
 }
 
 val repositoriesModule = module {
-//    factoryOf(::CitiesRepositoryOld)
-    factoryOf(::ForecastRepository)
-    factoryOf(::SettingsRepository)
-    factoryOf(::CitiesRepository)
-}
-
-val apiModule = module {
-    single {
-        Retrofit.Builder()
-            .baseUrl("https://api.openweathermap.org/data/2.5/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
-
-    single<WeatherApi> { get<Retrofit>().create(WeatherApi::class.java) }
-
-    single<Gson> { Gson() }
-//    factoryOf(::CurrentWeatherManager)
+    singleOf(::ForecastRepository)
+    singleOf(::SettingsRepository)
+    singleOf(::CitiesRepository)
 }
 
 val storageModule = module {
@@ -67,6 +50,17 @@ val storageModule = module {
     single<DataBaseDao> {
         get<DatabaseRoom>().dao()
     }
+}
 
-    singleOf(::SettingsStoreManager)
+val apiModule = module {
+    single {
+        Retrofit.Builder()
+            .baseUrl("https://api.openweathermap.org/data/2.5/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    single<WeatherApi> { get<Retrofit>().create(WeatherApi::class.java) }
+
+    single<Gson> { Gson() } // TODO: Remove Gson dependency in the future
 }

@@ -1,6 +1,6 @@
-package ua.sviatkuzbyt.cityweather.data.structures.forecast
+package ua.sviatkuzbyt.cityweather.data.structures.weather.forecast
 
-import ua.sviatkuzbyt.cityweather.data.structures.weather.Weather
+import ua.sviatkuzbyt.cityweather.data.structures.weather.cities.Weather
 
 data class ForecastFiveDaysResponse(
     val list: List<ForecastFiveDaysItem>

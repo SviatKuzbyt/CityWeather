@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.data.structures.weather
+package ua.sviatkuzbyt.cityweather.data.structures.weather.cities
 
 import com.google.gson.annotations.SerializedName
 

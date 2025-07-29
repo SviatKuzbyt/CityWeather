@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.data.structures.forecast
+package ua.sviatkuzbyt.cityweather.data.structures.weather.forecast
 
 import androidx.annotation.DrawableRes
 

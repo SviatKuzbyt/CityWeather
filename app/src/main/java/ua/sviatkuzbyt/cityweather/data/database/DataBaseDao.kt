@@ -5,12 +5,10 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
+import ua.sviatkuzbyt.cityweather.data.database.entities.CityEntity
 
 @Dao
 interface DataBaseDao {
-    @Query("SELECT * FROM city ORDER BY position")
-    fun getCities(): List<CityEntity>
-
     @Query("SELECT * FROM city ORDER BY position")
     fun cities(): Flow<List<CityEntity>>
 
@@ -18,7 +16,7 @@ interface DataBaseDao {
     fun updateCity(city: CityEntity)
 
     @Insert
-    fun addCity(cityEntity: CityEntity): Long
+    fun addCity(cityEntity: CityEntity)
 
     @Query("UPDATE city SET position=position+1 WHERE position < :toPosition")
     fun moveCitiesDown(toPosition: Int)

@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.data
+package ua.sviatkuzbyt.cityweather.data.other
 
 import android.util.Log
 import retrofit2.HttpException

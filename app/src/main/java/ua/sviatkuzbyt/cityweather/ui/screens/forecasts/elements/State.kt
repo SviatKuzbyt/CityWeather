@@ -1,7 +1,7 @@
 package ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements
 
 import androidx.annotation.StringRes
-import ua.sviatkuzbyt.cityweather.data.structures.forecast.ForecastData
+import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastData
 
 enum class ForecastScreenType{
     Today, FiveDays

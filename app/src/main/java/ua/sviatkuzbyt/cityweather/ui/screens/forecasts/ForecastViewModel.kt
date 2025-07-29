@@ -3,7 +3,7 @@ package ua.sviatkuzbyt.cityweather.ui.screens.forecasts
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import ua.sviatkuzbyt.cityweather.data.exceptionDescription
+import ua.sviatkuzbyt.cityweather.data.other.exceptionDescription
 import ua.sviatkuzbyt.cityweather.data.repositories.ForecastRepository
 import ua.sviatkuzbyt.cityweather.ui.elements.other.saveableCoroutineCall
 import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastScreenType

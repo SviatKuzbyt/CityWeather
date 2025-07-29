@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.data.database
+package ua.sviatkuzbyt.cityweather.data.database.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

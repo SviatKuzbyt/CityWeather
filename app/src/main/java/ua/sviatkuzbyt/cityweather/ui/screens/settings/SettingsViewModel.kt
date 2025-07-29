@@ -3,6 +3,7 @@ package ua.sviatkuzbyt.cityweather.ui.screens.settings
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import ua.sviatkuzbyt.cityweather.data.repositories.SettingsId
 import ua.sviatkuzbyt.cityweather.data.repositories.SettingsRepository
 import ua.sviatkuzbyt.cityweather.data.structures.settings.SettingsItemData
 import ua.sviatkuzbyt.cityweather.ui.elements.other.saveableCoroutineCall
@@ -19,11 +20,11 @@ class SettingsViewModel(private val repository: SettingsRepository): ViewModel()
 
     private fun loadSettings(){
         saveableCoroutineCall(_message) {
-            _settingsList.value = repository.getSettingsList()
+            _settingsList.value = repository.getSettingsInList()
         }
     }
 
-    fun setSettings(id: Int, value: String){
+    fun setSettings(id: SettingsId, value: String){
         saveableCoroutineCall(_message) {
             _settingsList.value = _settingsList.value.map {settings ->
                 if (settings.id == id){

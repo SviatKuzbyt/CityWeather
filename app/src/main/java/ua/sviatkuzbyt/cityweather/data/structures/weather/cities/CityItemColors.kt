@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather.data.structures.cities
+package ua.sviatkuzbyt.cityweather.data.structures.weather.cities
 
 import androidx.compose.ui.graphics.Color
 import ua.sviatkuzbyt.cityweather.ui.theme.BlackDark
@@ -23,6 +23,6 @@ data class CityItemColors(
     }
 }
 
-enum class CityBackground{
+enum class CityBackground {
     BLue, BlueDark, White, WhiteDark, Gray, GrayDark
 }

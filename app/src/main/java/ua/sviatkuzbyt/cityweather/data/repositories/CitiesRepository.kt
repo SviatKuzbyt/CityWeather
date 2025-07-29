@@ -3,20 +3,19 @@ package ua.sviatkuzbyt.cityweather.data.repositories
 import android.content.Context
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
-import ua.sviatkuzbyt.cityweather.data.ExistCityException
+import ua.sviatkuzbyt.cityweather.data.other.ExistCityException
 import ua.sviatkuzbyt.cityweather.data.api.WeatherApi
-import ua.sviatkuzbyt.cityweather.data.database.CityEntity
+import ua.sviatkuzbyt.cityweather.data.database.entities.CityEntity
 import ua.sviatkuzbyt.cityweather.data.database.DataBaseDao
-import ua.sviatkuzbyt.cityweather.data.canLoad
-import ua.sviatkuzbyt.cityweather.data.runIfConnected
-import ua.sviatkuzbyt.cityweather.data.settingsstore.SettingsStoreManager
+import ua.sviatkuzbyt.cityweather.data.other.canLoad
+import ua.sviatkuzbyt.cityweather.data.other.runIfConnected
 import ua.sviatkuzbyt.cityweather.data.structures.weather.UnitsData
-import ua.sviatkuzbyt.cityweather.data.structures.weather.WeatherResponse
+import ua.sviatkuzbyt.cityweather.data.structures.weather.cities.WeatherResponse
 
 class CitiesRepository(
     private val dao: DataBaseDao,
     private val weatherApi: WeatherApi,
-    private val settingsStoreManager: SettingsStoreManager,
+    private val settingsRepository: SettingsRepository,
     private val context: Context
 ) {
     val cities = dao.cities().catch {
@@ -25,7 +24,7 @@ class CitiesRepository(
 
     suspend fun loadData(){
         runIfConnected(context){
-            val units = UnitsData(settingsStoreManager.getUnits())
+            val units = UnitsData(settingsRepository.getSettings(SettingsId.Units))
 
             cities.first().forEach { city ->
                 if (canLoad(city.time, units.unitsApi, city.units)) {
@@ -41,9 +40,14 @@ class CitiesRepository(
         val trimName = name.trim()
         if (dao.checkExistCity(trimName) == 0) {
             runIfConnected(context) {
-                val units = UnitsData(settingsStoreManager.getUnits())
+                val units = UnitsData(settingsRepository.getSettings(SettingsId.Units))
                 val response = weatherApi.getCurrentWeather(trimName, units.unitsApi)
-                val newEntity = mapWeatherResponseToCityEntity(trimName, position, response, units)
+                val newEntity = mapWeatherResponseToCityEntity(
+                    cityName = trimName,
+                    position = position,
+                    response = response,
+                    units = units
+                )
                 dao.addCity(newEntity)
             }
         } else {

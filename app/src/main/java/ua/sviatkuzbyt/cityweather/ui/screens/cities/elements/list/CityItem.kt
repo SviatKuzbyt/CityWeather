@@ -28,9 +28,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemColors
-import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
-import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemDetailData
+import ua.sviatkuzbyt.cityweather.data.structures.weather.cities.CityItemColors
+import ua.sviatkuzbyt.cityweather.data.structures.weather.cities.CityItemData
+import ua.sviatkuzbyt.cityweather.data.structures.weather.cities.CityItemDetailData
 import ua.sviatkuzbyt.cityweather.ui.elements.other.TextBasicLarge
 import ua.sviatkuzbyt.cityweather.ui.elements.other.TextBasicSmall
 import ua.sviatkuzbyt.cityweather.ui.elements.other.TextHead

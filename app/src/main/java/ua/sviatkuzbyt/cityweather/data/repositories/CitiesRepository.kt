@@ -1,12 +1,14 @@
 package ua.sviatkuzbyt.cityweather.data.repositories
 
-import kotlinx.coroutines.flow.collectLatest
+import android.content.Context
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.last
 import ua.sviatkuzbyt.cityweather.data.ExistCityException
 import ua.sviatkuzbyt.cityweather.data.api.WeatherApi
 import ua.sviatkuzbyt.cityweather.data.database.CityEntity
 import ua.sviatkuzbyt.cityweather.data.database.DataBaseDao
+import ua.sviatkuzbyt.cityweather.data.canLoad
+import ua.sviatkuzbyt.cityweather.data.runIfConnected
 import ua.sviatkuzbyt.cityweather.data.settingsstore.SettingsStoreManager
 import ua.sviatkuzbyt.cityweather.data.structures.weather.UnitsData
 import ua.sviatkuzbyt.cityweather.data.structures.weather.WeatherResponse
@@ -14,27 +16,36 @@ import ua.sviatkuzbyt.cityweather.data.structures.weather.WeatherResponse
 class CitiesRepository(
     private val dao: DataBaseDao,
     private val weatherApi: WeatherApi,
-    private val settingsStoreManager: SettingsStoreManager
+    private val settingsStoreManager: SettingsStoreManager,
+    private val context: Context
 ) {
-    val cities = dao.cities()
+    val cities = dao.cities().catch {
+        emit(emptyList())
+     }
 
     suspend fun loadData(){
-        val units = UnitsData(settingsStoreManager.getUnits())
+        runIfConnected(context){
+            val units = UnitsData(settingsStoreManager.getUnits())
 
-        cities.first().forEach { city ->
-            val response = weatherApi.getCurrentWeather(city.name, units.unitsApi)
-            val newEntity = mapWeatherResponseToCityEntity(city, response, units)
-            dao.updateCity(newEntity)
+            cities.first().forEach { city ->
+                if (canLoad(city.time, units.unitsApi, city.units)) {
+                    val response = weatherApi.getCurrentWeather(city.name, units.unitsApi)
+                    val newEntity = mapWeatherResponseToCityEntity(city, response, units)
+                    dao.updateCity(newEntity)
+                }
+            }
         }
     }
 
     suspend fun addCity(name: String, position: Int) {
         val trimName = name.trim()
         if (dao.checkExistCity(trimName) == 0) {
-            val units = UnitsData(settingsStoreManager.getUnits())
-            val response = weatherApi.getCurrentWeather(trimName, units.unitsApi)
-            val newEntity = mapWeatherResponseToCityEntity(trimName, position, response, units)
-            dao.addCity(newEntity)
+            runIfConnected(context) {
+                val units = UnitsData(settingsStoreManager.getUnits())
+                val response = weatherApi.getCurrentWeather(trimName, units.unitsApi)
+                val newEntity = mapWeatherResponseToCityEntity(trimName, position, response, units)
+                dao.addCity(newEntity)
+            }
         } else {
             throw ExistCityException()
         }
@@ -61,7 +72,9 @@ class CitiesRepository(
         humidity = response.main.humidity,
         pressure = response.main.pressure,
         feelsLike = "${response.main.feelsLike.toInt()}${units.temp}",
-        rain = response.rain?.percent?.toInt() ?: 0
+        rain = response.rain?.percent?.toInt() ?: 0,
+        time = System.currentTimeMillis(),
+        units = units.unitsApi
     )
 
     private fun mapWeatherResponseToCityEntity(
@@ -79,6 +92,8 @@ class CitiesRepository(
         pressure = response.main.pressure,
         feelsLike = "${response.main.feelsLike.toInt()}${units.temp}",
         rain = response.rain?.percent?.toInt() ?: 0,
+        time = System.currentTimeMillis(),
+        units = units.unitsApi,
         position = position
     )
 }

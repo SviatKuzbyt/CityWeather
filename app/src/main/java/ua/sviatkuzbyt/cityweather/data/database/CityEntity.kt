@@ -14,5 +14,7 @@ data class CityEntity(
     val pressure: Int,
     val feelsLike: String,
     val rain: Int,
+    val time: Long,
+    val units: String,
     val position: Int
 )

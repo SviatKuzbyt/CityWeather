@@ -1,6 +1,5 @@
 package ua.sviatkuzbyt.cityweather.ui.screens.cities
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +17,6 @@ class CitiesViewModel(private val repository: CitiesRepository): ViewModel() {
     )
     private val _isLoading = MutableStateFlow(false)
     private val _message = MutableStateFlow<Int?>(null)
-
     val isLoading: StateFlow<Boolean> = _isLoading
     val message: StateFlow<Int?> = _message
 
@@ -26,8 +24,10 @@ class CitiesViewModel(private val repository: CitiesRepository): ViewModel() {
 
     fun loadCities(){
         saveableCoroutineCall(
-            code = { repository.loadData() },
-            errorHandler = {Log.e("SKLT", "", it)},
+            code = {
+                _isLoading.value = true
+                repository.loadData()
+            },
             finallyHandler = { _isLoading.value = false },
             message = _message
         )
@@ -36,10 +36,12 @@ class CitiesViewModel(private val repository: CitiesRepository): ViewModel() {
     fun addCity(name: String)  {
         saveableCoroutineCall(
             code = {
+                _isLoading.value = true
                 val position = citiesList.value.size
                 repository.addCity(name, position)
             },
-            message = _message,
+            finallyHandler = { _isLoading.value = false },
+            message = _message
         )
     }
 

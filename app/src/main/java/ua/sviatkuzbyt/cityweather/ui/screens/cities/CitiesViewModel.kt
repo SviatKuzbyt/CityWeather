@@ -11,7 +11,6 @@ import ua.sviatkuzbyt.cityweather.data.repositories.CitiesRepository
 import ua.sviatkuzbyt.cityweather.ui.elements.other.saveableCoroutineCall
 
 class CitiesViewModel(private val repository: CitiesRepository): ViewModel() {
-
     val citiesList = repository.cities.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Lazily,
@@ -45,21 +44,15 @@ class CitiesViewModel(private val repository: CitiesRepository): ViewModel() {
     }
 
     fun deleteCity(id: Long, position: Int) {
-//        saveableCoroutineCall(_message) {
-//            repository.deleteCity(id, position)
-//            _citiesList.update { oldList ->
-//                oldList - oldList[position]
-//            }
-//        }
+        saveableCoroutineCall(_message) {
+            repository.deleteCity(id, position)
+        }
     }
 
     fun moveUpCity(id: Long, position: Int) {
-//        saveableCoroutineCall(_message) {
-//            repository.moveUpCity(id, position)
-//            val moveItem = _citiesList.value[position]
-//            _citiesList.value -= moveItem
-//            _citiesList.value = listOf(moveItem) + _citiesList.value
-//        }
+        saveableCoroutineCall(_message) {
+            repository.moveUpCity(id, position)
+        }
     }
 
     fun clearMessage(){

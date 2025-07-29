@@ -40,6 +40,16 @@ class CitiesRepository(
         }
     }
 
+    fun deleteCity(id: Long, position: Int) {
+        dao.moveCitiesUp(position)
+        dao.deleteCity(id)
+    }
+
+    fun moveUpCity(id: Long, position: Int){
+        dao.moveCitiesDown(position)
+        dao.moveCityUp(id)
+    }
+
     private fun mapWeatherResponseToCityEntity(
         entity: CityEntity,
         response: WeatherResponse,

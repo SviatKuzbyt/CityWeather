@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
@@ -45,7 +46,7 @@ import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace20
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace36
 
 @Composable
-fun CityItem(
+fun LazyItemScope.CityItem(
     data: CityItemData,
     isOpen: Boolean,
     onClickItem: () -> Unit,
@@ -60,6 +61,7 @@ fun CityItem(
 
     //Set width, padding, background and animation
     val modifier = Modifier
+        .animateItem()
         .fillMaxWidth()
         .padding(bottom = sizeSpace16)
         .background(
@@ -68,9 +70,7 @@ fun CityItem(
         )
         .basicClick { onClickItem() }
         .padding(vertical = sizeSpace16, horizontal = sizeSpace20)
-        .animateContentSize(
-            animationSpec = tween(400, 0)
-        )
+        .animateContentSize()
 
     //Set UI
     Column(modifier) {

@@ -63,7 +63,10 @@ fun CitiesScreen(){
                     if (citiesList.isEmpty() && !isLoading) {
                         item { TextPlugList(stringResource(R.string.no_cities)) }
                     } else {
-                        itemsIndexed(citiesList){ index, city ->
+                        itemsIndexed(
+                            items = citiesList,
+                            key = {index, city -> city.cityId}
+                        ){ index, city ->
                             val isOpen = openCityItem == index
 
                             CityItem(

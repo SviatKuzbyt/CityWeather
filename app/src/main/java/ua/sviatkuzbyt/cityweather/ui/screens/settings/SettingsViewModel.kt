@@ -1,15 +1,14 @@
 package ua.sviatkuzbyt.cityweather.ui.screens.settings
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import ua.sviatkuzbyt.cityweather.data.repositories.SettingsRepository
 import ua.sviatkuzbyt.cityweather.data.structures.settings.SettingsItemData
 import ua.sviatkuzbyt.cityweather.ui.elements.other.saveableCoroutineCall
 
-class SettingsViewModel(application: Application): AndroidViewModel(application) {
-    private val repository = SettingsRepository(application)
+class SettingsViewModel(private val repository: SettingsRepository): ViewModel() {
+
     private val _settingsList = MutableStateFlow<List<SettingsItemData>>(listOf())
     private val _message = MutableStateFlow<Int?>(null)
 

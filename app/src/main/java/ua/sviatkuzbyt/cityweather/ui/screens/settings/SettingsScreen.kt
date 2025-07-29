@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
+import org.koin.androidx.compose.koinViewModel
 import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.ui.LocalNavController
 import ua.sviatkuzbyt.cityweather.ui.elements.other.ToastMessage
@@ -24,7 +24,7 @@ import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
 @Composable
 fun SettingsScreen(){
     // data
-    val viewModel: SettingsViewModel = viewModel()
+    val viewModel: SettingsViewModel = koinViewModel()
     val navController = LocalNavController.current
 
     val settingsList by viewModel.settingsList.collectAsState()

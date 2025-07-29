@@ -7,8 +7,7 @@ import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
 import ua.sviatkuzbyt.cityweather.data.structures.weather.UnitsData
 import ua.sviatkuzbyt.cityweather.data.structures.weather.WeatherResponse
 
-class CurrentWeatherManager{
-    private val gson = Gson()
+class CurrentWeatherManager(private val gson: Gson){
 
     fun loadWeatherForCity(cityEntity: CityEntity, units: UnitsData): CityItemData {
         val apiResponse = getApiResponse(cityEntity.name, "weather", "&units=${units.unitsApi}")

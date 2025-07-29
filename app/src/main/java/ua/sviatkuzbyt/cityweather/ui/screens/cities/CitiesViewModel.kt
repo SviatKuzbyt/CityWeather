@@ -1,7 +1,6 @@
 package ua.sviatkuzbyt.cityweather.ui.screens.cities
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -9,8 +8,7 @@ import ua.sviatkuzbyt.cityweather.data.repositories.CitiesRepository
 import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
 import ua.sviatkuzbyt.cityweather.ui.elements.other.saveableCoroutineCall
 
-class CitiesViewModel(application: Application): AndroidViewModel(application) {
-    private val repository = CitiesRepository(application)
+class CitiesViewModel(private val repository: CitiesRepository): ViewModel() {
 
     private val _citiesList = MutableStateFlow<List<CityItemData>>(listOf())
     private val _isLoading = MutableStateFlow(false)

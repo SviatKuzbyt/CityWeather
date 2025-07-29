@@ -1,4 +1,4 @@
-package ua.sviatkuzbyt.cityweather
+package ua.sviatkuzbyt.cityweather.core
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -12,7 +12,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            CityWeatherTheme{
+            CityWeatherTheme {
                 AppNavigation()
             }
         }

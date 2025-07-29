@@ -32,7 +32,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.ui.elements.other.SpacerMedium
-import ua.sviatkuzbyt.cityweather.ui.elements.other.SpacerSmall
 import ua.sviatkuzbyt.cityweather.ui.elements.other.TextBasic
 import ua.sviatkuzbyt.cityweather.ui.elements.other.TextHead
 import ua.sviatkuzbyt.cityweather.ui.elements.other.shapeContainer
@@ -75,7 +74,7 @@ fun AddCityDialog(
     ) {
         Column{
             TextHead(stringResource(R.string.add_city))
-            SpacerSmall()
+            SpacerMedium()
 
             CityTextField(
                 value = cityName,

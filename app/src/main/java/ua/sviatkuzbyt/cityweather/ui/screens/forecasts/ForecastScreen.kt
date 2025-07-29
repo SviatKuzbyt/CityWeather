@@ -9,12 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.viewmodel.compose.viewModel
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 import ua.sviatkuzbyt.cityweather.R
-import ua.sviatkuzbyt.cityweather.data.repositories.ForecastFiveDaysRepository
-import ua.sviatkuzbyt.cityweather.data.repositories.ForecastTodayRepository
 import ua.sviatkuzbyt.cityweather.ui.LocalNavController
 import ua.sviatkuzbyt.cityweather.ui.elements.screens.LoadPlug
 import ua.sviatkuzbyt.cityweather.ui.elements.screens.Screen
@@ -41,15 +39,9 @@ private fun ForecastScreen(
     city: String,
     type: ForecastScreenType
 ){
-    val context = LocalContext.current
-    val viewModel: ForecastViewModel = viewModel(
-        factory = ForecastViewModel.Factory(
-            when(type){
-                ForecastScreenType.Today -> ForecastTodayRepository(city, context)
-                ForecastScreenType.FiveDays -> ForecastFiveDaysRepository(city, context)
-            }
-        )
-    )
+    val viewModel: ForecastViewModel = koinViewModel {
+        parametersOf(type, city)
+    }
     val navController = LocalNavController.current
 
     val forecastState by viewModel.forecastState.collectAsState()

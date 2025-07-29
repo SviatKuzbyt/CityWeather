@@ -12,7 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
+import org.koin.androidx.compose.koinViewModel
 import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.ui.ForecastFiveDaysRoute
 import ua.sviatkuzbyt.cityweather.ui.ForecastTodayRoute
@@ -31,7 +31,7 @@ private const val NO_OPEN_ITEM = -1
 @Preview
 @Composable
 fun CitiesScreen(){
-    val viewModel: CitiesViewModel = viewModel()
+    val viewModel: CitiesViewModel = koinViewModel()
     val navController = LocalNavController.current
 
     val citiesList by viewModel.citiesList.collectAsState()

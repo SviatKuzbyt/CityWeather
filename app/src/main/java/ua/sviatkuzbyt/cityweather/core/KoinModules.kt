@@ -13,20 +13,20 @@ import ua.sviatkuzbyt.cityweather.data.database.DatabaseRoom
 import ua.sviatkuzbyt.cityweather.data.repositories.CitiesRepository
 import ua.sviatkuzbyt.cityweather.data.repositories.ForecastRepository
 import ua.sviatkuzbyt.cityweather.data.repositories.SettingsRepository
+import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastType
 import ua.sviatkuzbyt.cityweather.ui.screens.cities.CitiesViewModel
 import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.ForecastViewModel
-import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastScreenType
 import ua.sviatkuzbyt.cityweather.ui.screens.settings.SettingsViewModel
 
 val viewModelsModule = module {
     viewModelOf(::CitiesViewModel)
     viewModelOf(::SettingsViewModel)
 
-    viewModel { (type: ForecastScreenType, city: String) ->
+    viewModel { (type: ForecastType, cityId: Long) ->
         ForecastViewModel(
             repository = get(),
             type = type,
-            city = city
+            cityId = cityId
         )
     }
 }

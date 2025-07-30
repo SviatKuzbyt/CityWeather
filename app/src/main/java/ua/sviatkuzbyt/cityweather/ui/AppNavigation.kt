@@ -31,10 +31,10 @@ import ua.sviatkuzbyt.cityweather.ui.screens.settings.SettingsScreen
 data object CitiesRoute
 
 @Serializable
-data class ForecastTodayRoute(val city: String)
+data class ForecastTodayRoute(val cityId: Long)
 
 @Serializable
-data class ForecastFiveDaysRoute(val city: String)
+data class ForecastFiveDaysRoute(val cityId: Long)
 
 @Serializable
 data object SettingsRoute
@@ -78,12 +78,12 @@ fun AppNavigation(){
 
             composable<ForecastTodayRoute>{
                 val route: ForecastTodayRoute = it.toRoute()
-                ForecastTodayScreen(route.city)
+                ForecastTodayScreen(route.cityId)
             }
 
             composable<ForecastFiveDaysRoute>{
                 val route: ForecastTodayRoute = it.toRoute()
-                ForecastFiveDaysScreen(route.city)
+                ForecastFiveDaysScreen(route.cityId)
             }
 
             composable<SettingsRoute> {

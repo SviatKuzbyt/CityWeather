@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import ua.sviatkuzbyt.cityweather.R
+import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastType
 import ua.sviatkuzbyt.cityweather.ui.LocalNavController
 import ua.sviatkuzbyt.cityweather.ui.elements.screens.LoadPlug
 import ua.sviatkuzbyt.cityweather.ui.elements.screens.Screen
@@ -20,37 +21,36 @@ import ua.sviatkuzbyt.cityweather.ui.elements.screens.TextPlug
 import ua.sviatkuzbyt.cityweather.ui.elements.topbar.LabelNavigateTopBar
 import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastDescriptions
 import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastItem
-import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastScreenType
 import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastState
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
 
 @Composable
-fun ForecastTodayScreen(city: String) {
-    ForecastScreen(city, ForecastScreenType.Today)
+fun ForecastTodayScreen(cityId: Long) {
+    ForecastScreen(cityId, ForecastType.TODAY)
 }
 
 @Composable
-fun ForecastFiveDaysScreen(city: String) {
-    ForecastScreen(city, ForecastScreenType.FiveDays)
+fun ForecastFiveDaysScreen(cityId: Long) {
+    ForecastScreen(cityId, ForecastType.FIVE_DAYS)
 }
 
 @Composable
 private fun ForecastScreen(
-    city: String,
-    type: ForecastScreenType
+    cityId: Long,
+    type: ForecastType
 ){
     val viewModel: ForecastViewModel = koinViewModel {
-        parametersOf(type, city)
+        parametersOf(type, cityId)
     }
     val navController = LocalNavController.current
 
     val forecastState by viewModel.forecastState.collectAsState()
 
-    val isWindSpeed = type == ForecastScreenType.Today
+    val isWindSpeed = type == ForecastType.TODAY
     val weatherWeight = if(isWindSpeed) 1f else 0.75f
     val title = when(type){
-        ForecastScreenType.Today -> R.string.forecastToday
-        ForecastScreenType.FiveDays -> R.string.forecastFiveDays
+        ForecastType.TODAY -> R.string.forecastToday
+        ForecastType.FIVE_DAYS -> R.string.forecastFiveDays
     }
 
     Screen(

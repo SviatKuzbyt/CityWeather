@@ -73,10 +73,10 @@ fun CitiesScreen(){
                                 data = CityItemData.map(city),
                                 isOpen = isOpen,
                                 onTodayClick = {
-                                    navController.navigate(ForecastTodayRoute(city.name))
+                                    navController.navigate(ForecastTodayRoute(city.cityId))
                                 },
                                 onFiveDaysClick = {
-                                    navController.navigate(ForecastFiveDaysRoute(city.name))
+                                    navController.navigate(ForecastFiveDaysRoute(city.cityId))
                                 },
                                 onClickItem = {
                                     openCityItem =

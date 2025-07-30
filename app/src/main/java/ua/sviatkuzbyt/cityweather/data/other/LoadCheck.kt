@@ -17,7 +17,7 @@ fun canLoad(time: Long, currentUnits: String, lastUnits: String): Boolean{
     else false
 }
 
-private fun isConnected(context: Context): Boolean {
+fun isConnected(context: Context): Boolean {
     val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val network = cm.activeNetwork ?: return false
     val capabilities = cm.getNetworkCapabilities(network) ?: return false

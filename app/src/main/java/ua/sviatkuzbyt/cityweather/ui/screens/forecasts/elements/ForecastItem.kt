@@ -8,13 +8,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastData
+import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastDataUI
 import ua.sviatkuzbyt.cityweather.ui.elements.other.ItemList
 import ua.sviatkuzbyt.cityweather.ui.elements.other.TextBasicCenter
 import ua.sviatkuzbyt.cityweather.ui.elements.other.TextHeadCenter
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace24
 
 @Composable
-fun ForecastItem(data: ForecastData, weatherWeight: Float){
+fun ForecastItem(data: ForecastDataUI, weatherWeight: Float){
     ItemList {
         TextHeadCenter(data.time, modifier = Modifier.weight(1f))
         TextBasicCenter(data.temp, modifier = Modifier.weight(1f))

@@ -5,14 +5,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import ua.sviatkuzbyt.cityweather.data.other.exceptionDescription
 import ua.sviatkuzbyt.cityweather.data.repositories.ForecastRepository
+import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastType
 import ua.sviatkuzbyt.cityweather.ui.elements.other.saveableCoroutineCall
-import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastScreenType
 import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastState
 
 class ForecastViewModel(
     private val repository: ForecastRepository,
-    private val type: ForecastScreenType,
-    private val city: String
+    private val type: ForecastType,
+    private val cityId: Long
 ): ViewModel() {
 
     private val _forecastState = MutableStateFlow<ForecastState>(ForecastState.Loading)
@@ -22,10 +22,7 @@ class ForecastViewModel(
 
     fun loadData() = saveableCoroutineCall(
         code = {
-            val list = when(type){
-                ForecastScreenType.Today -> repository.loadForecastToday(city)
-                ForecastScreenType.FiveDays -> repository.loadForecastFiveDays(city)
-            }
+            val list = repository.loadForecast(cityId, type)
             _forecastState.value = ForecastState.Content(list)
         },
         errorHandler = {

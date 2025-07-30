@@ -14,6 +14,7 @@ import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastToday
 import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.NoFormatFiveDaysData
 import ua.sviatkuzbyt.cityweather.data.structures.weather.UnitsData
 import ua.sviatkuzbyt.cityweather.data.structures.weather.WeatherItemAppearance.Companion.getWeatherItemAppearance
+import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastContent
 import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastDataUI
 import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastType
 import java.time.Instant
@@ -27,7 +28,7 @@ class ForecastRepository(
     private val context: Context
 ) {
 
-    suspend fun loadForecast(cityId: Long, type: ForecastType): List<ForecastDataUI> {
+    suspend fun loadForecast(cityId: Long, type: ForecastType): ForecastContent {
         val units = UnitsData(settingsRepository.getSettings(SettingsId.Units))
         val entity = dao.getForecast(cityId, type)
 
@@ -36,14 +37,14 @@ class ForecastRepository(
         return when {
             entity != null -> {
                 if (isOnline && canLoad(entity.time, units.unitsApi, entity.units)) {
-                    loadFromApiAndSave(cityId, type, units, entity)
+                    ForecastContent(loadFromApiAndSave(cityId, type, units, entity), true)
                 } else {
-                    formatForecastDataUI(entity.data)
+                    ForecastContent(formatForecastDataUI(entity.data), isOnline)
                 }
             }
 
             isOnline -> {
-                loadFromApiAndSave(cityId, type, units)
+                ForecastContent(loadFromApiAndSave(cityId, type, units), true)
             }
 
             else -> throw NoConnectException()

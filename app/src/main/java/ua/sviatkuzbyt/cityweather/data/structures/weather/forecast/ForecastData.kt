@@ -22,4 +22,9 @@ data class ForecastDataUI(
     @StringRes val weatherDescription: Int
 )
 
+data class ForecastContent(
+    val list: List<ForecastDataUI>,
+    val isActualData: Boolean
+)
+
 data class Main(val temp: Float)

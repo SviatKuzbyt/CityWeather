@@ -29,6 +29,7 @@
     <string name="no_cities">Add new cities by clicking +</string>
     <string name="error">An error occurred</string>
     <string name="no_connect">No Internet connection</string>
+    <string name="old_data">No Internet connection. Data may be outdated</string>
     <string name="incorrect_data">Incorrect data entered. Failed to upload information</string>
     <string name="city_already_added">City already added</string>
     <string name="close_page">Close page</string>

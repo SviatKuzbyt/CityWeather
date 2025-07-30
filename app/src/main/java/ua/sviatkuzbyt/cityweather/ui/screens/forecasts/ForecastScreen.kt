@@ -1,6 +1,7 @@
 package ua.sviatkuzbyt.cityweather.ui.screens.forecasts
 
 import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,6 +23,7 @@ import ua.sviatkuzbyt.cityweather.ui.elements.topbar.LabelNavigateTopBar
 import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastDescriptions
 import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastItem
 import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.ForecastState
+import ua.sviatkuzbyt.cityweather.ui.screens.forecasts.elements.NoActualData
 import ua.sviatkuzbyt.cityweather.ui.theme.sizeSpace16
 
 @Composable
@@ -71,8 +73,11 @@ private fun ForecastScreen(
                             item {
                                 ForecastDescriptions(isWindSpeed, weatherWeight)
                             }
-                            items(state.forecastList){
+                            items(state.forecastContent.list){
                                 ForecastItem(it, weatherWeight)
+                            }
+                            if (!state.forecastContent.isActualData){
+                                item { NoActualData() }
                             }
                         }
                     }
@@ -80,7 +85,6 @@ private fun ForecastScreen(
                     ForecastState.Loading -> LoadPlug()
                 }
             }
-
         }
     )
 }

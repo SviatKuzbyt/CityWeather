@@ -60,8 +60,8 @@ fun CitiesScreen(){
                 isRefreshing = isLoading,
                 onRefresh = { viewModel.loadCities() },
                 content = {
-                    if (citiesList.isEmpty() && !isLoading) {
-                        item { TextPlugList(stringResource(R.string.no_cities)) }
+                    if (!isLoading && citiesList.isEmpty()) {
+                        item { TextPlugList(stringResource(R.string.no_cities), R.drawable.ic_city) }
                     } else {
                         itemsIndexed(
                             items = citiesList,

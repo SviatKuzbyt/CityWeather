@@ -16,7 +16,7 @@ class CitiesViewModel(private val repository: CitiesRepository): ViewModel() {
         started = SharingStarted.Lazily,
         initialValue = listOf()
     )
-    private val _isLoading = MutableStateFlow(false)
+    private val _isLoading = MutableStateFlow(true)
     private val _message = MutableStateFlow<Int?>(null)
     val isLoading: StateFlow<Boolean> = _isLoading
     val message: StateFlow<Int?> = _message
@@ -30,7 +30,7 @@ class CitiesViewModel(private val repository: CitiesRepository): ViewModel() {
                 repository.loadData()
             },
             finallyHandler = {
-                delay(200)
+                delay(2060)
                 _isLoading.value = false
             },
             message = _message

@@ -40,4 +40,5 @@
     <string name="about_tittle">About the App</string>
     <string name="about_content">An application for showing the weather forecast for the moment, hourly and for a couple of days for different cities at the same time. \n\nDeveloped by Sviatoslav Kuzbyt in 2025 on Jetpack Compose. \n\nResources used: Google fonts, Flaticon. API used: OpenWeatherMap</string>
     <string name="server_error">Server error. Please try again later</string>
+    <string name="icon">Plug icon</string>
 </resources>

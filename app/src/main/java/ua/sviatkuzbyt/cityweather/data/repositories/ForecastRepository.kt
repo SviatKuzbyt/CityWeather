@@ -1,12 +1,9 @@
 package ua.sviatkuzbyt.cityweather.data.repositories
 
-import com.google.gson.Gson
-import ua.sviatkuzbyt.cityweather.data.api.getApiResponse
+import ua.sviatkuzbyt.cityweather.data.api.WeatherApi
 import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastData
 import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastFiveDaysItem
-import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastFiveDaysResponse
-import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastTodayDataResponse
-import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastTodayResponseItem
+import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastTodayItem
 import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.NoFormatFiveDaysData
 import ua.sviatkuzbyt.cityweather.data.structures.weather.UnitsData
 import ua.sviatkuzbyt.cityweather.data.structures.weather.WeatherItemAppearance.Companion.getWeatherItemAppearance
@@ -16,23 +13,21 @@ import java.time.format.DateTimeFormatter
 
 class ForecastRepository(
     private val settingsRepository: SettingsRepository,
-    private val gson: Gson
+    private val weatherApi: WeatherApi
 ) {
     suspend fun loadForecastToday(city: String): List<ForecastData> {
         val units = UnitsData(settingsRepository.getSettings(SettingsId.Units))
-        val apiResponse = getApiResponse(city, "forecast", "&cnt=8&units=${units.unitsApi}")
-        val forecastTodayResponse = gson.fromJson(apiResponse, ForecastTodayDataResponse::class.java)
-        return formatDataToday(forecastTodayResponse.list, units.temp, units.wind)
+        val apiResponse = weatherApi.getForecastToday(city, units.unitsApi)
+        return formatDataToday(apiResponse.list, units.temp, units.wind)
     }
 
     suspend fun loadForecastFiveDays(city: String): List<ForecastData> {
         val units = UnitsData(settingsRepository.getSettings(SettingsId.Units))
-        val apiResponse = getApiResponse(city, "forecast", "&units=${units.unitsApi}")
-        val forecastFiveDayResponse = gson.fromJson(apiResponse, ForecastFiveDaysResponse::class.java)
-        return formatDataFiveDays(forecastFiveDayResponse.list, units.temp)
+        val apiResponse = weatherApi.getForecastFiveDays(city, units.unitsApi)
+        return formatDataFiveDays(apiResponse.list, units.temp)
     }
 
-    private fun formatDataToday(data: List<ForecastTodayResponseItem>, temp: Char, wind: String): List<ForecastData>{
+    private fun formatDataToday(data: List<ForecastTodayItem>, temp: Char, wind: String): List<ForecastData>{
         return data.map {
             ForecastData(
                 time = convertTime(it.dt, "HH:mm"),

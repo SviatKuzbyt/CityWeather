@@ -1,7 +1,6 @@
 package ua.sviatkuzbyt.cityweather.core
 
 import androidx.room.Room
-import com.google.gson.Gson
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
@@ -61,6 +60,4 @@ val apiModule = module {
     }
 
     single<WeatherApi> { get<Retrofit>().create(WeatherApi::class.java) }
-
-    single<Gson> { Gson() } // TODO: Remove Gson dependency in the future
 }

@@ -1,6 +1,7 @@
 package ua.sviatkuzbyt.cityweather.data.repositories
 
 import ua.sviatkuzbyt.cityweather.data.api.WeatherApi
+import ua.sviatkuzbyt.cityweather.data.other.getWeatherDescription
 import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastData
 import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastFiveDaysItem
 import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastTodayItem
@@ -34,7 +35,7 @@ class ForecastRepository(
                 temp = "${it.main.temp.toInt()}$temp",
                 windSpeed = "${it.wind.speed.toInt()} $wind",
                 weatherIcon = getWeatherItemAppearance(it.weather[0].icon).icon,
-                contentDescription = "Temp description"
+                weatherDescription = getWeatherDescription(it.weather[0].icon)
             )
         }
     }
@@ -51,8 +52,7 @@ class ForecastRepository(
             NoFormatFiveDaysData(
                 time = convertTime(it.dt, "E, dd.MM"),
                 temp =it.main.temp.toInt(),
-                weatherIcon = it.weather[0].icon,
-                contentDescription = "Temp description"
+                weatherIcon = it.weather[0].icon
             )
         }
 
@@ -65,7 +65,7 @@ class ForecastRepository(
                 time = dayData.key,
                 temp = getMinMaxTemp(dayData.value, temp),
                 weatherIcon = getWeatherItemAppearance(dayData.value[3].weatherIcon).icon,
-                contentDescription = dayData.value[3].contentDescription
+                weatherDescription = getWeatherDescription(dayData.value[3].weatherIcon)
             )
         }
     }

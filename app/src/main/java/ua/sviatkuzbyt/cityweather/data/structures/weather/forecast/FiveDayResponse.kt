@@ -15,6 +15,5 @@ data class ForecastFiveDaysItem(
 data class NoFormatFiveDaysData(
     val time: String,
     val temp: Int,
-    val weatherIcon: String,
-    val contentDescription: String
+    val weatherIcon: String
 )

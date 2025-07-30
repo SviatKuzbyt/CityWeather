@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastData
 import ua.sviatkuzbyt.cityweather.ui.elements.other.ItemList
@@ -24,7 +25,7 @@ fun ForecastItem(data: ForecastData, weatherWeight: Float){
 
         Image(
             imageVector = ImageVector.vectorResource(data.weatherIcon),
-            contentDescription = data.contentDescription,
+            contentDescription = stringResource(data.weatherDescription),
             modifier = Modifier.height(sizeSpace24).weight(weatherWeight)
         )
     }

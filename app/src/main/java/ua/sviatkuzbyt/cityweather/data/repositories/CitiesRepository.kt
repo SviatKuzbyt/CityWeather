@@ -3,10 +3,10 @@ package ua.sviatkuzbyt.cityweather.data.repositories
 import android.content.Context
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
-import ua.sviatkuzbyt.cityweather.data.other.ExistCityException
 import ua.sviatkuzbyt.cityweather.data.api.WeatherApi
-import ua.sviatkuzbyt.cityweather.data.database.entities.CityEntity
 import ua.sviatkuzbyt.cityweather.data.database.DataBaseDao
+import ua.sviatkuzbyt.cityweather.data.database.entities.CityEntity
+import ua.sviatkuzbyt.cityweather.data.other.ExistCityException
 import ua.sviatkuzbyt.cityweather.data.other.canLoad
 import ua.sviatkuzbyt.cityweather.data.other.runIfConnected
 import ua.sviatkuzbyt.cityweather.data.structures.weather.UnitsData
@@ -18,40 +18,27 @@ class CitiesRepository(
     private val settingsRepository: SettingsRepository,
     private val context: Context
 ) {
-    val cities = dao.cities().catch {
-        emit(emptyList())
-     }
 
-    suspend fun loadData(){
-        runIfConnected(context){
-            val units = UnitsData(settingsRepository.getSettings(SettingsId.Units))
+    val cities = dao.cities().catch { emit(emptyList()) }
 
-            cities.first().forEach { city ->
-                if (canLoad(city.time, units.unitsApi, city.units)) {
-                    val response = weatherApi.getCurrentWeather(city.name, units.unitsApi)
-                    val newEntity = mapWeatherResponseToCityEntity(city, response, units)
-                    dao.updateCity(newEntity)
-                }
+    suspend fun loadData() = runIfConnected(context) {
+        val units = getCurrentUnits()
+        cities.first().forEach { city ->
+            if (canLoad(city.time, units.unitsApi, city.units)) {
+                val response = weatherApi.getCurrentWeather(city.name, units.unitsApi)
+                dao.updateCity(response.toCityEntity(city, units))
             }
         }
     }
 
     suspend fun addCity(name: String, position: Int) {
-        val trimName = name.trim()
-        if (dao.checkExistCity(trimName) == 0) {
-            runIfConnected(context) {
-                val units = UnitsData(settingsRepository.getSettings(SettingsId.Units))
-                val response = weatherApi.getCurrentWeather(trimName, units.unitsApi)
-                val newEntity = mapWeatherResponseToCityEntity(
-                    cityName = trimName,
-                    position = position,
-                    response = response,
-                    units = units
-                )
-                dao.addCity(newEntity)
-            }
-        } else {
-            throw ExistCityException()
+        val cityName = name.trim()
+        if (dao.checkExistCity(cityName) > 0) throw ExistCityException()
+
+        runIfConnected(context) {
+            val units = getCurrentUnits()
+            val response = weatherApi.getCurrentWeather(cityName, units.unitsApi)
+            dao.addCity(response.toNewCityEntity(cityName, position, units))
         }
     }
 
@@ -60,42 +47,43 @@ class CitiesRepository(
         dao.deleteCity(id)
     }
 
-    fun moveUpCity(id: Long, position: Int){
+    fun moveUpCity(id: Long, position: Int) {
         dao.moveCitiesDown(position)
         dao.moveCityUp(id)
     }
 
-    private fun mapWeatherResponseToCityEntity(
-        entity: CityEntity,
-        response: WeatherResponse,
+    private suspend fun getCurrentUnits(): UnitsData =
+        UnitsData(settingsRepository.getSettings(SettingsId.Units))
+
+    private fun WeatherResponse.toCityEntity(
+        existing: CityEntity,
         units: UnitsData
-    ) = entity.copy(
-        temperature = "${response.main.temp.toInt()}${units.temp}",
-        windSpeed = "${response.wind.speed} ${units.wind}",
-        icon = response.weather[0].icon,
-        humidity = response.main.humidity,
-        pressure = response.main.pressure,
-        feelsLike = "${response.main.feelsLike.toInt()}${units.temp}",
-        rain = response.rain?.percent?.toInt() ?: 0,
+    ) = existing.copy(
+        temperature = "${main.temp.toInt()}${units.temp}",
+        windSpeed = "${wind.speed} ${units.wind}",
+        icon = weather[0].icon,
+        humidity = main.humidity,
+        pressure = main.pressure,
+        feelsLike = "${main.feelsLike.toInt()}${units.temp}",
+        rain = rain?.percent?.toInt() ?: 0,
         time = System.currentTimeMillis(),
         units = units.unitsApi
     )
 
-    private fun mapWeatherResponseToCityEntity(
-        cityName: String,
+    private fun WeatherResponse.toNewCityEntity(
+        name: String,
         position: Int,
-        response: WeatherResponse,
         units: UnitsData
     ) = CityEntity(
         cityId = 0,
-        name = cityName,
-        temperature = "${response.main.temp.toInt()}${units.temp}",
-        windSpeed = "${response.wind.speed} ${units.wind}",
-        icon = response.weather[0].icon,
-        humidity = response.main.humidity,
-        pressure = response.main.pressure,
-        feelsLike = "${response.main.feelsLike.toInt()}${units.temp}",
-        rain = response.rain?.percent?.toInt() ?: 0,
+        name = name,
+        temperature = "${main.temp.toInt()}${units.temp}",
+        windSpeed = "${wind.speed} ${units.wind}",
+        icon = weather[0].icon,
+        humidity = main.humidity,
+        pressure = main.pressure,
+        feelsLike = "${main.feelsLike.toInt()}${units.temp}",
+        rain = rain?.percent?.toInt() ?: 0,
         time = System.currentTimeMillis(),
         units = units.unitsApi,
         position = position

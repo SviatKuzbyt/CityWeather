@@ -5,7 +5,6 @@ import retrofit2.HttpException
 import ua.sviatkuzbyt.cityweather.R
 import java.net.ConnectException
 import java.net.UnknownHostException
-import kotlin.Exception
 
 class ExistCityException: Exception()
 class NoConnectException: Exception()

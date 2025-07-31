@@ -7,7 +7,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastData
 import ua.sviatkuzbyt.cityweather.data.structures.weather.forecast.ForecastDataUI
 import ua.sviatkuzbyt.cityweather.ui.elements.other.ItemList
 import ua.sviatkuzbyt.cityweather.ui.elements.other.TextBasicCenter

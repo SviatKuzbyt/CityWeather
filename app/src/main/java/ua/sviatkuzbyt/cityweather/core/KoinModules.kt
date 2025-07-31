@@ -46,9 +46,7 @@ val storageModule = module {
         ).build()
     }
 
-    single<DataBaseDao> {
-        get<DatabaseRoom>().dao()
-    }
+    single<DataBaseDao> { get<DatabaseRoom>().dao() }
 }
 
 val apiModule = module {

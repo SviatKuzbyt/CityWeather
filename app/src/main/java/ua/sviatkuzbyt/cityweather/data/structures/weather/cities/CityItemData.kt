@@ -3,10 +3,9 @@ package ua.sviatkuzbyt.cityweather.data.structures.weather.cities
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Stable
-import ua.sviatkuzbyt.cityweather.R
 import ua.sviatkuzbyt.cityweather.data.database.entities.CityEntity
 import ua.sviatkuzbyt.cityweather.data.other.getWeatherDescription
-import ua.sviatkuzbyt.cityweather.data.structures.weather.WeatherItemAppearance.Companion.getWeatherItemAppearance
+import ua.sviatkuzbyt.cityweather.data.structures.weather.cities.WeatherItemAppearance.Companion.getWeatherItemAppearance
 
 @Stable
 data class CityItemData(

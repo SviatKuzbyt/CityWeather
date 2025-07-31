@@ -11,3 +11,5 @@ data class ForecastTodayItem(
     val wind: Wind,
     val weather: List<Weather>
 )
+
+data class Main(val temp: Float)

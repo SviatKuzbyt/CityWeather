@@ -12,11 +12,12 @@
     <string name="weather_heavy_clouds">Weather now: Heavy clouds</string>
     <string name="weather_rain">Weather now: Rain</string>
     <string name="weather_thunderstorm">Weather now: Thunderstorm</string>
-    <string name="wind_speed">"Wind speed:"</string>
+    <string name="weather_unknown">Weather now: Unknown</string>
+    <string name="wind_speed">Wind speed:</string>
     <string name="humidity">Air humidity</string>
     <string name="pressure">Pressure</string>
     <string name="feels_like">The temperature feels like</string>
-    <string name="precipitation_reliability">Precipitation reliability</string>
+    <string name="precipitation_reliability">Chance of precipitation</string>
     <string name="forecastToday">Daily forecast</string>
     <string name="forecastFiveDays">Forecast for 5 days</string>
     <string name="control">Control</string>
@@ -27,16 +28,17 @@
     <string name="move_up">Move up</string>
     <string name="no_cities">Add new cities by clicking +</string>
     <string name="error">An error occurred</string>
-    <string name="no_connect">Connection failed. Check the Internet connection</string>
-    <string name="no_info">Failed to upload information. Incorrect data entered</string>
+    <string name="no_connect">No Internet connection</string>
+    <string name="old_data">No Internet connection. Data may be outdated</string>
+    <string name="incorrect_data">Incorrect data entered. Failed to upload information</string>
     <string name="city_already_added">City already added</string>
-    <string name="error_load">There was a loading error</string>
-    <string name="retry">Try again</string>
     <string name="close_page">Close page</string>
     <string name="time">Time</string>
     <string name="temperature">Temperature</string>
     <string name="settings">Settings</string>
     <string name="units">Units</string>
     <string name="about_tittle">About the App</string>
-    <string name="about_content">An application for showing the weather forecast for the moment, hourly and for a couple of days for different cities at the same time. \n\nDeveloped by Sviatoslav Kuzbyt in 2025 on Jetpack Compose. \n\nResources used: Google fonts, Flaticon.</string>
+    <string name="about_content">An application for showing the weather forecast for the moment, hourly and for a couple of days for different cities at the same time. \n\nDeveloped by Sviatoslav Kuzbyt in 2025 on Jetpack Compose. \n\nResources used: Google fonts, Flaticon. API used: OpenWeatherMap</string>
+    <string name="server_error">Server error. Please try again later</string>
+    <string name="icon">Plug icon</string>
 </resources>

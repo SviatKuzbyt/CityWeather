@@ -1,54 +1,91 @@
 package ua.sviatkuzbyt.cityweather.data.repositories
 
 import android.content.Context
-import ua.sviatkuzbyt.cityweather.data.ExistCityException
-import ua.sviatkuzbyt.cityweather.data.api.CurrentWeatherManager
-import ua.sviatkuzbyt.cityweather.data.database.CityEntity
-import ua.sviatkuzbyt.cityweather.data.database.DataBaseManager
-import ua.sviatkuzbyt.cityweather.data.settingsstore.SettingsStoreManager
-import ua.sviatkuzbyt.cityweather.data.structures.cities.CityItemData
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
+import ua.sviatkuzbyt.cityweather.data.api.WeatherApi
+import ua.sviatkuzbyt.cityweather.data.database.DataBaseDao
+import ua.sviatkuzbyt.cityweather.data.database.entities.CityEntity
+import ua.sviatkuzbyt.cityweather.data.other.ExistCityException
+import ua.sviatkuzbyt.cityweather.data.other.canLoad
+import ua.sviatkuzbyt.cityweather.data.other.runIfConnected
 import ua.sviatkuzbyt.cityweather.data.structures.weather.UnitsData
+import ua.sviatkuzbyt.cityweather.data.structures.weather.cities.WeatherResponse
 
-private const val NO_EXIST = 0
+class CitiesRepository(
+    private val dao: DataBaseDao,
+    private val weatherApi: WeatherApi,
+    private val settingsRepository: SettingsRepository,
+    private val context: Context
+) {
 
-class CitiesRepository(private val context: Context) {
-    private val dataBaseDao = DataBaseManager.getDao(context)
-    private val currentWeatherManager = CurrentWeatherManager()
+    val cities = dao.cities().catch { emit(emptyList()) }
 
-    suspend fun getWeatherForCities(): List<CityItemData>{
-        val units = UnitsData(SettingsStoreManager.getUnits(context))
-        val cities = dataBaseDao.getCities()
-        return cities.map {
-            loadWeather(it, units)
+    suspend fun loadData() = runIfConnected(context) {
+        val units = getCurrentUnits()
+        cities.first().forEach { city ->
+            if (canLoad(city.time, units.unitsApi, city.units)) {
+                val response = weatherApi.getCurrentWeather(city.name, units.unitsApi)
+                dao.updateCity(response.toCityEntity(city, units))
+            }
         }
     }
 
-    suspend fun addCity(name: String, position: Int): CityItemData {
-        val nameTrim = name.trim()
+    suspend fun addCity(name: String, position: Int) {
+        val cityName = name.trim()
+        if (dao.checkExistCity(cityName) > 0) throw ExistCityException()
 
-        if (dataBaseDao.checkExistCity(nameTrim) == NO_EXIST){
-            val units = UnitsData(SettingsStoreManager.getUnits(context))
-            val cityEntity = CityEntity(0, name.trim(), position)
-            val loadedWeather = loadWeather(cityEntity, units)
-            val addedId = dataBaseDao.addCity(cityEntity)
-
-            return loadedWeather.copy(cityId = addedId)
-        } else{
-            throw ExistCityException()
+        runIfConnected(context) {
+            val units = getCurrentUnits()
+            val response = weatherApi.getCurrentWeather(cityName, units.unitsApi)
+            dao.addCity(response.toNewCityEntity(cityName, position, units))
         }
-    }
-
-    private fun loadWeather(cityEntity: CityEntity, units: UnitsData): CityItemData {
-        return currentWeatherManager.loadWeatherForCity(cityEntity, units)
     }
 
     fun deleteCity(id: Long, position: Int) {
-        dataBaseDao.moveCitiesUp(position)
-        dataBaseDao.deleteCity(id)
+        dao.moveCitiesUp(position)
+        dao.deleteCity(id)
     }
 
-    fun moveUpCity(id: Long, position: Int){
-        dataBaseDao.moveCitiesDown(position)
-        dataBaseDao.moveCityUp(id)
+    fun moveUpCity(id: Long, position: Int) {
+        dao.moveCitiesDown(position)
+        dao.moveCityUp(id)
     }
+
+    private suspend fun getCurrentUnits(): UnitsData =
+        UnitsData(settingsRepository.getSettings(SettingsId.Units))
+
+    private fun WeatherResponse.toCityEntity(
+        existing: CityEntity,
+        units: UnitsData
+    ) = existing.copy(
+        temperature = "${main.temp.toInt()}${units.temp}",
+        windSpeed = "${wind.speed} ${units.wind}",
+        icon = weather[0].icon,
+        humidity = main.humidity,
+        pressure = main.pressure,
+        feelsLike = "${main.feelsLike.toInt()}${units.temp}",
+        rain = rain?.percent?.toInt() ?: 0,
+        time = System.currentTimeMillis(),
+        units = units.unitsApi
+    )
+
+    private fun WeatherResponse.toNewCityEntity(
+        name: String,
+        position: Int,
+        units: UnitsData
+    ) = CityEntity(
+        cityId = 0,
+        name = name,
+        temperature = "${main.temp.toInt()}${units.temp}",
+        windSpeed = "${wind.speed} ${units.wind}",
+        icon = weather[0].icon,
+        humidity = main.humidity,
+        pressure = main.pressure,
+        feelsLike = "${main.feelsLike.toInt()}${units.temp}",
+        rain = rain?.percent?.toInt() ?: 0,
+        time = System.currentTimeMillis(),
+        units = units.unitsApi,
+        position = position
+    )
 }

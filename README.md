@@ -23,3 +23,6 @@ An application for conveniently viewing the weather in several cities on one scr
 
 ## Screenshots
 ![Home and forecast screen](https://github.com/SviatKuzbyt/CityWeather/blob/main/screenshots/readme_screen.png?raw=true) 
+
+## How to install?
+Go to the latest [Release](https://github.com/SviatKuzbyt/CityWeather/releases/latest) and download and install the file `cityweather.apk`

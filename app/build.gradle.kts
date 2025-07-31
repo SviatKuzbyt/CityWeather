@@ -73,7 +73,6 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
 
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.gson)
     implementation(libs.androidx.datastore.preferences)
 

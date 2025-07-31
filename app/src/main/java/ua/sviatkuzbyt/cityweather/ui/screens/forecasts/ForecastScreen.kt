@@ -1,6 +1,7 @@
 package ua.sviatkuzbyt.cityweather.ui.screens.forecasts
 
 import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -65,20 +66,23 @@ private fun ForecastScreen(
             Crossfade(forecastState) { state ->
                 when(state) {
                     is ForecastState.Content -> {
-                        LazyColumn(
-                            modifier = Modifier.fillMaxSize(),
-                            contentPadding = PaddingValues(horizontal = sizeSpace16)
-                        ) {
-                            item {
-                                ForecastDescriptions(isWindSpeed, weatherWeight)
-                            }
-                            items(state.forecastContent.list){
-                                ForecastItem(it, weatherWeight)
+                        Column {
+                            LazyColumn(
+                                modifier = Modifier.weight(1f),
+                                contentPadding = PaddingValues(horizontal = sizeSpace16)
+                            ) {
+                                item {
+                                    ForecastDescriptions(isWindSpeed, weatherWeight)
+                                }
+                                items(state.forecastContent.list){
+                                    ForecastItem(it, weatherWeight)
+                                }
                             }
                             if (!state.forecastContent.isActualData){
-                                item { NoActualData() }
+                                NoActualData()
                             }
                         }
+
                     }
                     is ForecastState.Error -> TextPlug(stringResource(state.text), R.drawable.ic_info)
                     ForecastState.Loading -> LoadPlug()

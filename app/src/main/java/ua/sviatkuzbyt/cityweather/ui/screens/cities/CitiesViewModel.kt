@@ -30,7 +30,7 @@ class CitiesViewModel(private val repository: CitiesRepository): ViewModel() {
                 repository.loadData()
             },
             finallyHandler = {
-                delay(2060)
+                delay(400)
                 _isLoading.value = false
             },
             message = _message
@@ -45,7 +45,7 @@ class CitiesViewModel(private val repository: CitiesRepository): ViewModel() {
                 repository.addCity(name, position)
             },
             finallyHandler = {
-                delay(200)
+                delay(400)
                 _isLoading.value = false
             },
             message = _message

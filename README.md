@@ -12,10 +12,13 @@ An application for conveniently viewing the weather in several cities on one scr
 - Add cities, delete cities, move cities
 - Download current weather, hourly and daily forecasts
 - Change data download settings
+- Data caching, offline access
 
 #### Technologies:
 - Android SDK
 - Jetpack Compose
+- DI, Koin
+- Retrofit
 - Jetpack Room
 - MVVM
 - Gson
